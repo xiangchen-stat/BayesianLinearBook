@@ -13,8 +13,6 @@ description: |
   set in the _output.yml file.
 link-citations: yes
 github-repo: rstudio/bookdown-demo
-header-includes:
-  - \newcommand{\T}{\mathrm{\scriptscriptstyle T}}
 ---
 
 # The Divide & Conquer Algorithm
