@@ -1,0 +1,607 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Bayesian Dynamic Linear Model - Shared Variance Case},
+  pdfauthor={Daniel Zhou, Sudipto Banerjee},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Bayesian Dynamic Linear Model - Shared Variance Case}
+\author{Daniel Zhou, Sudipto Banerjee}
+\date{2023-01-23}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{conjecture}{Conjecture}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[chapter]
+\theoremstyle{definition}
+\newtheorem{hypothesis}{Hypothesis}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{preface}{%
+\chapter{Preface}\label{preface}}
+
+This is a first tutorial for Bayesian Linear Regression assembled in book form.
+
+\hypertarget{acknowledgements}{%
+\section{Acknowledgements}\label{acknowledgements}}
+
+\hypertarget{basics-of-bayesian-linear-regression}{%
+\chapter{Basics of Bayesian linear regression}\label{basics-of-bayesian-linear-regression}}
+
+\hypertarget{bayes-theorem}{%
+\section{Bayes' theorem}\label{bayes-theorem}}
+
+\begin{theorem}[Bayes' theorem]
+\protect\hypertarget{thm:bayes}{}\label{thm:bayes}For events \(A, B\) and \(P(B) \neq 0\), we have
+
+\[P(A\mid B) = \frac{P(B \mid A) P(A)}{P(B)}\]
+\end{theorem}
+
+We denote \(U\) as unknown parameters and \(K\) as known parameters. We call \(P(U)\) prior and \(P(K|U)\) likelihood. The Bayes' theorem gives us the posterior distribution of unknown parameters given the known parameters
+\[ P(U \mid K) \propto P(U) \cdot P(K \mid U)\]
+
+Let \(K = \left\{y_{n \times 1}, X_{n \times p} \right\}\) and assume \(y \sim N\left( X \beta, \sigma^{2} V\right)\), where \(V\) is known and \(U = \left\{\beta, \sigma^{2}\right\}\) is unknown. The likelihood is given by
+
+\begin{align}
+P(K \mid U)=N\left(y \mid X \beta, \sigma^{2} V\right)
+\end{align}
+
+\hypertarget{normal-inverse-gamma-nig-prior}{%
+\section{Normal Inverse-Gamma (NIG) prior}\label{normal-inverse-gamma-nig-prior}}
+
+\hypertarget{joint-distribution-of-nig-prior}{%
+\subsection{Joint distribution of NIG prior}\label{joint-distribution-of-nig-prior}}
+
+\begin{definition}[Normal Inverse-Gamma Distribution]
+\protect\hypertarget{def:NIG}{}\label{def:NIG}Suppose
+\[
+\begin{aligned}
+& x \mid \sigma^2, \mu, M \sim \text{N}(\mu,\sigma^2 M) \\
+& \sigma^2 \mid \alpha, \beta \sim \text{IG}(\alpha,\beta) 
+\end{aligned}
+\]
+Then \((x,\sigma^2)\) has a Normal-Inverse-Gamma distribution, denoted as \((x,\sigma^2) \sim \text{NIG}(\mu,M,\alpha,\beta)\).
+\end{definition}
+
+We use a Normal Inverse-Gamma prior for \((\beta, \sigma^2)\)
+
+\begin{align}
+    P(\beta, \sigma^{2})
+    &= NIG \left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \\
+    &= IG\left(\sigma^{2} \mid a_{0}, b_{0}\right) \cdot N\left(\beta \mid m_{0}, \sigma^{2} M_{0}\right) \\
+    &= \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)}
+    \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+1} e^{-\frac{b_{0}}{\sigma^{2}}} \frac{1}{(2 \pi)^{\frac{p}{2}}\left|\sigma^{2} M_{0}\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(\beta, m_{0}, M_{0}\right)} \\
+    &= \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)}
+    \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+1} e^{-\frac{b_{0}}{\sigma^{2}}} \frac{1}{(2 \pi \sigma^{2})^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(\beta, m_{0}, M_{0}\right)} \\
+\end{align}
+
+where \(Q(x, m, M)=(x-m)^{\top} M^{-1} (x-m)\)
+
+Note: the Inverse-Gamma (IG) distribution has a relationship with Gamma distribution. \(X \sim Gamma(\alpha, \beta)\), the density function of \(X\) is \(f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x}\). Let \(Y=\frac{1}{X} \sim IG(\alpha, \beta)\), the density function of \(Y\) is \(f(y)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{-\alpha-1} e^{-\frac{\beta}{x}}\).
+
+\hypertarget{marginal-distribution-of-nig-prior}{%
+\subsection{Marginal distribution of NIG prior}\label{marginal-distribution-of-nig-prior}}
+
+As for marginal priors, we can can get it by integration
+
+\[
+\begin{aligned}
+P(\sigma^2) & = \int N I G\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \  d\beta=I G\left(\sigma^{2} \mid a_{0}, b_{0}\right) \\
+P(\beta) & = \int N I G\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \  d\sigma^{2}=t_{2a_0}(m_0, \frac{b_0}{a_0}M_0) \\
+\end{aligned}
+\]
+
+Click to show or hide details
+
+\begin{align}
+    P\left(\sigma^{2} \right) &= \int NIG\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \  d\beta \\
+    &=IG\left(\sigma^{2} \mid a_{0}, b_{0}\right) \int N\left(\beta \mid m_{0}, \sigma^{2} M_{0}\right) \  d\beta \\
+    &=IG\left(\sigma^{2} \mid a_{0}, b_{0}\right)
+\end{align}
+
+\begin{align}
+P(\beta ) &=\int NIG \left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \  d\sigma^{2} \\
+&= \int \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)}
+\left(\frac{1}{\sigma^{2}}\right)^{a_{0}+1} e^{-\frac{b_{0}}{\sigma^{2}}} \frac{1}{(2 \pi \sigma^{2})^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(\beta, m_{0}, M_{0}\right)} \  d\sigma^{2} \\
+&= \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)(2 \pi)^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}}
+\int 
+\left(\frac{1}{\sigma^{2}}\right)^{a_{0}+\frac{p}{2}+1} e^{-\frac{1}{\sigma^{2}}(b_{0}+\frac{1}{2} Q \left(\beta, m_{0}, M_{0}\right))} \  d\sigma^{2} \\
+& \quad (\text{let } u = \frac{1}{\sigma^2}, \left|d\sigma^{2}\right|=\frac{1}{u^2} d u) \\
+&= \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)(2 \pi)^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}}
+\int 
+u^{a_{0}+\frac{p}{2}+1} e^{-(b_{0}+\frac{1}{2} Q \left(\beta, m_{0}, M_{0}\right)) u } \frac{1}{u^2} \  du \\
+&= \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)(2 \pi)^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}}
+\int 
+u^{a_{0}+\frac{p}{2}-1} e^{-(b_{0}+\frac{1}{2} Q \left(\beta, m_{0}, M_{0}\right)) u} \  du \\
+& \quad (\text{by Gamma integral function:} \int x^{\alpha - 1} exp^{-\beta x} dx = \frac{\Gamma(\alpha)}{\beta^{\alpha}}) \\
+&= \frac{b_{0}^{a_{0}} }{\Gamma\left(a_{0}\right)(2 \pi)^\frac{p}{2}\left|M_{0}\right|^{\frac{1}{2}}} \frac{\Gamma\left(a_{0}+\frac{p}{2}\right)}{\left[b_{0}+\frac{1}{2} Q(\beta,m_0,M_0)\right]^{\left(a_{0}+\frac{p}{2}\right)}} \\
+& = \frac{b_0^{a_0}\Gamma\left(a_{0}+\frac{p}{2}\right)}{\Gamma\left(a_{0}\right)(2 \pi)^ \frac{p}{2}\left|M_{0}\right|^{\frac{1}{2}}} 
+\left[b_0(1+\frac{1}{2 b_0} Q(\beta,m_0,M_0))\right]^{-\left(a_{0}+\frac{p}{2}\right)} \\
+& = \frac{b_0^{a_0}\Gamma\left(a_{0}+\frac{p}{2}\right) b_0^{- \left( a_0+\frac{p}{2}\right)}}{\Gamma\left(a_{0}\right)(2 \pi)^ \frac{p}{2}\left|M_{0}\right|^{\frac{1}{2}}} 
+\left[1+\frac{1}{2 b_0} \left(\beta-m_{0}\right){\top} M_{0}^{-1}\left(\beta-m_{0}\right) \right]^{-\left(a_{0}+\frac{p}{2}\right)} \\
+& =\frac{\Gamma\left(a_{0}+\frac{p}{2}\right)}{\left(2 \pi \right)^{\frac{p}{2}} b_{0}^{\frac{p}{2}} \Gamma\left(a_{0}\right)|M|^{\frac{1}{2}}}\left[1+\frac{1}{2 b_{0}} \left(\beta-m_{0}\right){\top} M_{0}^{-1}\left(\beta-m_{0}\right) \right]^{-\left(a_{0}+\frac{p}{2}\right)} \\
+& =\frac{\Gamma\left(a_{0}+\frac{p}{2}\right)}
+{\left(2 \pi \right)^{\frac{p}{2}}\left(a_{0} \cdot \frac{b_{0}}{a_{0}}\right)^{\frac{p}{2}} \Gamma\left(a_{0}\right)|M|^{\frac{1}{2}}} \left[1+\frac{1}{2 a_{0} \cdot \frac{b_{0}}{a_{0}}} \left(\beta-m_{0}\right){\top} M_{0}^{-1}\left(\beta-m_{0}\right)\right]^{-\left(a_{0}+\frac{p}{2}\right)}\\
+& =\frac{\Gamma\left(a_{0}+\frac{p}{2}\right)}{\left(2 a_{0} \pi\right)^{\frac{p}{2}} \Gamma\left(a_{0}\right)\left|\frac{b_{0}}{a_{0}} M\right|^{\frac{1}{2}}}\left[1+\frac{1}{2 a_{0}} \left(\beta-m_{0}\right)^{\top}\left(\frac{b_{0}}{a_{0}} M_{0}\right)^{-1}\left(\beta-m_{0}\right)\right]^{-\left(a_{0}+\frac{p}{2}\right)} \\
+& =t_{2a_0}(m_0, \frac{b_0}{a_0}M_0) \;
+\end{align}
+
+Note: the density of multivariate t-distribution is given by
+
+\[
+t_v(\mu, \Sigma)=\frac{\Gamma\left(\frac{v+p}{2}\right)}{(v \pi)^{\frac{p}{2}} \Gamma\left(\frac{v}{2}\right)  |\Sigma|^{\frac{1}{2}}}\left[1+\frac{1}{v}(x-\mu)^{\top} \Sigma^{-1}(x-\mu)\right]^{-\frac{v+p}{2}}
+\]
+
+\hypertarget{posterior-distribution}{%
+\section{Posterior distribution}\label{posterior-distribution}}
+
+The posterior distribution of \((\beta, \sigma^2)\) is given by
+
+\begin{align}
+P\left(\beta, \sigma^{2} \mid y\right) = NIG\left(\beta, \sigma^{2} \mid M_{1}m_{1}, M_{1}, a_{1}, b_{1}\right) \;
+\end{align}
+
+where
+
+\begin{align}
+M_{1} &= (M_{0}^{-1}+X^{\top} V^{-1} X)^{-1} \;; \\
+m_{1}&=M_{0}^{-1} m_{0}+X^{\top} V^{-1} y \;; \\
+a_{1}&=a_{0}+\frac{p}{2} \;; \\
+b_{1}&=b_{0}+\frac{c^{\ast}}{2}= b_{0}+\frac{1}{2}\left(m_{0}^{\top} M_{0}^{-1} m_{0}+y^{\top} V^{-1} y-m_{1}^{\top} M_{1} m_{1}\right)\;. 
+\end{align}
+
+Click to show or hide details
+
+\begin{align}\label{eq:post_dist}
+P\left(\beta, \sigma^{2} \mid y\right) & \propto NIG\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \cdot N\left(y \mid X \beta, \sigma^{2} V\right) \nonumber\\
+& \propto IG\left(\sigma^{2} \mid a_{0}, b_{0}\right) \cdot N\left(\beta \mid m_{0}, \sigma^{2} M_{0}\right) \cdot N\left(y \mid X \beta, \sigma^{2} V\right) \nonumber\\
+& \propto \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)}
+\left(\frac{1}{\sigma^{2}}\right)^{a_{0}+1} e^{-\frac{b_{0}}{\sigma^{2}}} 
+\frac{1}{(2 \pi \sigma^{2})^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(\beta, m_{0}, M_{0}\right)} 
+\frac{1}{(2 \pi \sigma^{2})^{\frac{p}{2}}\left| V\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(y, X \beta, V\right)} \nonumber\\
+& \propto \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+p+1} e^{-\frac{b_{0}}{\sigma^{2}}} 
+e^{-\frac{1}{2 \sigma^{2}} (Q \left(\beta, m_{0}, M_{0}\right)+Q \left(y, X \beta, V\right))}\;
+\end{align}
+
+where
+
+\begin{align}\label{eq:multivariate_completion_square}
+Q \left(\beta, m_{0}, M_{0}\right)+Q \left(y, X \beta, V\right) &= (\beta - m_{0})^{\top}M_{0}^{-1}(\beta - m_{0}) + (y - X\beta)^{\top}V^{-1}(y - X\beta)\; \nonumber\\
+ &= \beta^{\top}M_{0}^{-1}\beta - 2\beta^{\top}M_{0}^{-1}m_{0} + m_{0}^{\top}M_{0}^{-1}m_{0} \nonumber\\
+  &\qquad + \beta^{\top}X^{\top}V^{-1}X\beta - 2\beta^{\top} X^{\top}V^{-1}y + y^{\top}V^{-1}y \nonumber\\
+  &= \beta^{\top} \left(M_{0}^{-1} + X^{\top}V^{-1}X\right) \beta - 2\beta^{\top}\left(M_{0}^{-1}m_{0} + X^{\top}V^{-1}y\right) \nonumber\\
+  &\qquad + m_{0}^{\top} M_{0}^{-1}m_{0} + y^{\top}V^{-1}y \nonumber \\
+  &= \beta^{\top}M_{1}^{-1}\beta - 2\beta^{\top} m_{1} + c\nonumber\\
+  &= (\beta - M_{1}m_{1})^{\top}M_{1}^{-1}(\beta - M_{1}m_{1}) - m_{1}^{\top}M_{1}m_{1} +c \nonumber\\   
+  &= (\beta - M_{1}m_{1})^{\top}M_{1}^{-1}(\beta - M_{1}m_{1}) +c^{\ast}\;
+\end{align}
+
+where \(M_{1}\) is a symmetric positive definite matrix, \(m_{1}\) is a vector, and \(c\) \& \(c^{\ast}\) are scalars given by
+
+\begin{align}
+ M_{1} &= (M_{0}^{-1} + X^{\top}V^{-1}X)^{-1}\;; \\
+ m_{1} &= M_{0}^{-1}m_{0} + X^{\top}V^{-1}y\;; \\
+ c &= m_{0}^{\top} M_{0}^{-1}m_{0} + y^{\top}V^{-1}y\;; \\
+  c^{\ast} &= c - m^{\top}Mm = m_{0}^{\top} M_{0}^{-1}m_{0} + y^{\top}V^{-1}y - m_{1}^{\top}M_{1}m_{1}\; .
+\end{align}
+
+Note: \(M_{1}\), \(m_{1}\) and \(c\) do not depend upon \(\beta\).
+
+Then, we have
+
+\begin{align}
+P\left(\beta, \sigma^{2} \mid y\right) & \propto \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+p+1} e^{-\frac{b_{0}}{\sigma^{2}}} 
+e^{-\frac{1}{2 \sigma^{2}} ((\beta - M_{1}m_{1})^{\top}M_{1}^{-1}(\beta - M_{1}m_{1}) +c^{\ast})}\\
+& \propto \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+p+1} e^{-\frac{b_{0}+\frac{c^{\ast}}{2}}{\sigma^{2}}} 
+e^{-\frac{1}{2 \sigma^{2}} (\beta - M_{1}m_{1})^{\top}M_{1}^{-1}(\beta - M_{1}m_{1})}\\
+& \propto \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+\frac{p}{2}+1} e^{-\frac{b_{0}+\frac{c^{\ast}}{2}}{\sigma^{2}}} 
+(\frac{1}{\sigma^2})^{\frac{p}{2}}
+e^{-\frac{1}{2 \sigma^{2}} (\beta - M_{1}m_{1})^{\top}M_{1}^{-1}(\beta - M_{1}m_{1})}\\
+&= IG\left(\sigma^{2} \mid a_{0}+\frac{p}{2}, b_{0}+\frac{c^{\ast}}{2} \right) \cdot N\left(\beta \mid M_{1}m_{1}, \sigma^{2} M_{1}\right) \\
+&= IG\left(\sigma^{2} \mid a_{1}, b_{1} \right) \cdot N\left(\beta \mid M_{1}m_{1}, \sigma^{2} M_{1}\right) \\
+&= NIG\left(\beta, \sigma^{2} \mid M_{1}m_{1}, M_{1}, a_{1}, b_{1}\right) \;
+\end{align}
+
+where
+
+\begin{align}
+M_{1} &= (M_{0}^{-1}+X^{\top} V^{-1} X)^{-1} \;; \\
+m_{1}&=M_{0}^{-1} m_{0}+X^{\top} V^{-1} y \;; \\
+a_{1}&=a_{0}+\frac{p}{2} \;; \\
+b_{1}&=b_{0}+\frac{c^{\ast}}{2}= b_{0}+\frac{1}{2}\left(m_{0}^{\top} M_{0}^{-1} m_{0}+y^{\top} V^{-1} y-m_{1}^{\top} M_{1} m_{1}\right)\;. 
+\end{align}
+
+From derivation in marginal priors, the marginal posterior distributions can be easily get by updating corresponding parameters
+
+\[
+\begin{aligned}
+&P\left(\sigma^{2} \mid y\right)=I G\left(\sigma^{2} \mid a_{1}, b_{1}\right) \\
+&P(\beta \mid y)=t_{2a_1}(M_1m_1, \frac{b_1}{a_1}M_1)
+\end{aligned}
+\]
+
+\hypertarget{bayesian-prediction}{%
+\section{Bayesian prediction}\label{bayesian-prediction}}
+
+Assume \(V=I_{n}\). Let \(\tilde{y}\) denote an \(\tilde{n}\times 1\) vector of outcomes. \(\tilde{X}\) is corresponding predictors. We seek to predict \(\tilde{y}\) based upon \(y\)
+
+\begin{align}
+P(\tilde{y} \mid y) 
+&= t_{2a_1}(\tilde{X} M_1 m_1, \frac{b_1}{a_1}(I_{\tilde{n}} + \tilde{X} M_{1} \tilde{X}^{\top})) \;
+\end{align}
+
+Click to show or hide details
+
+\begin{align}
+P\left(\beta, \sigma^{2}, \tilde{y} \mid y\right) 
+&=P\left(\beta, \sigma^{2} \mid y\right) \cdot P\left(\tilde{y} \mid \beta, \sigma^{2}, y\right) \\
+& \propto P\left(\beta, \sigma^{2}\right) \cdot P\left(y \mid \beta, \sigma^{2}\right) \cdot P\left(\tilde{y} \mid \beta, \sigma^{2}, y\right) \\
+&= NIG \left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right)
+\cdot N\left(y \mid X \beta, \sigma^{2} I_{n}\right) 
+\cdot N\left(\tilde{y} \mid \tilde{X} \beta, \sigma^{2} I_{\tilde{n}}\right) \\
+&= NIG \left(\beta, \sigma^{2} \mid M_{1} m_{1}, M_{1}, a_{1}, b_{1}\right) \cdot N\left(\tilde{y} \mid \tilde{X} \beta, \sigma^{2} I_{\tilde{n}}\right) \\
+&= IG(\sigma^{2} \mid a_{1}, b_{1}) \cdot N\left(\beta \mid M_{1} m_{1}, \sigma^{2} M_{1} \right) \cdot N\left(\tilde{y} \mid \tilde{X} \beta, \sigma^{2} I_{\tilde{n}} \right) \;
+\end{align}
+
+Then we can calculate posterior predictive density \(P(\tilde{y} \mid y)\) from \(P\left(\beta, \sigma^{2}, \tilde{y} \mid y\right)\)
+
+\begin{align}
+P(\tilde{y} \mid y) 
+&=\iint P\left(\beta, \sigma^{2}, \tilde{y} \mid y\right) \  d\beta \  d\sigma^{2} \\
+&=\iint IG(\sigma^{2} \mid a_{1}, b_{1}) \cdot N\left(\beta \mid M_{1} m_{1}, \sigma^{2} M_{1} \right) \cdot N\left(\tilde{y} \mid \tilde{X} \beta, \sigma^{2} I_{\tilde{n}}\right) \  d\beta \  d\sigma^{2} \\
+&=\int IG(\sigma^{2} \mid a_{1}, b_{1}) \int N\left(\beta \mid M_{1} m_{1}, \sigma^{2} M_{1} \right) \cdot N\left(\tilde{y} \mid \tilde{X} \beta, \sigma^{2} I_{\tilde{n}}\right) \  d\beta \  d\sigma^{2} \\
+\end{align}
+
+As for \(\int N\left(\beta \mid M_{1} m_{1}, \sigma^{2} M_{1}\right) \cdot N\left(\tilde{y} \mid \tilde{X} \beta, \sigma^{2} I_{\tilde{n}}\right) \  d\beta\), we provide an easy way to derive it avoiding any integration at all. Note that we can write the above model as
+
+\begin{align}
+\tilde{y} &= \tilde{X} \beta + \tilde{\epsilon}, \text{ where } \tilde{\epsilon} \sim N(0,\sigma^2 I_{\tilde{n}}) \\
+\beta &= M_{1} m_{1} + \epsilon_{\beta \mid y}, \text{ where } \epsilon_{\beta \mid y} \sim N(0,\sigma^2M_{1})
+\end{align}
+
+where \(\tilde{\epsilon}\) and \(\epsilon_{\beta \mid y}\) are independent of each other. It then follows that
+
+\begin{align}
+\tilde{y} &= \tilde{X} M_{1} m_{1} + \tilde{X} \epsilon_{\beta \mid y} + \tilde{\epsilon} 
+\sim N(\tilde{X} M_{1} m_{1}, \sigma^2(I_{\tilde{n}} + \tilde{X} M_{1} \tilde{X}^{\top}))
+\end{align}
+
+As a result
+
+\begin{align}
+P(\tilde{y} \mid y) 
+&=\int IG(\sigma^{2} \mid a_{1}, b_{1}) \cdot N(\tilde{X} M_{1} m_{1}, \sigma^2(I_{\tilde{n}} + \tilde{X} M_{1} \tilde{X}^{\top})) \  d\sigma^{2} \\
+&= t_{2a_1}(\tilde{X} M_1 m_1, \frac{b_1}{a_1}(I_{\tilde{n}} + \tilde{X} M_{1} \tilde{X}^{\top})) \;
+\end{align}
+
+\hypertarget{sampling-process}{%
+\section{Sampling process}\label{sampling-process}}
+
+We can get the joint posterior density \(P\left(\beta, \sigma^{2}, \tilde{y} \mid y\right)\) by sampling process
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Draw \(\hat{\sigma}_{(i)}^{2}\) from \(I G\left(a_{1}, b_{1}\right)\)
+\item
+  Draw \(\hat{\beta}_{(i)}\) from \(N\left(M_{1} m_{1}, \hat{\sigma}_{(i)}^{2} M_{1}\right)\)
+\item
+  Draw \(\tilde{y}_{(i)}\) from \(N\left(\tilde{X} \hat{\beta}_{(i)}, \hat{\sigma}_{(i)}^{2}I_{\tilde{n}}\right)\)
+\end{enumerate}
+
+\hypertarget{the-divide-conquer-algorithm}{%
+\chapter{The Divide \& Conquer Algorithm}\label{the-divide-conquer-algorithm}}
+
+The divide and conquer algorithm is a strategy of solving a large problem by breaking it down into two or more smaller and more manageable sub-problems of the same or of a similar genre. The solutions to the sub-problems are then combined to get the desired output: the solution to the original problem.
+
+In this section, we apply the divide and conquer algorithm to the Bayesian linear regression framework.
+
+\hypertarget{the-problem}{%
+\section{The Problem}\label{the-problem}}
+
+Let \(y = (y_1, y_2, ...,y_n)^{T}\) be an \(n \times 1\) random vector of outcomes and \(X\) be a fixed \(n \times p\) matrix of predictors with full column rank. Consider the following Bayesian (hierarchical) linear regression model,
+
+\[ IG(\sigma^2 \mid a_0,b_0) \times N(\beta \mid m_0, \sigma^2M_0) \times N(y \mid X\beta, \sigma^2I_n).\]
+The posterior density is \(p(\beta, \sigma^2 \mid y) = IG(\sigma^2 \mid a_0^*, b_0^*) \times N(\beta \mid Mm, \sigma^2M)\), and to carry out Bayesian inference, we first sample \(\sigma^2 \sim IG(a^*, b^*)\) and then, for each sampled \(\sigma^2\), we sample \(\beta \sim N(Mm, \sigma^2 M)\).
+
+Assume that \(n\) is so large that we are unable to store or load \(y\) or \(X\) into our CPU to carry out computations for them. We decide to divide our data set into K mutually exclusive and exhaustive subsets, each comprising a manageable number of points. Note that \(p\) is small, so computations involving \(p \times p\) matrices are fine. Let \(y_k\) denote the \(m_k \times 1\) sub-vector of \(y\), and \(X_k\) be the \(m_k \times p\) sub-matrix of \(X\) in subset \(k\), where each \(m_k\) has been chosen by us so that \(m_k > p\), and is small enough such that we can fit the above model on \(\{y_k, X_k\}\). This section will clearly explain how we can still compute \(a^*, b^*, M\) and \(m\) without ever having to store or compute with \(y\) or \(X\), but with quantities computed using only the subsets \(\{y_k, X_k\}\) for \(k = 1,2,...,K\).
+
+\hypertarget{the-solution}{%
+\section{The Solution}\label{the-solution}}
+
+Using the multivariate completing the square method, we know that the explicit expressions for \(a^*, b^*, m\) and \(M\) are given by:
+
+\begin{itemize}
+\tightlist
+\item
+  \(a_0^*\) = \(a_0 + \frac{n}{2}\)\\
+\item
+  \(b_0^{*}\) = \(b_0 + \frac{c^*}{2}\)\\
+\item
+  \(c\) = \(m_0^{T}M^{-1}_0 m_0 + y^{T}y - m^{T}Mm\)\\
+\item
+  \(m\) = \((X^{T}y + M_0^{-1}m_0)\)\\
+\item
+  \(M\) = \((X^{T}X + M_0^{-1})^{-1}\)
+\end{itemize}
+
+This implies that the explicit expressions for the \(a_0^*, b_0^*, m\) and \(M\) for the \(i_th\) subset are given by:
+
+\begin{itemize}
+\tightlist
+\item
+  \(a_{0i}^*\) = \(a_0 + \frac{m_i}{2}\)\\
+\item
+  \(b_{0i}^{*}\) = \(b_0 + \frac{c^*}{2}\)\\
+\item
+  \(c_i^{*}\) = \(m_0^{T}M^{-1}_0 m_0 + y_i^{T}y_i - m_i^{T}M_im_i\)
+\item
+  \(m_i\) = \((X_i^{T}y_i + M_0^{-1}m_0)\)\\
+\item
+  \(M_i\) = \((X_i^{T}X_i + M_0^{-1})^{-1}\)
+\end{itemize}
+
+We can express the posteriors of the entire data set as a function of the posteriors of the subsets with some math, resulting in:
+
+\begin{itemize}
+\tightlist
+\item
+  \(a_0^{*}\) = \(\sum_{i=1}^{k} a_{0i}^{*} + (k-1)a_0\)
+\item
+  \(b_0^{*}\) = \(b_0 + m_0^{T}M^{-1}_0 m_0 + \sum_{i=1}^{k}y_i^{T}y_i - m^{T}Mm\)\\
+\item
+  \(m\) = \(\sum_{i=1}^{k}m_i - (k-1)M^{-1}_0m_0\)\\
+\item
+  \(M\) = \(\sum_{i=1}^{k}(X_i^{T}X_i + M^{-1}_0)^{-1} = (\sum_{i=1}^{k}M^{-1}_i - (k-1)M^{-1}_0)^{-1}\)
+\end{itemize}
+
+\hypertarget{dynamic-linear-model---shared-variance}{%
+\chapter{Dynamic Linear Model - Shared Variance}\label{dynamic-linear-model---shared-variance}}
+
+This chapter discusses the Dynamic Linear Model with a scale factor for the variance shared across time and its derivations at each step. The approach taken in this chapter is borrowed from West and Harrison (1997), with some details derived from Petris et al (2009). For full generality and to maintain a multivariate normal system in both the data and parameter matrices, we assume all \(Y_{t} \in \mathbb{R}^{n}\), \(\beta_{t} \in \mathbb{R}^{p}\), and \(t \in \{1,\ldots,T\}\) for some integer \(T\).
+
+\hypertarget{background}{%
+\section{Background}\label{background}}
+
+The model we are concerned with studying is a class of time-varying models called the Dynamic Linear Model. The setup for the equation follows:
+
+\begin{eqnarray*}
+Y_{t}\vert\beta_{t}, \sigma^{2} &\sim& N(F_{t}^{T}\beta_{t}, \sigma^{2}V_{t})\\
+\beta_{t}\vert \beta_{t-1},\sigma^{2} &\sim& N(G_{t}\beta_{t-1}, \sigma^{2}W_{t})\\
+\sigma^{-2} &\sim& \Gamma(a_{t-1},b_{t-1})\\
+\beta_{t-1}\vert \sigma^{2} &\sim& N(m_{t-1}, \sigma^{2}C_{t-1})\\
+\end{eqnarray*}
+
+Alternatively, using Normal-Inverse Gamma notation, where, if \(\sigma^{-2} \sim \Gamma(a_{t-1},b_{t-1})\), \(\sigma^{2} \sim IG(a_{t-1},b_{t-1})\), where \(IG\) denotes an inverse Gamma distribution, we may write the above set of equations as the following:
+\begin{eqnarray*}
+Y_{t},\sigma^{2}\vert \beta_{t} &\sim& NIG(F_{t}^{T}\beta_{t}, V_{t}, a_{t-1}, b_{t-1})\\
+\beta_{t},\sigma^{2}\vert \beta_{t-1} &\sim& NIG(G_{t}\beta_{t-1}, W_{t}, a_{t-1}, b_{t-1})\\
+\beta_{t-1},\sigma^{2} &\sim& NIG(m_{t-1}, C_{t-1}, a_{t-1}, b_{t-1})
+\end{eqnarray*}
+
+The task is to acquire estimates for \(\beta_{0,\ldots,T}\) and \(\sigma^{2}\). This task may be divided into the forward filter and backwards sampling steps (collectively referred to as the Forward Filter-Backwards Sampling (FFBS) algorithm): The forward filter to acquire sequential estimates, and the backwards sampling step to retroactively ``smooth'' our initial estimates. We are given a set of observations \(Y_{t,j}\), and known parameters \(F_{t}\), \(G_{t}\), \(V_{t}\), \(W_{t}\), and \(n_{t-1}\), although Frankenburg and Banerjee also apply FFBS to cases where \(F_{t}\) and \(G_{t}\) are not pre-specified.
+
+Note that while the setup is borrowed from Petris, the notation is retained from West and Harrison to be fully consistent across documentation where the variance is dampened.
+
+\hypertarget{derivation}{%
+\subsection{Derivation}\label{derivation}}
+
+We proceed for some arbitrary \(t\):
+
+\begin{eqnarray*}
+\beta_{t} &=& G_{t}\beta_{t-1} + \omega_{t}, \omega_{t} \sim N(0, \sigma^{2}W_{t})\\
+\beta_{t}\vert \sigma^{2} &\sim& N(G_{t}m_{t-1}, \sigma^{2}(G_{t}C_{t-1}G_{t}^{T} + W_{t}))\\
+\end{eqnarray*}
+
+Now, let \(m^{*}_{t} = G_{t}m_{t-1}\) and \(R_{t} = G_{t}C_{t-1}G_{t}^{T} + W_{t}\). We then have:
+
+\begin{eqnarray*}
+Y_{t} &=& F_{t}^{T}\beta_{t} + \nu_{t}, \nu_{t}\sim N(0, \sigma^{2}V_{t})\\
+Y_{t}\vert \sigma^{2} &\sim& N(F_{t}^{T}m^{*}_{t}, \sigma^{2}(F_{t}^{T}R_{t}F_{t} + V_{t}))
+\end{eqnarray*}
+
+Since \(\sigma^{2} \sim IG(a_{t-1},b_{t-1})\), we marginalize it out of \(Y_{t}\vert \sigma^{2}\) to get
+
+\begin{eqnarray*}
+Y_{t} &\sim& T_{2a_{t-1}}(F_{t}^{T}m^{*}_{t}, \frac{b_{t-1}}{a_{t-1}}(F_{t}^{T}R_{t}F_{t} + V_{t}))
+\end{eqnarray*}
+
+We now have the apparatus needed to compute the sequential posterior \(\beta_{t}\vert Y_{t}\) and \(\sigma^{2}\vert Y_{t}\):
+
+\hypertarget{deriving-beta_tvert-y_t}{%
+\subsubsection{\texorpdfstring{Deriving \(\beta_{t}\vert Y_{t}\)}{Deriving \textbackslash beta\_\{t\}\textbackslash vert Y\_\{t\}}}\label{deriving-beta_tvert-y_t}}
+
+\begin{eqnarray*}
+p(\beta_{t} \vert Y_{t}, \sigma^{2}) &\propto& p(\beta_{t}, Y_{t}\vert \sigma^{2})\\
+ &\propto& p(Y_{t}\vert \beta_{t},\sigma^{2})p(\beta_{t}\vert \sigma^{2})\\
+ &\propto& \sigma^{-n}\exp(-\frac{1}{2\sigma^{2}}(y_{t} - F_{t}^{T}\beta_{t})^{T}V_{t}^{-1}(y_{t} - F_{t}^{T}\beta_{t}))\sigma^{-p}\exp(-\frac{1}{2\sigma^{2}}(\beta_{t} - m^{*}_{t})^{T}R_{t}^{-1}(\beta_{t} - m^{*}_{t}))\\
+ &\propto& \sigma^{-(n+p)}\exp(-\frac{1}{2\sigma^{2}}[(y_{t} - F_{t}^{T}\beta_{t})^{T}V_{t}^{-1}(y_{t} - F_{t}^{T}\beta_{t}) + (\beta_{t} - m^{*}_{t})^{T}R_{t}^{-1}(\beta_{t} - m^{*}_{t})])\\
+\end{eqnarray*}
+
+Note next that
+\begin{eqnarray*}
+\begin{bmatrix}Y_{t}\\ \beta_{t}\end{bmatrix}\vert \sigma^{2} &\sim& N\left(\begin{bmatrix}F_{t}^{T}m^{*}_{t}\\ m^{*}_{t}\end{bmatrix},\sigma^{2}\begin{bmatrix}F_{t}^{T}R_{t}F_{t} + V_{t} & F_{t}^{T}R_{t}\\
+R_{t}F_{t} & R_{t}\end{bmatrix}\right)
+\end{eqnarray*}
+
+with the cross-terms \(\mathrm{Cov}(Y_{t},\beta_{t}) = \mathrm{Cov}(F_{t}^{T}\beta_{t} + \nu_{t},\beta_{t}) = F_{t}^{T}\mathrm{Cov}(\beta_{t}, \beta_{t}) = F_{t}^{T}R_{t}\).
+
+Since, for the following block-normal system
+
+\begin{eqnarray*}
+\begin{bmatrix}x_{1}\\ x_{2}\end{bmatrix} &\sim& N\left(\begin{bmatrix}\mu_{1}\\ \mu_{2}\end{bmatrix}, \begin{bmatrix}\Sigma_{11} & \Sigma_{12}\\
+\Sigma_{21} & \Sigma_{22}\end{bmatrix}\right)
+\end{eqnarray*}
+
+we have
+
+\begin{eqnarray*}
+x_{2}\vert x_{1} &\sim& N(\mu_{2} + \Sigma_{21}\Sigma_{11}^{-1}(x_{1} - \mu_{1}), \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})
+\end{eqnarray*}
+
+(The derivation of the density of \(x_{2}\vert x_{1}\) can be found in the Appendix.)
+
+We arrive at,
+
+\begin{eqnarray*}
+\beta_{t}\vert \sigma^{2},Y_{t} &\sim& N(m_{t}^{*} + R_{t}F_{t}(F_{t}^{T}R_{t}F_{t} + V_{t})^{-1}(Y_{t} - F_{t}^{T}m_{t}^{*}), R_{t} - R_{t}F_{t}(F_{t}^{T}R_{t}F_{t} + V_{t})^{-1}F_{t}^{T}R_{t})\\
+ &\sim& N(m_{t}^{*} + R_{t}F_{t}Q_{t}^{-1}(Y_{t} - F_{t}^{T}m_{t}^{*}), R_{t} - R_{t}F_{t}Q_{t}^{-1}F_{t}^{T}R_{t})
+\end{eqnarray*}
+
+where \(Q_{t} = F_{t}^{T}R_{t}F_{t} + V_{t}\).
+
+(Note that Petris's expression for the variance suffers from a typo; to see this, simply take their \(\widetilde{C}_{t}^{T}\).)
+
+\hypertarget{deriving-sigma2vert-y_t}{%
+\subsubsection{\texorpdfstring{Deriving \(\sigma^{2}\vert Y_{t}\)}{Deriving \textbackslash sigma\^{}\{2\}\textbackslash vert Y\_\{t\}}}\label{deriving-sigma2vert-y_t}}
+
+We next deduce the density of \(\sigma^{2}\vert Y_{t}\). Note before we begin that since \(Y_{t} \sim T_{2a_{t-1}}(F_{t}^{T}m^{*}_{t}, Q_{t}) = \int NIG_{Y_{t}}(F_{t}^{T}m^{*}_{t}, Q_{t}, a_{t-1}, b_{t-1})d\sigma^{2}\), we can write \(Y_{t}\vert \sigma^{2} \sim N(F_{t}m^{*}_{t}, \sigma^{2}Q_{t})\). Hence:
+
+\begin{eqnarray*}
+p(\sigma^{2}\vert Y_{t}) &\propto& p(Y_{t}\vert \sigma^{2})p(\sigma^{2})\\
+ &\propto& \sigma^{-n}\exp(-\frac{1}{2\sigma^{2}}(y_{t} - F_{t}^{T}m^{*}_{t})^{T}Q_{t}^{-1}(y_{t} - F_{t}^{T}m^{*}_{t}))\sigma^{-2(a_{t-1} + 1)}\exp(-b_{t-1}\sigma^{-2})\\
+ &\propto& \sigma^{-2(a_{t-1} + \frac{n}{2} + 1)}\exp(-\sigma^{-2}[\frac{1}{2}(y_{t} - F_{t}^{T}m^{*}_{t})^{T}Q_{t}^{-1}(y_{t} - F_{t}^{T}m^{*}_{t}) + b_{t-1}])
+\end{eqnarray*}
+
+We conclude that \(\sigma^{-2}\vert Y_{t} \sim \Gamma(a_{t},b_{t})\), where \(a_{t} = a_{t-1} + \frac{n}{2}\) and \(b_{t} = b_{t-1} + \frac{1}{2}(y_{t} - F_{t}^{T}m^{*}_{t})^{T}Q_{t}^{-1}(y_{t} - F_{t}^{T}m^{*}_{t})\).
+
+This gives us the set of updating equations according to Petris Proposition 4.1.
+
+\hypertarget{final-commentary-on-the-derivation}{%
+\subsubsection{Final Commentary on the Derivation}\label{final-commentary-on-the-derivation}}
+
+Note that we have derived the forward filtering step for the set of equations for time \(t\) given the parameters for the distributions at time \(t-1\). Hence the equation's setup is Markovian, i.e.~the state of this set of equations only depends on that of the preceding time point. Nevertheless, applications where the forward filter's equations propagate from an initial time point \(t=0\) are written so that the dependence of the parameters' values \(\beta_{t}\) and \(\sigma^{2}\) on the data up to time \(t-1\) or time \(t\) are made explicit. Specifically, letting \(D_{t} = \{Y_{\tau}\}_{\tau=1,\ldots,t}\), we may write the set of equations in our setup as:
+
+\begin{eqnarray*}
+Y_{t},\sigma^{2}\vert \beta_{t},D_{t-1} &\sim& NIG(F_{t}^{T}\beta_{t}, V_{t}, a_{t-1}, b_{t-1})\\
+\beta_{t},\sigma^{2}\vert \beta_{t-1},D_{t-1} &\sim& NIG(G_{t}\beta_{t-1}, W_{t}, a_{t-1}, b_{t-1})\\
+\beta_{t-1},\sigma^{2}\vert D_{t-1} &\sim& NIG(m_{t-1}, C_{t-1}, a_{t-1}, b_{t-1})
+\end{eqnarray*}
+
+and the sequential posteriors we have derived, \(\beta_{t}\vert Y_{t}\) and \(\sigma^{2}\vert Y_{t}\), as \(\beta_{t}\vert D_{t}\) and \(\sigma^{2} \vert D_{t}\) respectively.
+
+\hypertarget{appendix}{%
+\section{Appendix}\label{appendix}}
+
+\hypertarget{deriving-x_2-vert-x_1-when-x_1-x_2t-is-a-block-normal-multivariate-random-variable.}{%
+\subsection{\texorpdfstring{Deriving \(x_{2} \vert x_{1}\) when \((x_{1} x_{2})^{T}\) is a block-normal multivariate random variable.}{Deriving x\_\{2\} \textbackslash vert x\_\{1\} when (x\_\{1\} x\_\{2\})\^{}\{T\} is a block-normal multivariate random variable.}}\label{deriving-x_2-vert-x_1-when-x_1-x_2t-is-a-block-normal-multivariate-random-variable.}}
+
+Recall our block normal system:
+
+\begin{eqnarray*}
+\begin{bmatrix}x_{1}\\ x_{2}\end{bmatrix} &\sim& N\left(\begin{bmatrix}\mu_{1}\\ \mu_{2}\end{bmatrix}, \begin{bmatrix}\Sigma_{11} & \Sigma_{12}\\
+\Sigma_{21} & \Sigma_{22}\end{bmatrix}\right)
+\end{eqnarray*}
+
+Assuming that \(\Sigma_{11}\) is invertible (though unless \(x_{1}\) contains degenerate terms, we have nothing to worry about), we then have
+
+\begin{eqnarray*}
+p(x_{2}\vert x_{1}) &=& \frac{p(x_{1},x_{2})}{p(x_{1})}\\
+ &\propto& \exp\left(-\frac{1}{2}\left[\begin{bmatrix}x_{1} - \mu_{1}\\ x_{2} - \mu_{2}\end{bmatrix}^{T}\begin{bmatrix}\Sigma_{11} & \Sigma_{12}\\ \Sigma_{21} & \Sigma_{22}\end{bmatrix}^{-1}\begin{bmatrix}x_{1} - \mu_{1}\\ x_{2} - \mu_{2}\end{bmatrix} - (x_{1} - \mu_{1})^{T}\Sigma_{11}^{-1}(x_{1} - \mu_{1})\right]\right)
+\end{eqnarray*}
+
+Now, one of the expressions we may use to invert the block covariance matrix is:
+\begin{eqnarray*}
+\begin{bmatrix}\Sigma_{11} & \Sigma_{12}\\
+\Sigma_{21} & \Sigma_{22}\end{bmatrix}^{-1} &=& \begin{bmatrix}\Sigma_{11}^{-1} + \Sigma_{11}^{-1}\Sigma_{12}(\Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})^{-1}\Sigma_{21}\Sigma_{11}^{-1} & -\Sigma_{11}^{-1}\Sigma_{12}(\Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})^{-1}\\
+-(\Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})^{-1}\Sigma_{21}\Sigma_{11}^{-1} & (\Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})^{-1}\end{bmatrix}
+\end{eqnarray*}
+
+Hence,
+
+\begin{eqnarray*}
+p(x_{2}\vert x_{1}) &\propto& \exp\left(-\frac{1}{2}\left[(x_{1} - \mu_{1})^{T}\Sigma_{11}^{-1}\Sigma_{12}(\Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})^{-1}\Sigma_{21}\Sigma_{11}^{-1}(x_{1} - \mu_{1}) - 2(x_{1} - \mu_{1})\Sigma_{11}^{-1}\Sigma_{12}(\Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})^{-1}(x_{2} - \mu_{2}) + (x_{2} - \mu_{2})^{T}(\Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})^{-1}(x_{2} - \mu_{2})\right]\right)\\
+ &\propto& \exp\left(-\frac{1}{2}\left[((x_{2} - \mu_{2}) - \Sigma_{21}\Sigma_{11}^{-1}(x_{1} - \mu_{1}))^{T}(\Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})^{-1}((x_{2} - \mu_{2}) - \Sigma_{21}\Sigma_{11}^{-1}(x_{1} - \mu_{1}))\right]\right)
+\end{eqnarray*}
+
+i.e.~\(x_{2} \vert x_{1} \sim N(\mu_{2} + \Sigma_{21}\Sigma_{11}^{-1}(x_{1} - \mu_{1}), \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})\). \(\square\)
+
+  \bibliography{book.bib,packages.bib}
+
+\end{document}

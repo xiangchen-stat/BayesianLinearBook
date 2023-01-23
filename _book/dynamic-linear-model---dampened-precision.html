@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Dynamic Linear Model - Dampened Precision | Bayesian Dynamic Linear Model - Dampened Precision Case</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Dynamic Linear Model - Dampened Precision | Bayesian Dynamic Linear Model - Dampened Precision Case" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Dynamic Linear Model - Dampened Precision | Bayesian Dynamic Linear Model - Dampened Precision Case" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Daniel Zhou, Sudipto Banerjee" />
+
+
+<meta name="date" content="2022-11-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="footnotes-and-citations.html"/>
+<link rel="next" href="blocks.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i><b>1.1</b> Usage</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>2</b> Hello bookdown</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="hello-bookdown.html"><a href="hello-bookdown.html#a-section"><i class="fa fa-check"></i><b>2.1</b> A section</a>
+<ul>
+<li class="chapter" data-level="" data-path="hello-bookdown.html"><a href="hello-bookdown.html#an-unnumbered-section"><i class="fa fa-check"></i>An unnumbered section</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>3</b> Cross-references</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="cross.html"><a href="cross.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>3.1</b> Chapters and sub-chapters</a></li>
+<li class="chapter" data-level="3.2" data-path="cross.html"><a href="cross.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.2</b> Captioned figures and tables</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dynamic-linear-model---shared-variance.html"><a href="dynamic-linear-model---shared-variance.html"><i class="fa fa-check"></i><b>4</b> Dynamic Linear Model - Shared Variance</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="dynamic-linear-model---shared-variance.html"><a href="dynamic-linear-model---shared-variance.html#background"><i class="fa fa-check"></i><b>4.1</b> Background</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="dynamic-linear-model---shared-variance.html"><a href="dynamic-linear-model---shared-variance.html#derivation"><i class="fa fa-check"></i><b>4.1.1</b> Derivation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="dynamic-linear-model---shared-variance.html"><a href="dynamic-linear-model---shared-variance.html#appendix"><i class="fa fa-check"></i><b>4.2</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="dynamic-linear-model---shared-variance.html"><a href="dynamic-linear-model---shared-variance.html#deriving-x_2-vert-x_1-when-x_1-x_2t-is-a-block-normal-multivariate-random-variable."><i class="fa fa-check"></i><b>4.2.1</b> Deriving <span class="math inline">\(x_{2} \vert x_{1}\)</span> when <span class="math inline">\((x_{1} x_{2})^{T}\)</span> is a block-normal multivariate random variable.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>5</b> Parts</a></li>
+<li class="chapter" data-level="6" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>6</b> Footnotes and citations</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>6.1</b> Footnotes</a></li>
+<li class="chapter" data-level="6.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>6.2</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="dynamic-linear-model---dampened-precision.html"><a href="dynamic-linear-model---dampened-precision.html"><i class="fa fa-check"></i><b>7</b> Dynamic Linear Model - Dampened Precision</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="dynamic-linear-model---dampened-precision.html"><a href="dynamic-linear-model---dampened-precision.html#background-1"><i class="fa fa-check"></i><b>7.1</b> Background</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="dynamic-linear-model---dampened-precision.html"><a href="dynamic-linear-model---dampened-precision.html#applications"><i class="fa fa-check"></i><b>7.1.1</b> Applications</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="dynamic-linear-model---dampened-precision.html"><a href="dynamic-linear-model---dampened-precision.html#forward-filter"><i class="fa fa-check"></i><b>7.2</b> Forward Filter</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="dynamic-linear-model---dampened-precision.html"><a href="dynamic-linear-model---dampened-precision.html#derivations"><i class="fa fa-check"></i><b>7.2.1</b> Derivations</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="dynamic-linear-model---dampened-precision.html"><a href="dynamic-linear-model---dampened-precision.html#backwards-sampling"><i class="fa fa-check"></i><b>7.3</b> Backwards Sampling</a></li>
+<li class="chapter" data-level="7.4" data-path="dynamic-linear-model---dampened-precision.html"><a href="dynamic-linear-model---dampened-precision.html#future-work"><i class="fa fa-check"></i><b>7.4</b> Future Work</a></li>
+<li class="chapter" data-level="7.5" data-path="dynamic-linear-model---dampened-precision.html"><a href="dynamic-linear-model---dampened-precision.html#appendix-1"><i class="fa fa-check"></i><b>7.5</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="dynamic-linear-model---dampened-precision.html"><a href="dynamic-linear-model---dampened-precision.html#precision-dampener---a-bivariate-derivation"><i class="fa fa-check"></i><b>7.5.1</b> Precision Dampener - a Bivariate Derivation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="dynamic-linear-model---dampened-precision.html"><a href="dynamic-linear-model---dampened-precision.html#works-cited-bibliography-wip"><i class="fa fa-check"></i><b>7.6</b> Works Cited (Bibliography WIP)</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>8</b> Blocks</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>8.1</b> Equations</a></li>
+<li class="chapter" data-level="8.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>8.2</b> Theorems and proofs</a></li>
+<li class="chapter" data-level="8.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>8.3</b> Callout blocks</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>9</b> Sharing your book</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>9.1</b> Publishing</a></li>
+<li class="chapter" data-level="9.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>9.2</b> 404 pages</a></li>
+<li class="chapter" data-level="9.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>9.3</b> Metadata for sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Dynamic Linear Model - Dampened Precision Case</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="dynamic-linear-model---dampened-precision" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Dynamic Linear Model - Dampened Precision<a href="dynamic-linear-model---dampened-precision.html#dynamic-linear-model---dampened-precision" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter discusses the Dynamic Linear Model and its derivations at each step. The approach taken in this document is borrowed from West and Harrison (1997), with some details derived from Petris et al (2009). For full generality and to maintain a multivariate normal system in both the data and parameter matrices, we assume all <span class="math inline">\(Y_{t} \in \mathbb{R}^{n}\)</span>, <span class="math inline">\(\theta_{t} \in \mathbb{R}^{p}\)</span>, and <span class="math inline">\(t \in \{1,\ldots,T\}\)</span> for some integer <span class="math inline">\(T\)</span>.</p>
+<div id="background-1" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Background<a href="dynamic-linear-model---dampened-precision.html#background-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The model we are concerned with studying is a class of time-varying models called the Dynamic Linear Model. The setup for the equation follows:</p>
+<p>For <span class="math inline">\(t = 1,\ldots,T\)</span>:
+<span class="math display">\[\begin{eqnarray*}
+Y_{t} &amp;=&amp; F_{t}^{T}\theta_{t} + \nu_{t}\\
+\theta_{t} &amp;=&amp; G_{t}\theta_{t-1} + \omega_{t}\\
+v_{t}^{-1} &amp;=&amp; \frac{\gamma_{t}}{\delta}v_{t-1}^{-1}\\
+\end{eqnarray*}\]</span></p>
+<p>where</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\nu_{t} &amp;\sim&amp; N_{n}(0, v_{t}V_{t})\\
+\omega_{t} &amp;\sim&amp; N_{p}(0, v_{t}W_{t})\\
+\gamma_{t} &amp;\sim&amp; \mathrm{Beta}(\delta n_{t-1}, (1 - \delta)n_{t-1})\\
+v_{t-1}^{-1} &amp;\sim&amp; \mathrm{Gamma}(n_{t-1}, d_{t-1})\\
+\end{eqnarray*}\]</span></p>
+<p>(Equations and setup due to West and Harrison (1997), repurposed for applications by Frankenburg and Banerjee (2022).)</p>
+<p>The task is to acquire estimates for <span class="math inline">\(\theta_{0,\ldots,T}\)</span>, <span class="math inline">\(v_{0,\ldots,T}\)</span>. This task may be divided into the forward filter and backwards sampling steps (collectively referred to as the Forward Filter-Backwards Sampling (FFBS) algorithm): The forward filter to acquire sequential estimates, and the backwards sampling step to retroactively “smooth” our initial estimates. We are given a set of observations <span class="math inline">\(Y_{t,j}\)</span>, and known parameters <span class="math inline">\(F_{t}\)</span>, <span class="math inline">\(G_{t}\)</span>, <span class="math inline">\(V_{t}\)</span>, <span class="math inline">\(W_{t}\)</span>, and <span class="math inline">\(n_{t-1}\)</span>, although Frankenburg and Banerjee also apply FFBS to cases where <span class="math inline">\(F_{t}\)</span> and <span class="math inline">\(G_{t}\)</span> are not pre-specified.</p>
+<p>Note in comparison to the shared variance case that this case includes the <span class="math inline">\(v_{t}^{-1} = \frac{\gamma_{t}}{\delta}v_{t-1}^{-1}\)</span> expression. We refer to this model as the “dampened precision” case because the inverse variance, i.e. precision, is dampened in this expression.</p>
+<div id="applications" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Applications<a href="dynamic-linear-model---dampened-precision.html#applications" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Intuitively, the setup has the dual benefit of being simple and applicable to a host of time series models. In particular, specifying the application gives you the values of <span class="math inline">\(F_{t}\)</span> and <span class="math inline">\(G_{t}\)</span>.</p>
+<p>Carter and Kohn (1994) have used a Gibbs sampler with a similar model with a time-varying but otherwise independent variance for errors taking the form of Gaussian mixtures (a set of Gaussian random errors of which any one of which may apply to the observation with some probability) and applied it to problems of cubic spline fitting and a trend plus seasonal components time-series model.</p>
+<p>Recently Frankenburg and Banerjee (2022) have applied the dynamic linear model to estimate ODE’s and PDE’s. Note in particular that a multivariate outcome <span class="math inline">\(Y_{t}\)</span> has ready applications to the spatial domain.</p>
+</div>
+</div>
+<div id="forward-filter" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Forward Filter<a href="dynamic-linear-model---dampened-precision.html#forward-filter" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The forward filter requires us to compute the unknown parameters to the posterior densities for the above set of equations, i.e. for <span class="math inline">\(p(\theta_{t},v_{t}\vert y_{1:t-1}) \sim \mathrm{NIG}(a_{t},A_{t},n_{t}^{*},d_{t}^{*})\)</span> and <span class="math inline">\(p(\theta_{t},v_{t}\vert y_{1:t}) \sim \mathrm{NIG}(m_{t},M_{t},n_{t},d_{t})\)</span>, compute <span class="math inline">\(a_{t}\)</span>, <span class="math inline">\(A_{t}\)</span>, <span class="math inline">\(m_{t}\)</span>, <span class="math inline">\(M_{t}\)</span>, <span class="math inline">\(n_{t}\)</span>, and <span class="math inline">\(d_{t}\)</span>.</p>
+<p>The algorithm supplied by Frankenburg and Banerjee follows:</p>
+<ol style="list-style-type: decimal">
+<li>for <span class="math inline">\(t = 1,\ldots,T\)</span>:</li>
+</ol>
+<ol style="list-style-type: lower-roman">
+<li><p>Compute <span class="math inline">\(a_{t} \leftarrow G_{t}m_{t-1}\)</span>, <span class="math inline">\(A_{t} \leftarrow G_{t}M_{t-1}G_{t}^{T} + W_{t}\)</span>, <span class="math inline">\(n_{t}^{*} \leftarrow \delta n_{t-1}\)</span>, <span class="math inline">\(d_{t}^{*}\leftarrow \delta d_{t-1}\)</span> for <span class="math inline">\(\theta_{t}, v_{t}^{-1}\vert Y_{1:t-1}\)</span></p></li>
+<li><p>Compute <span class="math inline">\(q_{t} \leftarrow F_{t}a_{t}\)</span>, <span class="math inline">\(Q_{t} \leftarrow F_{t}A_{t}F_{t}^{T} + V_{t}\)</span> for <span class="math inline">\(y_{t}\vert y_{1:t-1}\)</span></p></li>
+<li><p>Compute <span class="math inline">\(m_{t}\leftarrow a_{t} + A_{t}F_{t}Q_{t}^{-1}(y_{t} - q_{t})\)</span>, <span class="math inline">\(M_{t} \leftarrow A_{t} - A_{t}F_{t}^{T}Q_{t}^{-1}F_{t}A_{t}^{T}\)</span>, <span class="math inline">\(n_{t} \leftarrow n_{t}^{*} + \frac{n}{2}\)</span>, <span class="math inline">\(d_{t} \leftarrow d_{t}^{*} + \frac{1}{2}(y_{t} - q_{t})^{T}Q_{t}^{-1}(y_{t} - q_{t})\)</span></p></li>
+</ol>
+<ol start="2" style="list-style-type: decimal">
+<li>return <span class="math inline">\(\{n_{t}, d_{t}, a_{t}, A_{t}, m_{t}, M_{t}\}_{t=0}^{T}\)</span>.</li>
+</ol>
+<!-- TODO -->
+<p>Note here that Frankenburg and Banerjee treat their <span class="math inline">\(V_{t}\)</span> and <span class="math inline">\(W_{t}\)</span> as constant correlation matrices over time, allowing the scale factor to vary over time.</p>
+<div id="derivations" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Derivations<a href="dynamic-linear-model---dampened-precision.html#derivations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="precision-dampener" class="section level4 hasAnchor" number="7.2.1.1">
+<h4><span class="header-section-number">7.2.1.1</span> Precision Dampener<a href="dynamic-linear-model---dampened-precision.html#precision-dampener" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The derivation is straightforward:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+v_{t}^{-1} &amp;=&amp; \frac{\gamma_{t}}{\omega}v_{t-1}^{-1}\\
+P(v_{t}\leq v) &amp;=&amp; P(\frac{\omega}{\gamma_{t}}v_{t-1} \leq v)\\
+&amp;=&amp; P(v_{t-1} \leq \frac{v}{\omega}\gamma_{t})\\
+&amp;\propto&amp; \int_{0}^{1}\int_{0}^{\frac{v}{\omega}\gamma_{t}}v_{t-1}^{-(n_{t-1} + 1)}\exp(-d_{t-1}v_{t-1}^{-1})dv_{t-1}\gamma_{t}^{\omega n_{t-1} - 1}(1 - \gamma_{t})^{(1 - \omega)n_{t-1} - 1}d\gamma_{t}\\
+f_{v_{t}}(v) &amp;=&amp; \frac{\partial}{\partial v}(P(v_{t}\leq v))\\
+&amp;\propto&amp; \int_{0}^{1}\left(\frac{v}{\omega}\gamma_{t}\right)^{-(n_{t-1} + 1)}\exp\left(-\frac{d_{t-1}\omega}{\gamma_{t}}v^{-1}\right)\left(\frac{\omega}{\gamma_{t}}\right)\gamma_{t}^{\omega n_{t-1} - 1}(1 - \gamma_{t})^{(1 - \omega)n_{t-1} - 1}d\gamma_{t}\\
+&amp;\propto&amp; v^{-(n_{t-1} + 1)}\int_{0}^{1}\gamma_{t}^{-2}(\gamma_{t}^{-1} - 1)^{(1 - \omega)n_{t-1} - 1}\exp\left(-\frac{d_{t-1}\omega}{\gamma_{t}}v^{-1}\right)d\gamma_{t}\\
+\end{eqnarray*}\]</span></p>
+<p>Now let <span class="math inline">\(y_{t} = \gamma_{t}^{-1}\)</span>. Then <span class="math inline">\(dy_{t} = -\gamma_{t}^{-2}d\gamma_{t}\)</span> and:
+<span class="math display">\[\begin{eqnarray*}
+f_{v_{t}}(v) &amp;\propto&amp; v^{-(n_{t-1} + 1)}\int_{\infty}^{1}-(y_{t} - 1)^{(1 - \omega)n_{t-1} - 1}\exp\left(-\frac{d_{t-1}\omega}{v}y_{t}\right)dy_{t}\\
+&amp;\propto&amp; v^{-(n_{t-1} + 1)}\int_{1}^{\infty}(y_{t} - 1)^{(1 - \omega)n_{t-1} - 1}\exp\left(-\frac{d_{t-1}\omega}{v}y_{t}\right)dy_{t}\\
+&amp;\propto&amp; v^{-(n_{t-1} + 1)}\exp\left(-\frac{d_{t-1}\omega}{v}\right)\int_{0}^{\infty}y_{t}^{(1 - \omega)n_{t-1} - 1}\exp\left(-\frac{d_{t-1}\omega}{v}y_{t}\right)dy_{t}\\
+&amp;\propto&amp; v^{-(n_{t-1} + 1)}\exp\left(-\frac{d_{t-1}\omega}{v}\right)\left(\frac{v}{d_{t-1}\omega}\right)^{(1 - \omega)n_{t-1}}\\
+&amp;\propto&amp; v^{-(\omega n_{0} + 1)}\exp\left(-\frac{d_{t-1}\omega}{v}\right)
+\end{eqnarray*}\]</span></p>
+<p>Thus, <span class="math inline">\(v_{t}^{-1}\sim \Gamma(\omega n_{t-1}, \omega d_{t-1})\)</span>. <span class="math inline">\(\square\)</span></p>
+</div>
+<div id="regression-model" class="section level4 hasAnchor" number="7.2.1.2">
+<h4><span class="header-section-number">7.2.1.2</span> Regression Model<a href="dynamic-linear-model---dampened-precision.html#regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We subsequently derive each of the regression model equations in West and Harrison (1997) Table 10.4. Given <span class="math inline">\(\theta_{t-1}\vert D_{t-1} = \theta_{t-1} \sim T_{n_{t-1}}(m_{t-1},C_{t-1})\)</span>, where <span class="math inline">\(n_{t-1}\)</span>, <span class="math inline">\(m_{t-1} \in \mathbb{R}^{p}\)</span>, and <span class="math inline">\(C_{t-1} \in \mathbb{R}^{p\times p}\)</span>, we make use of the following derivations:</p>
+<p><span class="math inline">\(\theta_{t}\vert D_{t-1}\)</span>:
+<span class="math display">\[\begin{eqnarray*}
+\theta_{t-1} &amp;\sim&amp; T_{n_{t-1}}(m_{t-1},C_{t-1})\\
+&amp;=&amp; \int N(\theta_{t-1}\vert m_{t-1}, v_{t-1}\frac{n_{t-1}}{d_{t-1}}C_{t-1})\Gamma^{-1}(v_{t-1}\vert \frac{n_{t-1}}{2}, \frac{d_{t-1}}{2})dv_{t-1}
+\end{eqnarray*}\]</span></p>
+<p>Based on this t-distribution specification alone, we may write:
+<span class="math display">\[\begin{eqnarray*}
+\theta_{t-1}\vert v_{t-1} &amp;\sim&amp; N(m_{t-1}, v_{t-1}\frac{1}{S_{t-1}}C_{t-1})
+\end{eqnarray*}\]</span></p>
+<p>where <span class="math inline">\(S_{t-1} = \frac{d_{t-1}}{n_{t-1}}\)</span></p>
+<p>In the same way,
+<span class="math display">\[\begin{eqnarray*}
+\omega_{t}\vert v_{t-1} &amp;\sim&amp; N(0,v_{t-1}\frac{1}{S_{t-1}}W_{t})
+\end{eqnarray*}\]</span></p>
+<p>and thus
+<span class="math display">\[\begin{eqnarray*}
+\theta_{t}\vert v_{t-1} &amp;=&amp; (G_{t}\theta_{t-1} + \omega_{t})\vert v_{t-1}\\
+&amp;\sim&amp; N(G_{t}m_{t-1}, v_{t-1}(\frac{1}{S_{t-1}}(G_{t}C_{t-1}G_{t}^{T} + W_{t})))\\
+\theta_{t} = \theta_{t}\vert D_{t-1} &amp;\sim&amp; \int N(G_{t}m_{t-1}, v_{t-1}(\frac{n_{t-1}}{d_{t-1}}(G_{t}C_{t-1}G_{t}^{T} + W_{t})))\Gamma^{-1}(v_{t-1}\vert \frac{n_{t-1}}{2}, \frac{d_{t-1}}{2})dv_{t-1}\\
+&amp;\sim&amp; T_{n_{t-1}}(G_{t}m_{t-1}, G_{t}C_{t-1}G_{t}^{T} + W_{t})
+\end{eqnarray*}\]</span></p>
+<p>We will use this iterative variance fixing to update the t-distributions accordingly, working with conditional scale variances rather than the densities of the t-distributions directly. We follow up with <span class="math inline">\(Y_{t}\)</span>:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+Y_{t} &amp;=&amp; F_{t}^{T}\theta_{t} + \nu_{t}\\
+\end{eqnarray*}\]</span></p>
+<p>Note that <span class="math inline">\(\nu_{t} \sim N(0,v_{t}V_{t})\)</span>. However, <span class="math inline">\(\theta_{t}\vert D_{t-1} \sim T_{n_{t-1}}(G_{t}m_{t-1}, G_{t}C_{t-1}G_{t}^{T} + W_{t})\)</span>, which makes transitioning to the degrees of freedom of <span class="math inline">\(v_{t}\vert D_{t-1}\)</span> nontrivial. To illustrate our current progress, we will ignore this change in degrees of freedom or take it for granted and proceed.</p>
+</div>
+<div id="intermediate-concerns-sidestepping-the-degrees-of-freedom." class="section level4 hasAnchor" number="7.2.1.3">
+<h4><span class="header-section-number">7.2.1.3</span> Intermediate Concerns: Sidestepping the Degrees of Freedom.<a href="dynamic-linear-model---dampened-precision.html#intermediate-concerns-sidestepping-the-degrees-of-freedom." class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<!-- TODO: -->
+<p>Note that West and Harrison specifies that <span class="math inline">\(\theta_{t}\vert D_{t-1} \sim T_{\delta n_{t-1}}(G_{t}m_{t-1}, G_{t}C_{t-1}G_{t}^{T} + W_{t})\)</span>, i.e. the degrees of freedom of the t-distribution is <span class="math inline">\(\delta n_{t-1}\)</span>, rather than <span class="math inline">\(n_{t-1}\)</span> as we’ve deduced, in an errata from Mike West’s website. Hand-waving this for the time being, we proceed:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\theta_{t}\vert D_{t-1} &amp;\sim&amp; T_{\delta n_{t-1}}(G_{t}m_{t-1}, G_{t}C_{t-1}G_{t}^{T} + W_{t})\\
+&amp;\sim&amp; \int N(\theta_{t}\vert a_{t}, \frac{v_{t}}{S_{t-1}}R_{t})\Gamma^{-1}(v_{t}\vert \frac{\delta n_{t-1}}{2}, \frac{\delta d_{t-1}}{2})dv_{t}\\
+\theta_{t}\vert D_{t-1}, v_{t} &amp;\sim&amp; N(a_{t}, \frac{v_{t}}{S_{t-1}}R_{t})\\
+Y_{t} &amp;=&amp; F_{t}^{T}\theta_{t} + \nu_{t}\\
+Y_{t}\vert D_{t-1}, v_{t} &amp;\sim&amp; N(F_{t}^{T}a_{t}, v_{t}(\frac{1}{S_{t-1}}F_{t}^{T}R_{t}F_{t} + V_{t}))\\
+Y_{t}\vert D_{t-1} &amp;\sim&amp; T_{\delta n_{t-1}}(F_{t}^{T}a_{t}, F_{t}^{T}R_{t}F_{t} + S_{t-1}V_{t})\\
+\end{eqnarray*}\]</span>
+where <span class="math inline">\(a_{t} = G_{t}m_{t-1}\)</span> and <span class="math inline">\(R_{t} = G_{t}C_{t-1}G_{t}^{T} + W_{t}\)</span>.</p>
+<p>Then, letting <span class="math inline">\(Q_{t} = F_{t}^{T}R_{t}F_{t} + S_{t-1}V_{t}\)</span>:
+<span class="math display">\[\begin{eqnarray*}
+p(\theta_{t}\vert D_{t}) &amp;=&amp; \frac{p(Y_{t}\vert \theta_{t},v_{t})p(\theta_{t}\vert v_{t})}{p(Y_{t}\vert v_{t})}\\
+&amp;=&amp; \frac{(2\pi)^{-\frac{n}{2}}\lvert V_{t}\rvert^{-\frac{1}{2}}v_{t}^{-\frac{n}{2}}\exp(-\frac{1}{2v_{t}}(Y_{t} - F_{t}^{T}\theta_{t})^{T}K^{-1}(Y_{t} - F_{t}^{T}\theta_{t}))(2\pi)^{-\frac{p}{2}}\lvert R_{t}\rvert^{-\frac{1}{2}}v_{t}^{-\frac{p}{2}}\exp(-\frac{S_{t-1}}{2v_{t}}(\theta_{t} - G_{t}m_{t-1})^{T}R_{t}^{-1}(\theta_{t} - G_{t}m_{t-1}))}{(2\pi)^{-\frac{n}{2}}\lvert Q_{t}\rvert^{-\frac{1}{2}}v_{t}^{-\frac{n}{2}}\exp(-\frac{1}{2v_{t}}(Y_{t} - F_{t}^{T}a_{t})^{T}Q_{t}^{-1}(Y_{t} - F_{t}^{T}a_{t}))}\\
+&amp;\propto&amp; v_{t}^{-\frac{p}{2}}\exp(-\frac{1}{2v_{t}}\left[(Y_{t} - F_{t}^{T}\theta_{t})^{T}K^{-1}(Y_{t} - F_{t}^{T}\theta_{t}) + S_{t-1}(\theta_{t} - a_{t})^{T}R_{t}^{-1}(\theta_{t} - a_{t})\right])
+\end{eqnarray*}\]</span></p>
+<p>For simplicity, we work with the sum of quadratic forms in the exponent:
+<span class="math display">\[\begin{eqnarray*}
+(Y_{t} - F_{t}^{T}\theta_{t})^{T}K^{-1}(Y_{t} - F_{t}^{T}\theta_{t}) + S_{t-1}(\theta_{t} - a_{t})^{T}R_{t}^{-1}(\theta_{t} - a_{t}) &amp;=&amp; \theta_{t}^{T}(S_{t-1}R_{t}^{-1} + F_{t}V_{t}^{-1}F_{t}^{T})\theta_{t} - 2(S_{t-1}R_{t}^{-1}a_{t} + F_{t}V_{t}^{-1}Y_{t})^{T}\theta_{t} + Y_{t}^{T}V_{t}^{-1}Y_{t} + S_{t-1}a_{t}^{T}R_{t}^{-1}a_{t}
+\end{eqnarray*}\]</span></p>
+<p>Hence,
+<span class="math display">\[\begin{eqnarray*}
+\theta_{t}\vert D_{t},v_{t} &amp;\sim&amp; N((S_{t-1}R_{t}^{-1} + F_{t}V_{t}^{-1}F_{t}^{T})^{-1}(S_{t-1}R_{t}^{-1}a_{t} + F_{t}V_{t}^{-1}Y_{t}), v_{t}(S_{t-1}R_{t}^{-1} + F_{t}V_{t}^{-1}F_{t}^{T})^{-1})
+\end{eqnarray*}\]</span></p>
+<p>Simplifying the parameters of this normal distribution gives us
+<span class="math display">\[\begin{eqnarray*}
+(S_{t-1}R_{t}^{-1} + F_{t}V_{t}^{-1}F_{t}^{T})^{-1} &amp;=&amp; \frac{1}{S_{t-1}}R_{t} - \frac{1}{S_{t-1}}R_{t}F_{t}(V_{t} + \frac{1}{S_{t-1}}F_{t}^{T}R_{t}F_{t})^{-1}F_{t}^{T}R_{t}\frac{1}{S_{t-1}}\\
+&amp;=&amp; \frac{1}{S_{t-1}}R_{t} - \frac{1}{S_{t-1}}R_{t}F_{t}Q_{t}^{-1}F_{t}^{T}R_{t} = \frac{1}{S_{t-1}}(R_{t} - A_{t}Q_{t}A_{t}^{T})\\
+(S_{t-1}R_{t}^{-1} + F_{t}V_{t}^{-1}F_{t}^{T})^{-1}(S_{t-1}R_{t}^{-1}a_{t} + F_{t}V_{t}^{-1}Y_{t}) &amp;=&amp; a_{t} - R_{t}F_{t}Q_{t}^{-1}F_{t}^{T}a_{t} + \frac{1}{S_{t-1}}R_{t}F_{t}V_{t}^{-1}Y_{t} - \frac{1}{S_{t-1}}R_{t}F_{t}Q_{t}^{-1}F_{t}^{T}R_{t}F_{t}V_{t}^{-1}Y_{t}\\
+&amp;=&amp; a_{t} - A_{t}F_{t}^{T}a_{t} + \frac{1}{S_{t-1}}A_{t}Q_{t}V_{t}^{-1}Y_{t} - \frac{1}{S_{t-1}}A_{t}Q_{t}A_{t}^{T}F_{t}V_{t}^{-1}Y_{t}\\
+&amp;=&amp; a_{t} - A_{t}F_{t}^{T}a_{t} + \frac{1}{S_{t-1}}A_{t}(F_{t}^{T}R_{t}F_{t}^{T} + S_{t-1}V_{t})V_{t}^{-1}Y_{t} - \frac{1}{S_{t-1}}A_{t}Q_{t}A_{t}^{T}F_{t}V_{t}^{-1}Y_{t}\\
+&amp;=&amp; a_{t} - A_{t}F_{t}^{T}a_{t} + \frac{1}{S_{t-1}}A_{t}Q_{t}A_{t}^{T}F_{t}^{T}V_{t}^{-1}Y_{t} + A_{t}Y_{t} - \frac{1}{S_{t-1}}A_{t}Q_{t}A_{t}^{T}F_{t}V_{t}^{-1}Y_{t}\\
+&amp;=&amp; a_{t} - A_{t}F_{t}^{T}a_{t} + A_{t}Y_{t} = a_{t} + A_{t}e_{t}
+\end{eqnarray*}\]</span></p>
+<p>where <span class="math inline">\(A_{t} = R_{t}F_{t}Q_{t}^{-1}\)</span> and <span class="math inline">\(e_{t} = Y_{t} - F_{t}^{T}a_{t}\)</span>. So we conclude that <span class="math inline">\(\theta_{t}\vert D_{t},v_{t} \sim N(a_{t} + A_{t}e_{t}, \frac{1}{S_{t-1}}(R_{t} - A_{t}Q_{t}A_{t}^{T}))\)</span>. We wish to integrate out <span class="math inline">\(v_{t}\)</span>, which will be the subject of our next derivation:
+<span class="math display">\[\begin{eqnarray*}
+p(v_{t}\vert D_{t}) &amp;\propto&amp; p(v_{t}\vert D_{t-1})p(Y_{t}\vert v_{t}, D_{t-1})\\
+&amp;\propto&amp; v_{t}^{-\frac{\delta n_{t-1}}{2} - 1}\exp(-\frac{\delta d_{t-1}}{2v_{t}})v_{t}^{-\frac{n}{2}}\exp(-\frac{S_{t-1}}{2v_{t}}(Y_{t} - F_{t}^{T}a_{t})^{T}Q_{t}^{-1}(Y_{t} - F_{t}^{T}a_{t}))\\
+&amp;\propto&amp; v_{t}^{-\frac{\delta n_{t-1} + n}{2} - 1}\exp(-v_{t}^{-1}\frac{1}{2}(\delta d_{t-1} + S_{t-1}(Y_{t} - F_{t}^{T}a_{t})^{T}Q_{t}^{-1}(Y_{t} - F_{t}^{T}a_{t})))
+\end{eqnarray*}\]</span></p>
+<p>As desired <span class="math inline">\(v_{t}\vert D_{t}\)</span> is also an inverse Gamma random variable. Its parameters are:
+<span class="math display">\[\begin{eqnarray*}
+n_{t} &amp;=&amp; \delta n_{t-1} + n\\
+d_{t} &amp;=&amp; \delta d_{t-1} + S_{t-1}(Y_{t} - F_{t}^{T}a_{t})^{T}Q_{t}^{-1}(Y_{t} - F_{t}^{T}a_{t})
+\end{eqnarray*}\]</span></p>
+<p>Finally, we marginalize <span class="math inline">\(v_{t}\)</span> out from <span class="math inline">\(\theta_{t}\vert D_{t}, v_{t}\)</span>, which gives us <span class="math inline">\(\theta_{t}\vert D_{t} \sim T_{n_{t}}(a_{t} + A_{t}e_{t}, \frac{S_{t}}{S_{t-1}}(R_{t} - A_{t}Q_{t}A_{t}^{T}))\)</span>.</p>
+<p>It should be noted that with these densities we have deduced, proceeding to further steps requires only induction.</p>
+</div>
+</div>
+</div>
+<div id="backwards-sampling" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Backwards Sampling<a href="dynamic-linear-model---dampened-precision.html#backwards-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As the above is incomplete, a detailed discussion of the backwards sampler is not entirely relevant at the moment, but it is useful to include for</p>
+<p>The backwards sampler requires us to, given the posterior estimates computed with the forward filter, to iteratively and retroactively update the parameters for the prior distributions in reverse time order. Frankenburg and Banerjee provide the following algorithm:</p>
+<ol style="list-style-type: decimal">
+<li><p>Draw <span class="math inline">\(v_{T}^{-1} \sim \mathrm{Gamma}(n_{T}, d_{T})\)</span></p></li>
+<li><p>for <span class="math inline">\(t = T-1,\ldots,0\)</span></p></li>
+</ol>
+<ol style="list-style-type: lower-roman">
+<li><p>Draw <span class="math inline">\(v_{t}^{*} \sim \mathrm{Gamma}((1 - \delta)n_{t}, d_{t})\)</span></p></li>
+<li><p><span class="math inline">\(v_{t}^{-1} \leftarrow \delta v_{t+1}^{-1} + v_{t}^{*}\)</span>, <span class="math inline">\(s_{t} \leftarrow m_{t} + M_{t}G_{t+1}^{T}A_{t+1}^{-1}(s_{t+1} - a_{t+1})\)</span>, <span class="math inline">\(S_{t} \leftarrow M_{t} - M_{t}G_{t+1}^{T}A_{t+1}^{-1}(A_{t+1} - S_{t+1})A_{t+1}^{-1}G_{t+1}M_{t}\)</span></p></li>
+<li><p>Draw <span class="math inline">\(\theta_{t} \sim N_{p}(s_{t}, v_{t}S_{t})\)</span></p></li>
+</ol>
+<ol start="3" style="list-style-type: decimal">
+<li>return <span class="math inline">\(\{v_{t}, \theta_{t}\}_{t=0}^{T}\)</span></li>
+</ol>
+</div>
+<div id="future-work" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Future Work<a href="dynamic-linear-model---dampened-precision.html#future-work" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Provided my derivations (or some form of my derivations after seeing Jamal Ameen’s past work), the multivariate outcome can further be extended to a matrix normal outcomes and the normal-inverse gamma densities can be extended into matrix normal-inverse Wisharts. Like the case with the vector outcome in this model, the matrix normal-inverse Wishart has spatial applications, possibly moreso than the vector case (although I could be optimistic in this regard).</p>
+<p>There is a possibility of applying this model to survival data over a spatial domain (e.g. body measurements with a health outcome for, say, heart disease) and also exploring parameter estimation when we factor in a survival component (censoring, in particular).</p>
+</div>
+<div id="appendix-1" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Appendix<a href="dynamic-linear-model---dampened-precision.html#appendix-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="precision-dampener---a-bivariate-derivation" class="section level3 hasAnchor" number="7.5.1">
+<h3><span class="header-section-number">7.5.1</span> Precision Dampener - a Bivariate Derivation<a href="dynamic-linear-model---dampened-precision.html#precision-dampener---a-bivariate-derivation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We include here a contrived derivation from <span class="math inline">\(v_{t-1}^{-1} \rightarrow v_{t}^{-1}\)</span>:</p>
+<p>Set:
+<span class="math display">\[\begin{eqnarray*}
+v_{t}^{-1} &amp;=&amp; v_{t-1}^{-1}\frac{\gamma_{t}}{\delta}\\
+v_{1b}^{-1} &amp;=&amp; v_{t-1}^{-1}\frac{1 - \gamma_{t}}{\delta}\\
+\end{eqnarray*}\]</span></p>
+<p>Then,
+<span class="math display">\[\begin{eqnarray*}
+\frac{v_{t-1}^{-1}}{\delta} &amp;=&amp; v_{t}^{-1} + v_{1b}^{-1}\\
+\gamma_{t} &amp;=&amp; \frac{\omega v_{t-1}}{v_{t}} = \frac{1}{v_{t}(v_{t}^{-1} + v_{1b}^{-1})} = \frac{v_{1b}}{v_{t} + v_{1b}}\\
+J(v_{t}^{-1}, v_{1b}^{-1}) &amp;=&amp; \mathrm{det}\begin{bmatrix}\frac{\partial v_{t-1}}{\partial v_{t}} &amp; \frac{\partial v_{t-1}}{\partial v_{1b}}\\
+\frac{\partial \gamma_{t}}{\partial v_{t}} &amp; \frac{\partial \gamma_{t}}{\partial v_{1b}}\\
+\end{bmatrix}\\
+&amp;=&amp; \cdots \\
+&amp;=&amp; \frac{1}{\delta}\frac{v_{t}v_{1b}}{(v_{t} + v_{1b})^{3}}
+\end{eqnarray*}\]</span></p>
+<p><span class="math display">\[\begin{eqnarray*}
+p(v_{t}^{-1}, v_{1b}^{-1}) &amp;=&amp; p(v_{t-1}^{-1}, \gamma_{t})\lvert J(v_{t}^{-1}, v_{1b}^{-1})\rvert\\
+&amp;=&amp; \frac{d_{t-1}^{n_{t-1}}}{\Gamma(n_{t-1})}v_{t-1}^{-n_{t-1}-1}e^{-\frac{d_{t-1}}{v_{t-1}}}\left(\frac{\Gamma(n_{t-1})}{\Gamma(\delta n_{t-1})\Gamma((1 - \delta)n_{t-1})}\gamma_{t}^{\delta n_{t-1} - 1}(1 -\gamma_{t})^{(1 - \delta)n_{t-1} - 1}\right)\left(\frac{1}{\delta}\frac{v_{t}v_{1b}}{(v_{t} + v_{1b})^{3}}\right)\\
+&amp;\propto&amp; \left(\frac{v_{t}v_{1b}}{v_{t} + v_{1b}}\right)^{-n_{t-1} - 1}e^{-\frac{d_{t-1}\delta}{v_{t}v_{1b}}(v_{t} + v_{1b})}\left(\frac{v_{1b}}{v_{t} + v_{1b}}\right)^{\delta n_{t-1} - 1}\left(\frac{v_{t}}{v_{t} + v_{1b}}\right)^{(1 - \delta)n_{t-1} - 1}\left(\frac{v_{t}v_{1b}}{(v_{t} + v_{1b})^{3}}\right)\\
+&amp;=&amp; v_{t}^{-n_{t-1} - 1 + (1 - \delta)n_{t-1} - 1 + 1}v_{1b}^{-n_{t-1} - 1 + \delta n_{t-1} - 1 + 1}(v_{t} + v_{1b})^{-[-n_{t-1} - 1 + \delta n_{t-1} - 1 + (1 - \delta) n_{t-1} - 1 + 3]}e^{-d_{t-1}\delta[\frac{1}{v_{1b}} + \frac{1}{v_{t}}]}\\
+&amp;=&amp; v_{t}^{-\delta n_{t-1} - 1}v_{1b}^{-(1 - \delta)n_{t-1} - 1}e^{-d_{t-1}\delta \left(\frac{1}{v_{1b}} + \frac{1}{v_{t}}\right)}\\
+p(v_{t}^{-1}) &amp;=&amp; \int p(v_{t}^{-1}, v_{1b}^{-1})dv_{1b}\\
+&amp;\propto&amp; v_{t}^{-\delta n_{t-1} - 1}e^{-\frac{d_{t-1}\delta}{v_{t}}}
+\end{eqnarray*}\]</span></p>
+<p>i.e. <span class="math inline">\(n_{t}^{*} = \delta n_{t-1}\)</span>, <span class="math inline">\(d_{t}^{*} = \delta d_{t-1}\)</span>.</p>
+<p>This derivation holds for all <span class="math inline">\(t = 1,\ldots,T-1\)</span>. Bear in mind, however, that the densities derived are not of <span class="math inline">\(\gamma_{t}\)</span> by itself, but <span class="math inline">\(\gamma_{t}\vert D_{t-1}\)</span> given the density of <span class="math inline">\(\gamma_{t-1}\vert D_{t-1}\)</span>. (We denote <span class="math inline">\(D_{t} = \{Y_{\tau}\}_{\tau = 1,\ldots,t}\)</span> for notational convenience and consistency with the source material.)</p>
+</div>
+</div>
+<div id="works-cited-bibliography-wip" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Works Cited (Bibliography WIP)<a href="dynamic-linear-model---dampened-precision.html#works-cited-bibliography-wip" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- TODO -->
+<ol style="list-style-type: decimal">
+<li><p>West and Harrison (1997)</p></li>
+<li><p>Frankenburg and Banerjee (2022)</p></li>
+<li><p>Petris, Petrone, Campagnoli (2009)</p></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="footnotes-and-citations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="blocks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-DLMDampPres.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

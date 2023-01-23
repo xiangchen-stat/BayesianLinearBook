@@ -1,0 +1,63 @@
+--- 
+title: "Bayesian Tutorials"
+author: "Valentina Arputhasamy, Dr. Sudipto Banerjee"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+# The Divide & Conquer Algorithm
+
+The divide and conquer algorithm is a strategy of solving a large problem by breaking it down into two or more smaller and more manageable sub-problems of the same or of a similar genre. The solutions to the sub-problems are then combined to get the desired output: the solution to the original problem. 
+
+In this section, we apply the divide and conquer algorithm to the Bayesian linear regression framework.
+
+## The Problem
+
+Let $y = (y_1, y_2, ...,y_n)^{T}$ be an $n \times 1$ random vector of outcomes and $X$ be a fixed $n \times p$ matrix of predictors with full column rank. Consider the following Bayesian (hierarchical) linear regression model,
+
+$$ IG(\sigma^2 \mid a_0,b_0) \times N(\beta \mid m_0, \sigma^2M_0) \times N(y \mid X\beta, \sigma^2I_n).$$
+The posterior density is $p(\beta, \sigma^2 \mid y) = IG(\sigma^2 \mid a_0^*, b_0^*) \times N(\beta \mid Mm, \sigma^2M)$, and to carry out Bayesian inference, we first sample $\sigma^2 \sim IG(a^*, b^*)$ and then, for each sampled $\sigma^2$, we sample $\beta \sim N(Mm, \sigma^2 M)$.
+
+Assume that $n$ is so large that we are unable to store or load $y$ or $X$ into our CPU to carry out computations for them. We decide to divide our data set into K mutually exclusive and exhaustive subsets, each comprising a manageable number of points. Note that $p$ is small, so computations involving $p \times p$ matrices are fine. Let $y_k$ denote the $m_k \times 1$ sub-vector of $y$, and $X_k$ be the $m_k \times p$ sub-matrix of $X$ in subset $k$, where each $m_k$ has been chosen by us so that $m_k > p$, and is small enough such that we can fit the above model on $\{y_k, X_k\}$. This section will clearly explain how we can still compute $a^*, b^*, M$ and $m$ without ever having to store or compute with $y$ or $X$, but with quantities computed using only the subsets $\{y_k, X_k\}$ for $k = 1,2,...,K$.
+
+## The Solution
+
+Using the multivariate completing the square method, we know that the explicit expressions for $a^*, b^*, m$ and $M$ are given by: 
+
+```{css, echo=FALSE}
+.ul { border: 2px solid black; }
+```
+
+<ul> - $a_0^*$ = $a_0 + \frac{n}{2}$\
+- $b_0^{*}$ = $b_0 + \frac{c^*}{2}$ \
+- $c$ = $m_0^{T}M^{-1}_0 m_0 + y^{T}y - m^{T}Mm$ \
+- $m$ = $(X^{T}y + M_0^{-1}m_0)$ \
+- $M$ = $(X^{T}X + M_0^{-1})^{-1}$ 
+</ul>          
+
+This implies that the explicit expressions for the $a_0^*, b_0^*, m$ and $M$ for the $i_th$ subset are given by: 
+<ul> 
+- $a_{0i}^*$ = $a_0 + \frac{m_i}{2}$\
+- $b_{0i}^{*}$ = $b_0 + \frac{c^*}{2}$ \
+- $c_i^{*}$ = $m_0^{T}M^{-1}_0 m_0 + y_i^{T}y_i - m_i^{T}M_im_i$
+- $m_i$ = $(X_i^{T}y_i + M_0^{-1}m_0)$ \
+- $M_i$ = $(X_i^{T}X_i + M_0^{-1})^{-1}$ </ul>
+
+We can express the posteriors of the entire data set as a function of the posteriors of the subsets with some math, resulting in:
+
+<ul> 
+- $a_0^{*}$ = $\sum_{i=1}^{k} a_{0i}^{*} + (k-1)a_0$
+- $b_0^{*}$ = $b_0 + m_0^{T}M^{-1}_0 m_0 + \sum_{i=1}^{k}y_i^{T}y_i - m^{T}Mm$ \
+- $m$ = $\sum_{i=1}^{k}m_i - (k-1)M^{-1}_0m_0$ \
+- $M$ = $\sum_{i=1}^{k}(X_i^{T}X_i + M^{-1}_0)^{-1} = (\sum_{i=1}^{k}M^{-1}_i - (k-1)M^{-1}_0)^{-1}$ </ul>
+
