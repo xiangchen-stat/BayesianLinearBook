@@ -13,7 +13,7 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# Preface
+# Preface {-}
 
 This is a first tutorial for Bayesian Linear Regression assembled in book form.
 
