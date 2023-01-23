@@ -13,6 +13,8 @@ description: |
   set in the _output.yml file.
 link-citations: yes
 github-repo: rstudio/bookdown-demo
+header-includes:
+  - \newcommand{\T}{\mathrm{\scriptscriptstyle T}}
 ---
 
 # The Divide & Conquer Algorithm
@@ -23,7 +25,7 @@ In this section, we apply the divide and conquer algorithm to the Bayesian linea
 
 ## The Problem
 
-Let $y = (y_1, y_2, ...,y_n)^{T}$ be an $n \times 1$ random vector of outcomes and $X$ be a fixed $n \times p$ matrix of predictors with full column rank. Consider the following Bayesian (hierarchical) linear regression model,
+Let $y = (y_1, y_2, ...,y_n)^{\T}$ be an $n \times 1$ random vector of outcomes and $X$ be a fixed $n \times p$ matrix of predictors with full column rank. Consider the following Bayesian (hierarchical) linear regression model,
 
 $$ IG(\sigma^2 \mid a_0,b_0) \times N(\beta \mid m_0, \sigma^2M_0) \times N(y \mid X\beta, \sigma^2I_n).$$
 The posterior density is $p(\beta, \sigma^2 \mid y) = IG(\sigma^2 \mid a_0^*, b_0^*) \times N(\beta \mid Mm, \sigma^2M)$, and to carry out Bayesian inference, we first sample $\sigma^2 \sim IG(a^*, b^*)$ and then, for each sampled $\sigma^2$, we sample $\beta \sim N(Mm, \sigma^2 M)$.
@@ -40,24 +42,24 @@ Using the multivariate completing the square method, we know that the explicit e
 
 <ul> - $a_0^*$ = $a_0 + \frac{n}{2}$\
 - $b_0^{*}$ = $b_0 + \frac{c^*}{2}$ \
-- $c$ = $m_0^{T}M^{-1}_0 m_0 + y^{T}y - m^{T}Mm$ \
-- $m$ = $(X^{T}y + M_0^{-1}m_0)$ \
-- $M$ = $(X^{T}X + M_0^{-1})^{-1}$ 
+- $c$ = $m_0^{\T}M^{-1}_0 m_0 + y^{\T}y - m^{\T}Mm$ \
+- $m$ = $(X^{\T}y + M_0^{-1}m_0)$ \
+- $M$ = $(X^{\T}X + M_0^{-1})^{-1}$ 
 </ul>          
 
 This implies that the explicit expressions for the $a_0^*, b_0^*, m$ and $M$ for the $i_th$ subset are given by: 
 <ul> 
 - $a_{0i}^*$ = $a_0 + \frac{m_i}{2}$\
 - $b_{0i}^{*}$ = $b_0 + \frac{c^*}{2}$ \
-- $c_i^{*}$ = $m_0^{T}M^{-1}_0 m_0 + y_i^{T}y_i - m_i^{T}M_im_i$
-- $m_i$ = $(X_i^{T}y_i + M_0^{-1}m_0)$ \
-- $M_i$ = $(X_i^{T}X_i + M_0^{-1})^{-1}$ </ul>
+- $c_i^{*}$ = $m_0^{\T}M^{-1}_0 m_0 + y_i^{\T}y_i - m_i^{\T}M_im_i$
+- $m_i$ = $(X_i^{\T}y_i + M_0^{-1}m_0)$ \
+- $M_i$ = $(X_i^{\T}X_i + M_0^{-1})^{-1}$ </ul>
 
 We can express the posteriors of the entire data set as a function of the posteriors of the subsets with some math, resulting in:
 
 <ul> 
 - $a_0^{*}$ = $\sum_{i=1}^{k} a_{0i}^{*} + (k-1)a_0$
-- $b_0^{*}$ = $b_0 + m_0^{T}M^{-1}_0 m_0 + \sum_{i=1}^{k}y_i^{T}y_i - m^{T}Mm$ \
+- $b_0^{*}$ = $b_0 + m_0^{\T}M^{-1}_0 m_0 + \sum_{i=1}^{k}y_i^{\T}y_i - m^{\T}Mm$ \
 - $m$ = $\sum_{i=1}^{k}m_i - (k-1)M^{-1}_0m_0$ \
-- $M$ = $\sum_{i=1}^{k}(X_i^{T}X_i + M^{-1}_0)^{-1} = (\sum_{i=1}^{k}M^{-1}_i - (k-1)M^{-1}_0)^{-1}$ </ul>
+- $M$ = $\sum_{i=1}^{k}(X_i^{\T}X_i + M^{-1}_0)^{-1} = (\sum_{i=1}^{k}M^{-1}_i - (k-1)M^{-1}_0)^{-1}$ </ul>
 
