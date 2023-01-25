@@ -1,4 +1,4 @@
-# Dynamic Linear Model - Shared Variance
+# Forward Filtering Backward Sampling - Shared Variance
 
 ---
 title: "Bayesian Dynamic Linear Model - Shared Variance Case"
@@ -7,7 +7,9 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-This chapter discusses the Dynamic Linear Model with a scale factor for the variance shared across time and its derivations at each step. The approach taken in this chapter is borrowed from West and Harrison (1997), with some details derived from Petris et al (2009). For full generality and to maintain a multivariate normal system in both the data and parameter matrices, we assume all $Y_{t} \in \mathbb{R}^{n}$, $\beta_{t} \in \mathbb{R}^{p}$, and $t \in \{1,\ldots,T\}$ for some integer $T$.
+This chapter discusses the Dynamic Linear Model with a scale factor for the variance shared across time and its derivations at each step. The approach taken in this chapter is borrowed from West and Harrison (1997), with some details derived from Petris et al (2009). The solution we take to estimate the parameters of this model is utilized via Forward Filtering Backward Sampling.
+
+For full generality and to maintain a multivariate normal system in both the data and parameter matrices, we assume all $Y_{t} \in \mathbb{R}^{n}$, $\beta_{t} \in \mathbb{R}^{p}$, and $t \in \{1,\ldots,T\}$ for some integer $T$.
 
 
 ## Background
@@ -28,11 +30,9 @@ Y_{t},\sigma^{2}\vert \beta_{t} &\sim& NIG(F_{t}^{\T}\beta_{t}, V_{t}, a_{t-1}, 
 \beta_{t-1},\sigma^{2} &\sim& NIG(m_{t-1}, C_{t-1}, a_{t-1}, b_{t-1})
 \end{eqnarray*}
 
-The task is to acquire estimates for $\beta_{0,\ldots,T}$ and $\sigma^{2}$. This task may be divided into the forward filter and backwards sampling steps (collectively referred to as the Forward Filter-Backwards Sampling (FFBS) algorithm): The forward filter to acquire sequential estimates, and the backwards sampling step to retroactively "smooth" our initial estimates. We are given a set of observations $Y_{t,j}$, and known parameters $F_{t}$, $G_{t}$, $V_{t}$, $W_{t}$, and $n_{t-1}$, although Frankenburg and Banerjee also apply FFBS to cases where $F_{t}$ and $G_{t}$ are not pre-specified.
+The task is to acquire estimates for $\beta_{0,\ldots,T}$ and $\sigma^{2}$. This task may be divided into the forward filter and backwards sampling steps (collectively referred to as the Forward Filter-Backwards Sampling (FFBS) algorithm): The forward filter to acquire sequential estimates, and the backwards sampling step to retroactively "smooth" our initial estimates given estimates at the last time stamp. We are given a set of observations $Y_{t,j}$, and known parameters $F_{t}$, $G_{t}$, $V_{t}$, $W_{t}$, and $n_{t-1}$, although Frankenburg and Banerjee also apply FFBS to cases where $F_{t}$ and $G_{t}$ are not pre-specified.
 
-Note that while the setup is borrowed from Petris, the notation is retained from West and Harrison to be fully consistent across documentation where the variance is dampened. 
-
-### Derivation
+## Derivation of the Forward Filter
 
 We proceed for some arbitrary $t$:
 
@@ -56,7 +56,7 @@ Y_{t} &\sim& T_{2a_{t-1}}(F_{t}^{\T}m^{*}_{t}, \frac{b_{t-1}}{a_{t-1}}(F_{t}^{\T
 
 We now have the apparatus needed to compute the sequential posterior $\beta_{t}\vert Y_{t}$ and $\sigma^{2}\vert Y_{t}$:
 
-#### Deriving $\beta_{t}\vert Y_{t}$
+### Deriving $\beta_{t}\vert Y_{t}$
 
 \begin{eqnarray*}
 p(\beta_{t} \vert Y_{t}, \sigma^{2}) &\propto& p(\beta_{t}, Y_{t}\vert \sigma^{2})\\
@@ -99,7 +99,7 @@ where $Q_{t} = F_{t}^{\T}R_{t}F_{t} + V_{t}$.
 
 (Note that Petris's expression for the variance suffers from a typo; to see this, simply take their $\widetilde{C}_{t}^{\T}$.)
 
-#### Deriving $\sigma^{2}\vert Y_{t}$
+### Deriving $\sigma^{2}\vert Y_{t}$
 
 We next deduce the density of $\sigma^{2}\vert Y_{t}$. Note before we begin that since $Y_{t} \sim T_{2a_{t-1}}(F_{t}^{\T}m^{*}_{t}, Q_{t}) = \int NIG_{Y_{t}}(F_{t}^{\T}m^{*}_{t}, Q_{t}, a_{t-1}, b_{t-1})d\sigma^{2}$, we can write $Y_{t}\vert \sigma^{2} \sim N(F_{t}m^{*}_{t}, \sigma^{2}Q_{t})$. Hence:
 
@@ -113,7 +113,7 @@ We conclude that $\sigma^{-2}\vert Y_{t} \sim \Gamma(a_{t},b_{t})$, where $a_{t}
 
 This gives us the set of updating equations according to Petris Proposition 4.1.
 
-#### Final Commentary on the Derivation
+### Commentary
 
 Note that we have derived the forward filtering step for the set of equations for time $t$ given the parameters for the distributions at time $t-1$. Hence the equation's setup is Markovian, i.e. the state of this set of equations only depends on that of the preceding time point. Nevertheless, applications where the forward filter's equations propagate from an initial time point $t=0$ are written so that the dependence of the parameters' values $\beta_{t}$ and $\sigma^{2}$ on the data up to time $t-1$ or time $t$ are made explicit. Specifically, letting $D_{t} = \{Y_{\tau}\}_{\tau=1,\ldots,t}$, we may write the set of equations in our setup as:
 
@@ -124,4 +124,48 @@ Y_{t},\sigma^{2}\vert \beta_{t},D_{t-1} &\sim& NIG(F_{t}^{\T}\beta_{t}, V_{t}, a
 \end{eqnarray*}
 
 and the sequential posteriors we have derived, $\beta_{t}\vert Y_{t}$ and $\sigma^{2}\vert Y_{t}$, as $\beta_{t}\vert D_{t}$ and $\sigma^{2} \vert D_{t}$ respectively.
+
+## Derivation of the Backwards Sampling
+
+Now that we have the parameters $\{\theta_{t},\phi\vert D_{t}\}_{t=1,\ldots,T}$, we would like to work backwards and derive $\{\theta_{t},\phi\vert \theta_{t+1}, D_{T}\}_{t=1,\ldots,T-1}$ to smooth our initial variable estimates:
+
+<!-- TODO: Include pictoral graph here -->
+
+\begin{eqnarray*}
+p(\theta_{t}\vert \theta_{(t+1):T},\sigma^{2},D_{T}) &=& p(\theta_{t}\vert \theta_{t+1},\sigma^{2},D_{t})\\
+&=& p(\theta_{t}\vert \theta_{t+1},\sigma^{2},D_{t})\\
+ &=& \frac{p(\theta_{t+1}\vert \theta_{t},D_{t})p(\theta_{t}\vert D_{t})}{p(\theta_{t+1}\vert D_{t})}\\
+ &\propto& p(\theta_{t+1}\vert \theta_{t},D_{t})p(\theta_{t}\vert D_{t})\\
+ &\propto& \exp\left(-\frac{1}{2\sigma^{2}}\left[(\theta_{t+1} - G_{t+1}\theta_{t})^{\T}W_{t+1}^{-1}(\theta_{t+1} - G_{t+1}\theta_{t})\right.\right.\\
+ &&\left.\left.+ (\theta_{t} - m_{t})^{\T}C_{t}^{-1}(\theta_{t} - m_{t})\right]\right)\\
+ &\propto& \exp\left(-\frac{1}{2\sigma^{2}}\left[\theta_{t+1}^{\T}W_{t+1}^{-1}\theta_{t+1} - 2\theta_{t+1}^{\T}W_{t+1}^{-1}G_{t+1}\theta_{t} + \theta_{t}^{\T}G_{t+1}^{\T}W_{t+1}^{-1}G_{t+1}\theta_{t}\right.\right.\\
+ &&\left.\left.+\theta_{t}^{\T}C_{t}^{-1}\theta_{t} - 2m_{t}^{\T}C_{t}^{-1}\theta_{t} + m_{t}^{\T}C_{t}^{-1}m_{t}\right]\right)\\
+ &\propto& \exp\left(-\frac{1}{2\sigma^{2}}\left[\theta_{t}^{\T}(G_{t+1}^{\T}W_{t+1}^{-1}G_{t+1} + C_{t}^{-1})\theta_{t} - 2(C_{t}^{-1}m_{t} + G_{t+1}^{\T}W_{t+1}^{-1}\theta_{t+1})^{\T}\theta_{t}\right]\right)\\
+ \theta_{t}\vert\theta_{t+1},\sigma^{2},D_{T} &\sim& N\left((G_{t+1}^{\T}W_{t+1}^{-1}G_{t+1} + C_{t}^{-1})^{-1}(C_{t}^{-1}m_{t} + G_{t+1}^{\T}W_{t+1}^{-1}\theta_{t+1}),\right.\\
+ &&\left.\sigma^{-2}(G_{t+1}^{\T}W_{t+1}^{-1}G_{t+1} + C_{t}^{-1})^{-1}\right)\\
+ &\sim& N\left(m_{t} - C_{t}G_{t+1}^{\T}(W_{t+1} + G_{t+1}C_{t}G_{t+1}^{\T})^{-1}G_{t+1}m_{t} + C_{t}G_{t+1}^{\T}W_{t+1}^{-1}\theta_{t+1}\right.\\
+ &&\left.- C_{t}G_{t+1}^{\T}(W_{t+1} + G_{t+1}C_{t}G_{t+1}^{\T})^{-1}G_{t+1}C_{t}G_{t+1}^{\T}W_{t+1}^{-1}\theta_{t+1},\right.\\
+ &&\left.C_{t} - C_{t}G_{t+1}^{\T}(W_{t+1} + G_{t+1}C_{t}G_{t+1}^{\T})^{-1}G_{t+1}C_{t}\right)\\
+ &\sim& N\left(m_{t} - C_{t}G_{t+1}^{\T}R_{t+1}^{-1}G_{t+1}m_{t} + C_{t}G_{t+1}^{\T}W_{t+1}^{-1}\theta_{t+1}\right.\\
+ &&\left. - C_{t}G_{t+1}^{\T}R_{t+1}^{-1}G_{t+1}C_{t}G_{t+1}^{\T}W_{t+1}^{-1}\theta_{t+1},\right.\\
+ &&\left.C_{t} - C_{t}G_{t+1}^{\T}R_{t+1}^{-1}G_{t+1}C_{t}\right)\\
+\end{eqnarray*}
+
+Notice that
+\begin{eqnarray*}
+C_{t}G_{t+1}^{\T}R_{t+1}^{-1}G_{t+1}C_{t}G_{t+1}^{\T}W_{t+1}^{-1}\theta_{t+1} &=& C_{t}G_{t+1}^{\T}R_{t+1}^{-1}(G_{t+1}C_{t}G_{t+1}^{\T} + W_{t+1} - W_{t+1})W_{t+1}^{-1}\theta_{t+1}\\
+ &=& C_{t}G_{t+1}^{\T}R_{t+1}^{-1}(R_{t+1} - W_{t+1})W_{t+1}^{-1}\theta_{t+1}\\
+ &=& C_{t}G_{t+1}^{\T}W_{t+1}^{-1}\theta_{t+1} - C_{t}G_{t+1}^{\T}R_{t+1}^{-1}\theta_{t+1}
+\end{eqnarray*}
+
+Hence,
+\begin{eqnarray*}
+\theta_{t}\vert\theta_{t+1},\sigma^{2},D_{T} &\sim& N\left(m_{t} - C_{t}G_{t+1}^{\T}R_{t+1}^{-1}G_{t+1}m_{t} + C_{t}G_{t+1}^{\T}W_{t+1}^{-1}\theta_{t+1}\right.\\
+ &&\left. - C_{t}G_{t+1}^{\T}W_{t+1}^{-1}\theta_{t+1} + C_{t}G_{t+1}^{\T}R_{t+1}^{-1}\theta_{t+1},\right.\\
+ &&\left.C_{t} - C_{t}G_{t+1}^{\T}R_{t+1}^{-1}G_{t+1}C_{t}\right)\\
+ &\sim& N(m_{t} + C_{t}G_{t+1}^{\T}R_{t+1}^{-1}(\theta_{t+1} - a_{t+1}), C_{t} - C_{t}G_{t+1}^{\T}R_{t+1}^{-1}G_{t+1}C_{t})
+\end{eqnarray*}
+
+
+
 
