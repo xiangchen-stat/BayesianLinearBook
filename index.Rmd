@@ -10,7 +10,9 @@ bibliography: [book.bib, packages.bib]
 description: |
   This is a first tutorial for Bayesian Linear Regression assembled in book form.
 link-citations: yes
-github-repo: rstudio/bookdown-demo
+github-repo: xiangchen-stat/BayesianLinearBook
+header-includes:
+  - \newcommand{\T}{\mathrm{\scriptscriptstyle T}}
 ---
 
 # Preface {-}
@@ -18,4 +20,3 @@ github-repo: rstudio/bookdown-demo
 This is a first tutorial for Bayesian Linear Regression assembled in book form.
 
 ## Acknowledgements {-}
-

@@ -1,20 +1,3 @@
---- 
-title: "Bayesian Tutorials"
-author: "Valentina Arputhasamy, Dr. Sudipto Banerjee"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-documentclass: book
-bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
-description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
-link-citations: yes
-github-repo: rstudio/bookdown-demo
----
-
 # The Divide & Conquer Algorithm
 
 The divide and conquer algorithm is a strategy of solving a large problem by breaking it down into two or more smaller and more manageable sub-problems of the same or of a similar genre. The solutions to the sub-problems are then combined to get the desired output: the solution to the original problem. 

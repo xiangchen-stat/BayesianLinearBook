@@ -1,0 +1,548 @@
+# Basics of Bayesian linear regression
+
+## Bayes' theorem
+::: {.theorem #bayes name="Bayes' theorem"}
+For events $U, K$ and $P(K) \neq 0$, we have
+
+$$P(U \mid K) = \frac{P(K \mid U) P(U)}{P(K)}$$
+:::
+
+
+We denote $U$ as unknown parameters and $K$ as known parameters. We call $P(U)$ prior and $P(K|U)$ likelihood. The Bayes' theorem gives us the posterior distribution of unknown parameters given the known parameters 
+$$ P(U \mid K) \propto P(U) \cdot P(K \mid U)$$
+
+## Normal-Inverse-Gamma (NIG) prior
+### Joint distribution of NIG prior
+::: {.definition  #NIG name="Normal-Inverse-Gamma Distribution"}
+Suppose
+$$
+\begin{aligned}
+& \beta \mid \sigma^2, \mu, M \sim N(\mu,\sigma^2 M) \\
+& \sigma^2 \mid a, b \sim IG(a, b) 
+\end{aligned}
+$$
+Then $(\beta,\sigma^2)$ has a Normal-Inverse-Gamma distribution, denoted as $(\beta,\sigma^2) \sim NIG(\mu,M,a,b)$.
+
+:::
+
+
+We use a Normal-Inverse-Gamma prior for $(\beta, \sigma^2)$
+
+\begin{align}
+    P(\beta, \sigma^{2}) &= NIG \left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \\
+    &= \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)}
+    \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+1} e^{-\frac{b_{0}}{\sigma^{2}}} \frac{1}{(2 \pi \sigma^{2})^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(\beta, m_{0}, M_{0}\right)} 
+\end{align}
+
+where $Q(x, m, M)=(x-m)^{\T} M^{-1} (x-m) \, .$
+
+<details>
+  <summary>Click to show or hide details</summary>
+
+\begin{align}
+    P(\beta, \sigma^{2})
+    &= NIG \left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \\
+    &= IG\left(\sigma^{2} \mid a_{0}, b_{0}\right) \cdot N\left(\beta \mid m_{0}, \sigma^{2} M_{0}\right) \\
+    &= \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)}
+    \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+1} e^{-\frac{b_{0}}{\sigma^{2}}} \frac{1}{(2 \pi)^{\frac{p}{2}}\left|\sigma^{2} M_{0}\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(\beta, m_{0}, M_{0}\right)} \\
+    &= \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)}
+    \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+1} e^{-\frac{b_{0}}{\sigma^{2}}} \frac{1}{(2 \pi \sigma^{2})^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(\beta, m_{0}, M_{0}\right)} \\
+\end{align}
+
+where $Q(x, m, M)=(x-m)^{\T} M^{-1} (x-m) \, .$
+
+Note: the Inverse-Gamma ($IG$) distribution has a relationship with Gamma distribution. Given $X \sim  Gamma(\alpha, \beta)$, the density function of $X$ is $f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x}$. Then $Y=\frac{1}{X} \sim IG\left(\alpha, \beta\right)$ with density function $f(y)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{-\alpha-1} e^{-\frac{\beta}{x}}$.
+
+</details>
+
+
+### Marginal distribution of NIG prior
+As for marginal priors, we can can get it by integration
+
+$$
+\begin{aligned}
+P(\sigma^2) & = \int N I G\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \  d\beta=I G\left(\sigma^{2} \mid a_{0}, b_{0}\right) \\
+P(\beta) & = \int N I G\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \  d\sigma^{2}=t_{2a_0}\left(m_0, \frac{b_0}{a_0}M_0\right) \\
+\end{aligned}
+$$
+
+<details>
+  <summary>Click to show or hide details</summary>
+
+  
+\begin{align}
+    P\left(\sigma^{2} \right) &= \int NIG\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \  d\beta \\
+    &=IG\left(\sigma^{2} \mid a_{0}, b_{0}\right) \int N\left(\beta \mid m_{0}, \sigma^{2} M_{0}\right) \  d\beta \\
+    &=IG\left(\sigma^{2} \mid a_{0}, b_{0}\right)
+\end{align}
+
+\begin{align}
+P(\beta ) &=\int NIG \left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \  d\sigma^{2} \\
+&= \int \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)}
+\left(\frac{1}{\sigma^{2}}\right)^{a_{0}+1} e^{-\frac{b_{0}}{\sigma^{2}}} \frac{1}{(2 \pi \sigma^{2})^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(\beta, m_{0}, M_{0}\right)} \  d\sigma^{2} \\
+&= \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)(2 \pi)^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}}
+\int 
+\left(\frac{1}{\sigma^{2}}\right)^{a_{0}+\frac{p}{2}+1} e^{-\frac{1}{\sigma^{2}}\left(b_{0}+\frac{1}{2} Q \left(\beta, m_{0}, M_{0}\right)\right)} \  d\sigma^{2} \\
+& \quad \left(\text{let } u = \frac{1}{\sigma^2}, \left|d\sigma^{2}\right|=\frac{1}{u^2} d u\right) \\
+&= \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)(2 \pi)^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}}
+\int 
+u^{a_{0}+\frac{p}{2}+1} e^{-\left(b_{0}+\frac{1}{2} Q \left(\beta, m_{0}, M_{0}\right)\right) u } \frac{1}{u^2} \  du \\
+&= \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)(2 \pi)^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}}
+\int 
+u^{a_{0}+\frac{p}{2}-1} e^{-\left(b_{0}+\frac{1}{2} Q \left(\beta, m_{0}, M_{0}\right)\right) u} \  du \\
+& \quad \left(\text{by Gamma integral function:} \int x^{\alpha - 1} exp^{-\beta x} dx = \frac{\Gamma(\alpha)}{\beta^{\alpha}}\right) \\
+&= \frac{b_{0}^{a_{0}} }{\Gamma\left(a_{0}\right)(2 \pi)^\frac{p}{2}\left|M_{0}\right|^{\frac{1}{2}}} \frac{\Gamma\left(a_{0}+\frac{p}{2}\right)}{\left(b_{0}+\frac{1}{2} Q(\beta,m_0,M_0)\right)^{\left(a_{0}+\frac{p}{2}\right)}} \\
+& = \frac{b_0^{a_0}\Gamma\left(a_{0}+\frac{p}{2}\right)}{\Gamma\left(a_{0}\right)(2 \pi)^ \frac{p}{2}\left|M_{0}\right|^{\frac{1}{2}}} 
+\left(b_0(1+\frac{1}{2 b_0} Q(\beta,m_0,M_0))\right)^{-\left(a_{0}+\frac{p}{2}\right)} \\
+& = \frac{b_0^{a_0}\Gamma\left(a_{0}+\frac{p}{2}\right) b_0^{- \left( a_0+\frac{p}{2}\right)}}{\Gamma\left(a_{0}\right)(2 \pi)^ \frac{p}{2}\left|M_{0}\right|^{\frac{1}{2}}} 
+\left(1+\frac{1}{2 b_0} \left(\beta-m_{0}\right)^{\T} M_{0}^{-1}\left(\beta-m_{0}\right) \right)^{-\left(a_{0}+\frac{p}{2}\right)} \\
+& =\frac{\Gamma\left(a_{0}+\frac{p}{2}\right)}{\left(2 \pi \right)^{\frac{p}{2}} b_{0}^{\frac{p}{2}} \Gamma\left(a_{0}\right)|M|^{\frac{1}{2}}}\left(1+\frac{1}{2 b_{0}} \left(\beta-m_{0}\right)^{\T} M_{0}^{-1}\left(\beta-m_{0}\right) \right)^{-\left(a_{0}+\frac{p}{2}\right)} \\
+& =\frac{\Gamma\left(a_{0}+\frac{p}{2}\right)}
+{\left(2 \pi \right)^{\frac{p}{2}}\left(a_{0} \cdot \frac{b_{0}}{a_{0}}\right)^{\frac{p}{2}} \Gamma\left(a_{0}\right)|M|^{\frac{1}{2}}} \left(1+\frac{1}{2 a_{0} \cdot \frac{b_{0}}{a_{0}}} \left(\beta-m_{0}\right)^{\T} M_{0}^{-1}\left(\beta-m_{0}\right)\right)^{-\left(a_{0}+\frac{p}{2}\right)}\\
+& =\frac{\Gamma\left(a_{0}+\frac{p}{2}\right)}{\left(2 a_{0} \pi\right)^{\frac{p}{2}} \Gamma\left(a_{0}\right)\left|\frac{b_{0}}{a_{0}} M\right|^{\frac{1}{2}}}\left(1+\frac{1}{2 a_{0}} \left(\beta-m_{0}\right)^{\T}\left(\frac{b_{0}}{a_{0}} M_{0}\right)^{-1}\left(\beta-m_{0}\right)\right)^{-\left(a_{0}+\frac{p}{2}\right)} \\
+& =t_{2a_0}\left(m_0, \frac{b_0}{a_0}M_0\right) \;
+\end{align}
+
+</details>
+
+
+Note: the density of multivariate t-distribution is given by
+
+$$
+t_v(\mu, \Sigma)=\frac{\Gamma\left(\frac{v+p}{2}\right)}{(v \pi)^{\frac{p}{2}} \Gamma\left(\frac{v}{2}\right)  |\Sigma|^{\frac{1}{2}}}\left(1+\frac{1}{v}(x-\mu)^{\T} \Sigma^{-1}(x-\mu)\right)^{-\frac{v+p}{2}}
+$$
+
+
+## Conjugate Bayesian linear regression and M&m formula
+Let $y_{n \times 1}$ be outcome variable and $X_{n \times p}$ be corresponding covariates. Assume $V$ is known. The model is given by
+
+\begin{align}
+& y=X \beta+\epsilon \ , \  \epsilon \sim N\left(0, \sigma^2 V\right) \\
+& \beta=m_0+\omega \ ,  \  \omega \sim N\left(0, \sigma^2 M_0\right) \\
+& \sigma^2 \sim I G\left(a_0, b_0\right)
+\end{align}
+
+The posterior distribution of $(\beta, \sigma^2)$ is given by
+
+\begin{align}
+P\left(\beta, \sigma^{2} \mid y\right) = NIG\left(\beta, \sigma^{2} \mid M_{1}m_{1}, M_{1}, a_{1}, b_{1}\right) \;
+\end{align}
+
+where
+
+\begin{align}
+M_{1}^{-1} &= M_{0}^{-1}+X^{\T} V^{-1} X  \\
+m_{1}&=M_{0}^{-1} m_{0}+X^{\T} V^{-1} y  \\
+a_{1}&=a_{0}+\frac{p}{2}  \\
+b_{1}&=b_{0}+\frac{c^{\ast}}{2}= b_{0}+\frac{1}{2}\left(m_{0}^{\T} M_{0}^{-1} m_{0}+y^{\T} V^{-1} y-m_{1}^{\T} M_{1} m_{1}\right)
+\end{align}
+
+<details>
+  <summary>Click to show or hide details</summary>
+
+
+\begin{align}\label{eq:post_dist}
+P\left(\beta, \sigma^{2} \mid y\right) & \propto NIG\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \cdot N\left(y \mid X \beta, \sigma^{2} V\right) \nonumber\\
+& \propto IG\left(\sigma^{2} \mid a_{0}, b_{0}\right) \cdot N\left(\beta \mid m_{0}, \sigma^{2} M_{0}\right) \cdot N\left(y \mid X \beta, \sigma^{2} V\right) \nonumber\\
+& \propto \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)}
+\left(\frac{1}{\sigma^{2}}\right)^{a_{0}+1} e^{-\frac{b_{0}}{\sigma^{2}}} 
+\frac{1}{(2 \pi \sigma^{2})^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(\beta, m_{0}, M_{0}\right)} 
+\frac{1}{(2 \pi \sigma^{2})^{\frac{p}{2}}\left| V\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(y, X \beta, V\right)} \nonumber\\
+& \propto \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+p+1} e^{-\frac{b_{0}}{\sigma^{2}}} 
+e^{-\frac{1}{2 \sigma^{2}} \left(Q \left(\beta, m_{0}, M_{0}\right)+Q \left(y, X \beta, V\right)\right)}\;
+\end{align}
+
+
+where
+
+\begin{align}\label{eq:multivariate_completion_square}
+Q \left(\beta, m_{0}, M_{0}\right)+Q \left(y, X \beta, V\right) &= (\beta - m_{0})^{\T}M_{0}^{-1}(\beta - m_{0}) + (y - X\beta)^{\T}V^{-1}(y - X\beta)\; \nonumber\\
+ &= \beta^{\T}M_{0}^{-1}\beta - 2\beta^{\T}M_{0}^{-1}m_{0} + m_{0}^{\T}M_{0}^{-1}m_{0} \nonumber\\
+  &\qquad + \beta^{\T}X^{\T}V^{-1}X\beta - 2\beta^{\T} X^{\T}V^{-1}y + y^{\T}V^{-1}y \nonumber\\
+  &= \beta^{\T} \left(M_{0}^{-1} + X^{\T}V^{-1}X\right) \beta - 2\beta^{\T}\left(M_{0}^{-1}m_{0} + X^{\T}V^{-1}y\right) \nonumber\\
+  &\qquad + m_{0}^{\T} M_{0}^{-1}m_{0} + y^{\T}V^{-1}y \nonumber \\
+  &= \beta^{\T}M_{1}^{-1}\beta - 2\beta^{\T} m_{1} + c\nonumber\\
+  &= (\beta - M_{1}m_{1})^{\T}M_{1}^{-1}(\beta - M_{1}m_{1}) - m_{1}^{\T}M_{1}m_{1} +c \nonumber\\   
+  &= (\beta - M_{1}m_{1})^{\T}M_{1}^{-1}(\beta - M_{1}m_{1}) +c^{\ast}\;
+\end{align}
+
+where $M_{1}$ is a symmetric positive definite matrix, $m_{1}$ is a vector, and $c$ \& $c^{\ast}$ are scalars given by
+
+\begin{align}
+ M_{1}^{-1} &= M_{0}^{-1} + X^{\T}V^{-1}X  \\
+ m_{1} &= M_{0}^{-1}m_{0} + X^{\T}V^{-1}y \\
+ c &= m_{0}^{\T} M_{0}^{-1}m_{0} + y^{\T}V^{-1}y \\
+  c^{\ast} &= c - m^{\T}Mm = m_{0}^{\T} M_{0}^{-1}m_{0} + y^{\T}V^{-1}y - m_{1}^{\T}M_{1}m_{1}
+\end{align}
+
+Note: $M_{1}$, $m_{1}$ and $c$ do not depend upon $\beta$.
+
+Then, we have
+
+\begin{align}
+P\left(\beta, \sigma^{2} \mid y\right) & \propto \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+p+1} e^{-\frac{b_{0}}{\sigma^{2}}} 
+e^{-\frac{1}{2 \sigma^{2}} ((\beta - M_{1}m_{1})^{\T}M_{1}^{-1}(\beta - M_{1}m_{1}) +c^{\ast})}\\
+& \propto \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+p+1} e^{-\frac{b_{0}+\frac{c^{\ast}}{2}}{\sigma^{2}}} 
+e^{-\frac{1}{2 \sigma^{2}} (\beta - M_{1}m_{1})^{\T}M_{1}^{-1}(\beta - M_{1}m_{1})}\\
+& \propto \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+\frac{p}{2}+1} e^{-\frac{b_{0}+\frac{c^{\ast}}{2}}{\sigma^{2}}} 
+(\frac{1}{\sigma^2})^{\frac{p}{2}}
+e^{-\frac{1}{2 \sigma^{2}} (\beta - M_{1}m_{1})^{\T}M_{1}^{-1}(\beta - M_{1}m_{1})}\\
+& \propto IG\left(\sigma^{2} \mid a_{0}+\frac{p}{2}, b_{0}+\frac{c^{\ast}}{2} \right) \cdot N\left(\beta \mid M_{1}m_{1}, \sigma^{2} M_{1}\right) \\
+& \propto IG\left(\sigma^{2} \mid a_{1}, b_{1} \right) \cdot N\left(\beta \mid M_{1}m_{1}, \sigma^{2} M_{1}\right) \\
+& \propto NIG\left(\beta, \sigma^{2} \mid M_{1}m_{1}, M_{1}, a_{1}, b_{1}\right) \;
+\end{align}
+
+where
+
+\begin{align}
+M_{1}^{-1} &= M_{0}^{-1}+X^{\T} V^{-1} X  \\
+m_{1}&=M_{0}^{-1} m_{0}+X^{\T} V^{-1} y  \\
+a_{1}&=a_{0}+\frac{p}{2}  \\
+b_{1}&=b_{0}+\frac{c^{\ast}}{2}= b_{0}+\frac{1}{2}\left(m_{0}^{\T} M_{0}^{-1} m_{0}+y^{\T} V^{-1} y-m_{1}^{\T} M_{1} m_{1}\right)
+\end{align}
+
+</details>
+
+From derivation in marginal priors, the marginal posterior distributions can be easily get by updating corresponding parameters 
+
+$$
+\begin{aligned}
+&P\left(\sigma^{2} \mid y\right)=I G\left(\sigma^{2} \mid a_{1}, b_{1}\right) \\
+&P(\beta \mid y)=t_{2a_1}\left(M_1m_1, \frac{b_1}{a_1}M_1\right)
+\end{aligned}
+$$
+
+## Updating form of the posterior distribution
+
+We will use two ways to derive the updating form of the posterior distribution.
+
+### Method 1: Sherman-Woodbury-Morrison identity
+::: {.theorem #swm name="Sherman-Woodbury-Morrison identity"}
+We have
+\begin{equation}\label{ShermanWoodburyMorrison} 
+\left(A + BDC\right)^{-1} = A^{-1} - A^{-1}B\left(D^{-1}+CA^{-1}B\right)^{-1}CA^{-1} 
+\end{equation} 
+where $A$ and $D$ are square matrices that are invertible and $B$ and $C$ are rectangular (square if $A$ and $D$ have the same dimensions) matrices such that the multiplications are well-defined.
+:::
+
+[Sherman-Woodbury-Morrison identity](https://en.wikipedia.org/wiki/Woodbury_matrix_identity) is easily verified by multiplying the right hand side with $A + BDC$ and simplifying to reduce it to the identity matrix. Using this formula, we have
+
+$$
+\begin{aligned}
+M_1 & = (M_{0}^{-1} + X^{\T}V^{-1}X)^{-1} \\
+& = M_0-M_0 X^{\T}\left(V+X M_0 X^{\T}\right)^{-1} X M_0 \\
+& = M_0-M_0 X^{\T} Q^{-1} X M_0
+\end{aligned}
+$$
+
+where $Q = V + X M_0 X^{\T}$
+
+We can show that
+$$
+\begin{align}
+M_1 m_1 & =m_0+M_0 X^{\T} Q^{-1}\left(y-X m_0\right) 
+\end{align}
+$$
+
+<details>
+  <summary>Click to show or hide details</summary>
+
+  
+  \begin{align}
+  M_1 m_1 & = \left(M_0^{-1}+X^{\T} V^{-1} X\right)^{-1} m_1 \\
+  & = \left(M_0-M_0 X^{\T}\left(V+X M_0 X^{\T}\right)^{-1} X M_0\right)m_1 \\
+  & = \left(M_0-M_0 X^{\T} Q^{-1} X M_0\right) m_1 \\
+  & = \left(M_0-M_0 X^{\T} Q^{-1} X M_0\right)\left(M_0^{-1} m_0+X^{\T} V^{-1} y\right) \\
+  & = m_0+M_0 X^{\T} V^{-1} y-M_0 X^{\T} Q^{-1} X m_0 - M_0 X^{\T} Q^{-1} X M_0 X^{\T} V^{-1} y \\
+  & = m_0+M_0 X^{\T}\left(I-Q^{-1} X M_0 X^{\T}\right) V^{-1} y - M_0 X^{\T} Q^{-1} X m_0 \\
+  & = m_0+M_0 X^{\T} Q^{-1}\left(Q-X M_0 X^{\T}\right)V^{-1} y - M_0 X^{\T} Q^{-1} X m_0 \\
+  & \left(\text { since } Q=V+X M_0 X^{\T}\right) \\
+  & = m_0+M_0 X^{\T} Q^{-1}V V^{-1} y-M_0 X^{\T} Q^{-1} X m_0 \\
+  & = m_0+M_0 X^{\T} Q^{-1} y-M_0 X^{\T} Q^{-1} X m_0 \\
+  & = m_0+M_0 X^{\T} Q^{-1}\left(y-X m_0\right) \\
+  \end{align}
+
+</details>
+
+
+Furthermore, we can simplify that
+$$
+\begin{align}
+m_0^{\T} M_0^{-1} m_0+y^{\T} V^{-1} y-m_1^{\T} M_1 m_1 & = \left(y-X m_0\right)^{\T} Q^{-1}\left(y-X m_0\right)
+\end{align}
+$$
+
+<details>
+  <summary>Click to show or hide details</summary>
+
+  
+  \begin{align}
+  & \quad \  m_0^{\T} M_0^{-1} m_0+y^{\T} V^{-1} y-m_1^{\T} M_1 m_1 \\
+  & = m_0^{\T} M_0^{-1} m_0+y^{\T} V^{-1} y-m_1^{\T} \left(m_0+M_0 X^{\T} Q^{-1} (y - X m_0)\right) \\
+  & = m_0^{\T} M_0^{-1} m_0+y^{\T} V^{-1} y-m_1^{\T} m_0 - m_1^{\T} M_0 X^{\T} Q^{-1}\left(y-X m_0\right) \\
+  & = m_0^{\T} M_0^{-1} m_0+y^{\T} V^{-1} y -m_0^{\T}\left(M_0^{-1} m_0+X^{\T} V^{-1} y\right) \\ 
+  & \qquad \qquad \qquad - m_1^{\T} M_0 X^{\T} Q^{-1}\left(y-X m_0\right) \\
+  & = y^{\T} V^{-1} y-y^{\T} V^{-1} X m_0 - m_1^{\T} M_0 X^{\T} Q^{-1}\left(y-X m_0\right) \\
+  & = y^{\T} V^{-1}\left(y-X m_0 \right)-m_1^{\T} M_0 X^{\T} Q^{-1}\left(y-X m_0\right) \\
+  & =y^{\T} V^{-1}\left(y-X m_0\right)-\underbrace{m_1^{\T} M_0 X^{\T} Q^{-1}\left(y-X m_0\right)}_{\substack{\text { simplify from left to right }}} \\
+  & =y^{\T} V^{-1}\left(y-X m_0\right)-\left(M_0 m_1\right)^{\T} X^{\T} Q^{-1}\left(y-X m_0\right) \\
+  & =y^{\T} V^{-1}\left(y-X m_0\right)-\left(m_0+M_0 X^{\T} V^{-1} y\right)^{\T} X^{\T} Q^{-1}\left(y-m_0\right) \\
+  & =y^{\T} V^{-1}\left(y-X m_0\right)-\left(X m_0+X M_0 X^{\T} V^{-1} y\right)^{\T} Q^{-1}\left(y-X m_0\right)\\
+  & =y^{\T} V^{-1}\left(y-X m_0\right)-\left(Q^{-1} X m_0+Q^{-1}\left(X M_0 X^{\T}\right)V^{-1} y\right)\left(y-X m_0\right) \\
+  & =y^{\T} V^{-1}\left(y-X m_0\right)-\left(Q^{-1} X m_0+Q^{-1}(Q-V) V^{-1} y\right)^{\T}(y-X m_0) \\
+  & =y^{\T} V^{-1}\left(y-X m_0\right)-\left(Q^{-1} X m_0+V^{-1} y- Q^{-1} y \right)^{\T}\left(y-X m_0\right) \\
+  & =y^{\T} V^{-1}\left(y-X m_0\right)-\left(V^{-1} y+Q^{-1}\left(X m_0-y\right)\right)^{\T}\left(y-X m_0\right) \\
+  & =y^{\T} V^{-1}\left(y-X m_0\right)-y^{\T} V^{-1}\left(y-X m_0\right) +\left(y-X m_0\right)^{\T} Q^{-1}\left(y-X m_0\right) \\
+  & =\left(y-X m_0\right)^{\T} Q^{-1}\left(y-X m_0\right) \\
+  \end{align}
+
+</details>
+
+
+So, we get the following updating form of the posterior distribution from Bayesian linear regression
+
+
+
+$$
+\begin{aligned}
+P\left(\beta, \sigma^{2} \mid y\right) = NIG\left(\beta, \sigma^{2} \mid \tilde{m}_1, \tilde{M}_1, a_{1}, b_{1}\right) \;
+\end{aligned}
+$$
+where
+
+$$
+\begin{aligned}
+\tilde{m}_1 & =M_1 m_1=m_0+M_0 X^{\T} Q^{-1}\left(y-X m_0\right) \\
+\tilde{M}_1 & =M_1=M_0-M_0 X^{\T} Q^{-1} X M_0 \\
+a_1 & =a_0+\frac{p}{2} \\
+b_1 & =b_0+\frac{1}{2}\left(y-X m_0\right)^{\T} Q^{-1}\left(y-X m_0\right) \\
+Q & =V+X M_0 X^{\T}
+\end{aligned}
+$$
+
+### Method 2: Distribution theory
+Previously, we got the Bayesian Linear Regression Updater using [Sherman-Woodbury-Morrison identity](https://en.wikipedia.org/wiki/Woodbury_matriX_identity). Here, we will derive the results without resorting to it. Recall that the model is given by
+
+\begin{align}
+& y=X \beta+\epsilon \ , \  \epsilon \sim N\left(0, \sigma^2 V\right) \\
+& \beta=m_0+\omega \ ,  \  \omega \sim N\left(0, \sigma^2 M_0\right) \\
+& \sigma^2 \sim I G\left(a_0, b_0\right)
+\end{align}
+
+This corresponds to the posterior distribution
+
+\begin{align}
+P\left(\beta, \sigma^2 \mid y\right) \propto I G\left(\sigma^2 \mid a_0, b_0\right) & \times N\left(\beta \mid m_0, \sigma^2 M_0\right) \times N\left(y \mid X \beta, \sigma^2 V\right)
+\end{align}
+
+We will derive $P\left(\sigma^2 \mid y\right)$ and $P\left(\beta \mid \sigma^2, y\right)$ in a form that will reflect updates from the prior to the posterior. Integrating out $\beta$ from the model is equivalent to substituting $\beta$ from its prior model. Thus, $P\left(y \mid \sigma^2\right)$ is derived simply from $y =X \beta+\epsilon =X\left(m_0+\omega\right)+\epsilon =X m_0 + X \omega + \epsilon =X m_0+ \eta$
+
+<!-- \begin{align} -->
+<!-- y =X \beta+\epsilon =X\left(m_0+\omega\right)+\epsilon =X m_0 + X \omega + \epsilon =X m_0+ \eta -->
+<!-- \end{align} -->
+
+where $\eta = X \omega + \epsilon \sim N\left(0, \sigma^2Q\right)$ and $Q=X M_0 X^{\T}+V \, .$
+
+Therefore, 
+
+\begin{align}
+y \mid \sigma^2 \sim N\left(X m_0, \sigma^2 Q\right)\\
+\end{align}
+
+The posterior distribution is given by
+\begin{align}
+P\left(\sigma^2 \mid y\right) & \propto IG \left(\sigma^2 \mid a_1, b_1\right)
+\end{align}
+
+where
+\begin{align} 
+& a_1 = a_0 + \frac{p}{2} \\
+& b_1 = b_0 + \frac{1}{2} (y-Xm_0)^{\T} Q^{-1} \left(y-Xm_0\right)
+\end{align}
+
+<details>
+  <summary>Click to show or hide details</summary>
+  
+  \begin{align}
+  P\left(\sigma^2 \mid y\right) & \propto P\left(\sigma^2\right) P\left(y \mid \sigma^2\right) \\
+  & \propto\left(\sigma^2 \mid a_0, b_0\right) \times N\left(y \mid X m_0, \sigma^2 Q\right) \\
+  & \propto\left(\frac{1}{\sigma^2}\right)^{a_0+1} e^{-\frac{b_0} {\sigma^2} \times\left(\frac{1}{\sigma^2}\right)^{\frac{n}{2}} e^{-\frac{1}{2 \sigma^2}}\left(y-Xm_0\right)^{\T} Q^{-1}\left(y-Xm_0\right)} \\ 
+  & \propto\left(\frac{1}{\sigma^2}\right)^{a_0+\frac{p}{2}+1} e^{-\frac{1}{\sigma^2}\left(b_0+\frac{1}{2}\left(y-Xm_0\right)^{\T} Q^{-1}\left(y-Xm_0\right)\right)} \\
+  & \propto IG \left(\sigma^2 \mid a_1, b_1\right)
+  \end{align}
+  
+  where
+  \begin{align} 
+  & a_1 = a_0 + \frac{p}{2} \\
+  & b_1 = b_0 + \frac{1}{2} (y-Xm_0)^{\T} Q^{-1} \left(y-Xm_0\right)
+  \end{align}
+
+
+</details>
+
+Next, we turn to $P\left(\beta \mid \sigma^2, y\right)$.
+Note that
+$$
+\left(\begin{array}{l}
+y \\
+\beta
+\end{array}\right) \mid \sigma^2 \sim N\left(\left(\begin{array}{l}
+Xm_0 \\
+m_0
+\end{array}\right), \quad \sigma^2 \left(\begin{array}{cc}
+Q & X M_0 \\
+M_0 X^{\T} & M_0
+\end{array}\right)\right) \;
+$$
+<details>
+  <summary>Click to show or hide details</summary>
+
+  
+  We have used the facts 
+  
+  $$
+  \begin{aligned}
+  & \operatorname{E}\left[y \mid \sigma^2\right] = Xm_0 \, , \ 
+  \operatorname{Var}\left(y \mid \sigma^2\right)=\sigma^2 Q \, ; \\
+  & \operatorname{E}\left[\beta \mid \sigma^2\right] = m_0 \, , \ 
+  \operatorname{Var}\left(\beta \mid \sigma^2\right)=\sigma^2 M_0 \, ;
+  \end{aligned}
+  $$
+  
+  $$
+  \begin{aligned}
+  \operatorname{Cov}\left(y, \beta \mid \sigma^2\right) &= \operatorname{Cov}\left(X \beta+\epsilon, \beta \mid \sigma^2\right) \\
+  & =\operatorname{Cov}\left(X\left(m_0+\omega\right)+\epsilon, m_0+\omega \mid \sigma^2\right) \\
+  & \quad \left( \text {Since } m_0 \text { is constant and } \operatorname{Cov}(\omega, \epsilon)=0 \right) \\
+  & =\operatorname{Cov}\left(X \omega, \omega \mid \sigma^2\right) \\
+  & =\sigma^2 X M_0 
+  \end{aligned}
+  $$
+
+</details>
+
+
+
+From the expression of a conditional distribution derived from a multivariate Gaussian, we obtain
+$$
+\beta \mid \sigma^2, y \sim N\left(\tilde{m}_1, \sigma^2 \tilde{M}_1\right)
+$$
+
+where
+\begin{align}
+& \tilde{m}_1=\operatorname{E}\left[\beta \mid \sigma^2, y\right]=m_0+M_0 X^{\T} Q^{-1}\left(y-X{m_0}\right) \\
+& \tilde{M}_1=M_0-M_0 X^{\T} Q^{-1} X M_0 \\
+\end{align}
+
+<details>
+  <summary>Click to show or hide details</summary>
+
+  
+Note: 
+
+<!-- \begin{align} -->
+<!-- & \left(\begin{array}{l} -->
+<!-- X_1 \\ -->
+<!-- X_2 -->
+<!-- \end{array}\right) \sim N\left(\left(\begin{array}{l} -->
+<!-- \mu_1 \\ -->
+<!-- \mu_2 -->
+<!-- \end{array}\right),\left(\begin{array}{ll} -->
+<!-- \Sigma_{11} & \Sigma_{12} \\ -->
+<!-- \Sigma_{21} & \Sigma_{22} -->
+<!-- \end{array}\right)\right) \text { with } \Sigma_{21} = \Sigma_{12}^{\T} \\ -->
+<!-- & \Rightarrow X_2 \mid X_1  \sim N\left(\mu_{2 \cdot 1}, \Sigma_{2 \cdot 1}\right) \;, \\ -->
+<!-- \end{align} -->
+
+\begin{align}
+& \left(\begin{array}{l}
+X_1 \\
+X_2
+\end{array}\right) \sim N\left(\left(\begin{array}{l}
+\mu_1 \\
+\mu_2
+\end{array}\right),\left(\begin{array}{ll}
+\Sigma_{11} & \Sigma_{12} \\
+\Sigma_{21} & \Sigma_{22}
+\end{array}\right)\right) \text { with } \Sigma_{21} = \Sigma_{12}^{\T}
+\end{align}
+
+\begin{align}
+& \Rightarrow X_2 \mid X_1  \sim N\left(\mu_{2 \cdot 1}, \Sigma_{2 \cdot 1}\right)
+\end{align}
+
+where $\mu_{2 \cdot 1}= \mu_2+\Sigma_{21} \Sigma_{11}^{-1}\left(X_1-\mu_1\right) \text { and } \Sigma_{2 \cdot 1}=\Sigma_{22}-\Sigma_{21} \Sigma_{11}^{-1} \Sigma_{12} \, .$
+
+
+</details>
+
+
+
+## Bayesian prediction
+Assume $V=I_{n}$. Let $\tilde{y}$ denote an $\tilde{n}\times 1$ vector of outcomes. $\tilde{X}$ is corresponding predictors. We seek to predict $\tilde{y}$ based upon $y$
+
+\begin{align}
+P(\tilde{y} \mid y) 
+&= t_{2a_1}\left(\tilde{X} M_1 m_1, \frac{b_1}{a_1}\left(I_{\tilde{n}} + \tilde{X} M_{1} \tilde{X}^{\T}\right)\right) \;
+\end{align}
+
+
+<details>
+  <summary>Click to show or hide details</summary>
+
+
+\begin{align}
+P\left(\beta, \sigma^{2}, \tilde{y} \mid y\right) 
+&=P\left(\beta, \sigma^{2} \mid y\right) \cdot P\left(\tilde{y} \mid \beta, \sigma^{2}, y\right) \\
+&= P\left(\beta, \sigma^{2}\right) \cdot P\left(y \mid \beta, \sigma^{2}\right) \cdot P\left(\tilde{y} \mid \beta, \sigma^{2}, y\right) \\
+&= NIG \left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right)
+\cdot N\left(y \mid X \beta, \sigma^{2} I_{n}\right) 
+\cdot N\left(\tilde{y} \mid \tilde{X} \beta, \sigma^{2} I_{\tilde{n}}\right) \\
+&= NIG \left(\beta, \sigma^{2} \mid M_{1} m_{1}, M_{1}, a_{1}, b_{1}\right) \cdot N\left(\tilde{y} \mid \tilde{X} \beta, \sigma^{2} I_{\tilde{n}}\right) \\
+&= IG\left(\sigma^{2} \mid a_{1}, b_{1}\right) \cdot N\left(\beta \mid M_{1} m_{1}, \sigma^{2} M_{1} \right) \cdot N\left(\tilde{y} \mid \tilde{X} \beta, \sigma^{2} I_{\tilde{n}} \right) \;
+\end{align}
+
+Then we can calculate posterior predictive density $P\left(\tilde{y} \mid y\right)$ from $P\left(\beta, \sigma^{2}, \tilde{y} \mid y\right)$
+
+
+\begin{align}
+P\left(\tilde{y} \mid y\right) 
+&=\iint P\left(\beta, \sigma^{2}, \tilde{y} \mid y\right) \  d\beta \  d\sigma^{2} \\
+&=\iint IG\left(\sigma^{2} \mid a_{1}, b_{1}\right) \cdot N\left(\beta \mid M_{1} m_{1}, \sigma^{2} M_{1} \right) \cdot N\left(\tilde{y} \mid \tilde{X} \beta, \sigma^{2} I_{\tilde{n}}\right) \  d\beta \  d\sigma^{2} \\
+&=\int IG\left(\sigma^{2} \mid a_{1}, b_{1}\right) \int N\left(\beta \mid M_{1} m_{1}, \sigma^{2} M_{1} \right) \cdot N\left(\tilde{y} \mid \tilde{X} \beta, \sigma^{2} I_{\tilde{n}}\right) \  d\beta \  d\sigma^{2} \\
+\end{align}
+
+As for $\int N\left(\beta \mid M_{1} m_{1}, \sigma^{2} M_{1}\right) \cdot N\left(\tilde{y} \mid \tilde{X} \beta, \sigma^{2} I_{\tilde{n}}\right) \  d\beta$, we provide an easy way to derive it avoiding any integration at all. Note that we can write the above model as
+
+\begin{align}
+\tilde{y} &= \tilde{X} \beta + \tilde{\epsilon}, \text{ where } \tilde{\epsilon} \sim N\left(0,\sigma^2 I_{\tilde{n}}\right) \\
+\beta &= M_{1} m_{1} + \epsilon_{\beta \mid y}, \text{ where } \epsilon_{\beta \mid y} \sim N\left(0,\sigma^2M_{1}\right)
+\end{align}
+
+where $\tilde{\epsilon}$ and $\epsilon_{\beta \mid y}$ are independent of each other. It then follows that
+
+\begin{align}
+\tilde{y} &= \tilde{X} M_{1} m_{1} + \tilde{X} \epsilon_{\beta \mid y} + \tilde{\epsilon} 
+\sim N\left(\tilde{X} M_{1} m_{1}, \sigma^2\left(I_{\tilde{n}} + \tilde{X} M_{1} \tilde{X}^{\T}\right)\right)
+\end{align}
+
+As a result
+
+\begin{align}
+P\left(\tilde{y} \mid y\right) 
+&=\int IG\left(\sigma^{2} \mid a_{1}, b_{1}\right) \cdot N\left(\tilde{X} M_{1} m_{1}, \sigma^2\left(I_{\tilde{n}} + \tilde{X} M_{1} \tilde{X}^{\T}\right)\right) \  d\sigma^{2} \\
+&= t_{2a_1}\left(\tilde{X} M_1 m_1, \frac{b_1}{a_1}\left(I_{\tilde{n}} + \tilde{X} M_{1} \tilde{X}^{\T}\right)\right) \;
+\end{align}
+
+
+</details>
+
+
+## Sampling from the posterior distribution
+We can get the joint posterior density $P\left(\beta, \sigma^{2}, \tilde{y} \mid y\right)$ by sampling process
+
+1) Draw $\hat{\sigma}_{(i)}^{2}$ from $I G\left(a_{1}, b_{1}\right)$
+
+2) Draw $\hat{\beta}_{(i)}$ from $N\left(M_{1} m_{1}, \hat{\sigma}_{(i)}^{2} M_{1}\right)$
+
+3) Draw $\tilde{y}_{(i)}$ from $N\left(\tilde{X} \hat{\beta}_{(i)}, \hat{\sigma}_{(i)}^{2}I_{\tilde{n}}\right)$

@@ -1,12 +1,5 @@
 # Forward Filtering Backward Sampling - Shared Variance
 
----
-title: "Bayesian Dynamic Linear Model - Shared Variance Case"
-author: "Daniel Zhou, Sudipto Banerjee"
-date: "`r Sys.Date()`"
-output: html_document
----
-
 This chapter discusses the Dynamic Linear Model with a scale factor for the variance shared across time and its derivations at each step. The approach taken in this chapter is borrowed from West and Harrison (1997), with some details derived from Petris et al (2009). The solution we take to estimate the parameters of this model is utilized via Forward Filtering Backward Sampling.
 
 For full generality and to maintain a multivariate normal system in both the data and parameter matrices, we assume all $Y_{t} \in \mathbb{R}^{n}$, $\beta_{t} \in \mathbb{R}^{p}$, and $t \in \{1,\ldots,T\}$ for some integer $T$.

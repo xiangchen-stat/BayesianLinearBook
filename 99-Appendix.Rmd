@@ -1,13 +1,6 @@
-# Appendix
+# Appendix {-}
 
----
-title: "Appendix"
-author: "Xiang Chen, Valentina Arputhasamy, Daniel Zhou, Sudipto Banerjee"
-date: "`r Sys.Date()`"
-output: html_document
----
-
-## Deriving $x_{2} \vert x_{1}$ when $(x_{1} x_{2})^{\T}$ is a block-normal multivariate random variable.
+## Deriving $x_{2} \vert x_{1}$ when $(x_{1} x_{2})^{\T}$ is a block-normal multivariate random variable {-}
 
 Recall our block normal system:
 

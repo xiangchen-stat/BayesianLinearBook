@@ -1,0 +1,22 @@
+--- 
+title: "Bayesian Linear Regression"
+author: "Xiang Chen, Valentina Arputhasamy, Daniel Zhou, Sudipto Banerjee"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a first tutorial for Bayesian Linear Regression assembled in book form.
+link-citations: yes
+github-repo: xiangchen-stat/BayesianLinearBook
+header-includes:
+  - \newcommand{\T}{\mathrm{\scriptscriptstyle T}}
+---
+
+# Preface {-}
+
+This is a first tutorial for Bayesian Linear Regression assembled in book form.
+
+## Acknowledgements {-}
