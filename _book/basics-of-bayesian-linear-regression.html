@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Basics of Bayesian linear regression | Bayesian Linear Regression</title>
+  <title>Chapter 1 Basics of Bayesian linear regression | Bayesian Linear Regression Tutorial</title>
   <meta name="description" content="This is a first tutorial for Bayesian Linear Regression assembled in book form." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Basics of Bayesian linear regression | Bayesian Linear Regression" />
+  <meta property="og:title" content="Chapter 1 Basics of Bayesian linear regression | Bayesian Linear Regression Tutorial" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a first tutorial for Bayesian Linear Regression assembled in book form." />
   <meta name="github-repo" content="xiangchen-stat/BayesianLinearBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Basics of Bayesian linear regression | Bayesian Linear Regression" />
+  <meta name="twitter:title" content="Chapter 1 Basics of Bayesian linear regression | Bayesian Linear Regression Tutorial" />
   
   <meta name="twitter:description" content="This is a first tutorial for Bayesian Linear Regression assembled in book form." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Xiang Chen, Valentina Arputhasamy, Daniel Zhou, Sudipto Banerjee" />
 
 
-<meta name="date" content="2023-01-28" />
+<meta name="date" content="2023-02-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -118,7 +118,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Linear Regression</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Linear Regression Tutorial</a>
           </h1>
         </div>
 
@@ -158,10 +158,10 @@ Then <span class="math inline">\((\beta,\sigma^2)\)</span> has a Normal-Inverse-
     \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+1} e^{-\frac{b_{0}}{\sigma^{2}}} \frac{1}{(2 \pi \sigma^{2})^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(\beta, m_{0}, M_{0}\right)}
 \end{align}\]</span></p>
 <p>where <span class="math inline">\(Q(x, m, M)=(x-m)^{\mathrm{\scriptscriptstyle T}} M^{-1} (x-m) \, .\)</span></p>
-<details>
-<summary>
-Click to show or hide details
-</summary>
+<button id="toggle-button1" type="button" onclick="toggleDisplay1(&#39;formula1&#39;)">
+Show details
+</button>
+<div id="formula1" style="display: none;">
 <p><span class="math display">\[\begin{align}
     P(\beta, \sigma^{2})
     &amp;= NIG \left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \\
@@ -173,7 +173,20 @@ Click to show or hide details
 \end{align}\]</span></p>
 <p>where <span class="math inline">\(Q(x, m, M)=(x-m)^{\mathrm{\scriptscriptstyle T}} M^{-1} (x-m) \, .\)</span></p>
 <p>Note: the Inverse-Gamma (<span class="math inline">\(IG\)</span>) distribution has a relationship with Gamma distribution. Given <span class="math inline">\(X \sim Gamma(\alpha, \beta)\)</span>, the density function of <span class="math inline">\(X\)</span> is <span class="math inline">\(f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x}\)</span>. Then <span class="math inline">\(Y=\frac{1}{X} \sim IG\left(\alpha, \beta\right)\)</span> with density function <span class="math inline">\(f(y)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{-\alpha-1} e^{-\frac{\beta}{x}}\)</span>.</p>
-</details>
+</div>
+<script>
+function toggleDisplay1(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button1');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 </div>
 <div id="marginal-distribution-of-nig-prior" class="section level3 hasAnchor" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Marginal distribution of NIG prior<a href="basics-of-bayesian-linear-regression.html#marginal-distribution-of-nig-prior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -184,10 +197,10 @@ P(\sigma^2) &amp; = \int N I G\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, 
 P(\beta) &amp; = \int N I G\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \  d\sigma^{2}=t_{2a_0}\left(m_0, \frac{b_0}{a_0}M_0\right) \\
 \end{aligned}
 \]</span></p>
-<details>
-<summary>
-Click to show or hide details
-</summary>
+<button id="toggle-button2" type="button" onclick="toggleDisplay2(&#39;formula2&#39;)">
+Show details
+</button>
+<div id="formula2" style="display: none;">
 <p><span class="math display">\[\begin{align}
     P\left(\sigma^{2} \right) &amp;= \int NIG\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \  d\beta \\
     &amp;=IG\left(\sigma^{2} \mid a_{0}, b_{0}\right) \int N\left(\beta \mid m_{0}, \sigma^{2} M_{0}\right) \  d\beta \\
@@ -219,7 +232,20 @@ u^{a_{0}+\frac{p}{2}-1} e^{-\left(b_{0}+\frac{1}{2} Q \left(\beta, m_{0}, M_{0}\
 &amp; =\frac{\Gamma\left(a_{0}+\frac{p}{2}\right)}{\left(2 a_{0} \pi\right)^{\frac{p}{2}} \Gamma\left(a_{0}\right)\left|\frac{b_{0}}{a_{0}} M\right|^{\frac{1}{2}}}\left(1+\frac{1}{2 a_{0}} \left(\beta-m_{0}\right)^{\mathrm{\scriptscriptstyle T}}\left(\frac{b_{0}}{a_{0}} M_{0}\right)^{-1}\left(\beta-m_{0}\right)\right)^{-\left(a_{0}+\frac{p}{2}\right)} \\
 &amp; =t_{2a_0}\left(m_0, \frac{b_0}{a_0}M_0\right) \;
 \end{align}\]</span></p>
-</details>
+</div>
+<script>
+function toggleDisplay2(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button2');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 <p>Note: the density of multivariate t-distribution is given by</p>
 <p><span class="math display">\[
 t_v(\mu, \Sigma)=\frac{\Gamma\left(\frac{v+p}{2}\right)}{(v \pi)^{\frac{p}{2}} \Gamma\left(\frac{v}{2}\right)  |\Sigma|^{\frac{1}{2}}}\left(1+\frac{1}{v}(x-\mu)^{\mathrm{\scriptscriptstyle T}} \Sigma^{-1}(x-\mu)\right)^{-\frac{v+p}{2}}
@@ -245,10 +271,10 @@ m_{1}&amp;=M_{0}^{-1} m_{0}+X^{\mathrm{\scriptscriptstyle T}} V^{-1} y  \\
 a_{1}&amp;=a_{0}+\frac{p}{2}  \\
 b_{1}&amp;=b_{0}+\frac{c^{\ast}}{2}= b_{0}+\frac{1}{2}\left(m_{0}^{\mathrm{\scriptscriptstyle T}} M_{0}^{-1} m_{0}+y^{\mathrm{\scriptscriptstyle T}} V^{-1} y-m_{1}^{\mathrm{\scriptscriptstyle T}} M_{1} m_{1}\right)
 \end{align}\]</span></p>
-<details>
-<summary>
-Click to show or hide details
-</summary>
+<button id="toggle-button3" type="button" onclick="toggleDisplay3(&#39;formula3&#39;)">
+Show details
+</button>
+<div id="formula3" style="display: none;">
 <p><span class="math display">\[\begin{align}\label{eq:post_dist}
 P\left(\beta, \sigma^{2} \mid y\right) &amp; \propto NIG\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \cdot N\left(y \mid X \beta, \sigma^{2} V\right) \nonumber\\
 &amp; \propto IG\left(\sigma^{2} \mid a_{0}, b_{0}\right) \cdot N\left(\beta \mid m_{0}, \sigma^{2} M_{0}\right) \cdot N\left(y \mid X \beta, \sigma^{2} V\right) \nonumber\\
@@ -298,7 +324,20 @@ m_{1}&amp;=M_{0}^{-1} m_{0}+X^{\mathrm{\scriptscriptstyle T}} V^{-1} y  \\
 a_{1}&amp;=a_{0}+\frac{p}{2}  \\
 b_{1}&amp;=b_{0}+\frac{c^{\ast}}{2}= b_{0}+\frac{1}{2}\left(m_{0}^{\mathrm{\scriptscriptstyle T}} M_{0}^{-1} m_{0}+y^{\mathrm{\scriptscriptstyle T}} V^{-1} y-m_{1}^{\mathrm{\scriptscriptstyle T}} M_{1} m_{1}\right)
 \end{align}\]</span></p>
-</details>
+</div>
+<script>
+function toggleDisplay3(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button3');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 <p>From derivation in marginal priors, the marginal posterior distributions can be easily get by updating corresponding parameters</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -334,10 +373,10 @@ M_1 &amp; = (M_{0}^{-1} + X^{\mathrm{\scriptscriptstyle T}}V^{-1}X)^{-1} \\
 M_1 m_1 &amp; =m_0+M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X m_0\right)
 \end{align}
 \]</span></p>
-<details>
-<summary>
-Click to show or hide details
-</summary>
+<button id="toggle-button4" type="button" onclick="toggleDisplay4(&#39;formula4&#39;)">
+Show details
+</button>
+<div id="formula4" style="display: none;">
 <p><span class="math display">\[\begin{align}
   M_1 m_1 &amp; = \left(M_0^{-1}+X^{\mathrm{\scriptscriptstyle T}} V^{-1} X\right)^{-1} m_1 \\
   &amp; = \left(M_0-M_0 X^{\mathrm{\scriptscriptstyle T}}\left(V+X M_0 X^{\mathrm{\scriptscriptstyle T}}\right)^{-1} X M_0\right)m_1 \\
@@ -351,17 +390,30 @@ Click to show or hide details
   &amp; = m_0+M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1} y-M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1} X m_0 \\
   &amp; = m_0+M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X m_0\right) \\
   \end{align}\]</span></p>
-</details>
+</div>
+<script>
+function toggleDisplay4(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button4');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 <p>Furthermore, we can simplify that
 <span class="math display">\[
 \begin{align}
 m_0^{\mathrm{\scriptscriptstyle T}} M_0^{-1} m_0+y^{\mathrm{\scriptscriptstyle T}} V^{-1} y-m_1^{\mathrm{\scriptscriptstyle T}} M_1 m_1 &amp; = \left(y-X m_0\right)^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X m_0\right)
 \end{align}
 \]</span></p>
-<details>
-<summary>
-Click to show or hide details
-</summary>
+<button id="toggle-button5" type="button" onclick="toggleDisplay5(&#39;formula5&#39;)">
+Show details
+</button>
+<div id="formula5" style="display: none;">
 <p><span class="math display">\[\begin{align}
   &amp; \quad \  m_0^{\mathrm{\scriptscriptstyle T}} M_0^{-1} m_0+y^{\mathrm{\scriptscriptstyle T}} V^{-1} y-m_1^{\mathrm{\scriptscriptstyle T}} M_1 m_1 \\
   &amp; = m_0^{\mathrm{\scriptscriptstyle T}} M_0^{-1} m_0+y^{\mathrm{\scriptscriptstyle T}} V^{-1} y-m_1^{\mathrm{\scriptscriptstyle T}} \left(m_0+M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1} (y - X m_0)\right) \\
@@ -381,7 +433,20 @@ Click to show or hide details
   &amp; =y^{\mathrm{\scriptscriptstyle T}} V^{-1}\left(y-X m_0\right)-y^{\mathrm{\scriptscriptstyle T}} V^{-1}\left(y-X m_0\right) +\left(y-X m_0\right)^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X m_0\right) \\
   &amp; =\left(y-X m_0\right)^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X m_0\right) \\
   \end{align}\]</span></p>
-</details>
+</div>
+<script>
+function toggleDisplay5(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button5');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 <p>So, we get the following updating form of the posterior distribution from Bayesian linear regression</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -429,10 +494,10 @@ P\left(\sigma^2 \mid y\right) &amp; \propto IG \left(\sigma^2 \mid a_1, b_1\righ
 &amp; a_1 = a_0 + \frac{p}{2} \\
 &amp; b_1 = b_0 + \frac{1}{2} (y-Xm_0)^{\mathrm{\scriptscriptstyle T}} Q^{-1} \left(y-Xm_0\right)
 \end{align}\]</span></p>
-<details>
-<summary>
-Click to show or hide details
-</summary>
+<button id="toggle-button6" type="button" onclick="toggleDisplay6(&#39;formula6&#39;)">
+Show details
+</button>
+<div id="formula6" style="display: none;">
 <p><span class="math display">\[\begin{align}
   P\left(\sigma^2 \mid y\right) &amp; \propto P\left(\sigma^2\right) P\left(y \mid \sigma^2\right) \\
   &amp; \propto\left(\sigma^2 \mid a_0, b_0\right) \times N\left(y \mid X m_0, \sigma^2 Q\right) \\
@@ -445,8 +510,21 @@ Click to show or hide details
   &amp; a_1 = a_0 + \frac{p}{2} \\
   &amp; b_1 = b_0 + \frac{1}{2} (y-Xm_0)^{\mathrm{\scriptscriptstyle T}} Q^{-1} \left(y-Xm_0\right)
   \end{align}\]</span></p>
-</details>
-Next, we turn to <span class="math inline">\(P\left(\beta \mid \sigma^2, y\right)\)</span>.
+</div>
+<script>
+function toggleDisplay6(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button6');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
+<p>Next, we turn to <span class="math inline">\(P\left(\beta \mid \sigma^2, y\right)\)</span>.
 Note that
 <span class="math display">\[
 \left(\begin{array}{l}
@@ -459,11 +537,11 @@ m_0
 Q &amp; X M_0 \\
 M_0 X^{\mathrm{\scriptscriptstyle T}} &amp; M_0
 \end{array}\right)\right) \;
-\]</span>
-<details>
-<summary>
-Click to show or hide details
-</summary>
+\]</span></p>
+<button id="toggle-button7" type="button" onclick="toggleDisplay7(&#39;formula7&#39;)">
+Show details
+</button>
+<div id="formula7" style="display: none;">
 <p>We have used the facts</p>
 <p><span class="math display">\[
   \begin{aligned}
@@ -482,7 +560,20 @@ Click to show or hide details
   &amp; =\sigma^2 X M_0
   \end{aligned}
   \]</span></p>
-</details>
+</div>
+<script>
+function toggleDisplay7(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button7');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 <p>From the expression of a conditional distribution derived from a multivariate Gaussian, we obtain
 <span class="math display">\[
 \beta \mid \sigma^2, y \sim N\left(\tilde{m}_1, \sigma^2 \tilde{M}_1\right)
@@ -492,10 +583,10 @@ Click to show or hide details
 &amp; \tilde{m}_1=\operatorname{E}\left[\beta \mid \sigma^2, y\right]=m_0+M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X{m_0}\right) \\
 &amp; \tilde{M}_1=M_0-M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1} X M_0 \\
 \end{align}\]</span></p>
-<details>
-<summary>
-Click to show or hide details
-</summary>
+<button id="toggle-button8" type="button" onclick="toggleDisplay8(&#39;formula8&#39;)">
+Show details
+</button>
+<div id="formula8" style="display: none;">
 <p>Note:</p>
 <!-- \begin{align} -->
 <!-- & \left(\begin{array}{l} -->
@@ -526,7 +617,20 @@ X_2
 &amp; \Rightarrow X_2 \mid X_1  \sim N\left(\mu_{2 \cdot 1}, \Sigma_{2 \cdot 1}\right)
 \end{align}\]</span></p>
 <p>where <span class="math inline">\(\mu_{2 \cdot 1}= \mu_2+\Sigma_{21} \Sigma_{11}^{-1}\left(X_1-\mu_1\right) \text { and } \Sigma_{2 \cdot 1}=\Sigma_{22}-\Sigma_{21} \Sigma_{11}^{-1} \Sigma_{12} \, .\)</span></p>
-</details>
+</div>
+<script>
+function toggleDisplay8(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button8');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 </div>
 </div>
 <div id="bayesian-prediction" class="section level2 hasAnchor" number="1.5">
@@ -536,10 +640,10 @@ X_2
 P(\tilde{y} \mid y)
 &amp;= t_{2a_1}\left(\tilde{X} M_1 m_1, \frac{b_1}{a_1}\left(I_{\tilde{n}} + \tilde{X} M_{1} \tilde{X}^{\mathrm{\scriptscriptstyle T}}\right)\right) \;
 \end{align}\]</span></p>
-<details>
-<summary>
-Click to show or hide details
-</summary>
+<button id="toggle-button9" type="button" onclick="toggleDisplay9(&#39;formula9&#39;)">
+Show details
+</button>
+<div id="formula9" style="display: none;">
 <p><span class="math display">\[\begin{align}
 P\left(\beta, \sigma^{2}, \tilde{y} \mid y\right)
 &amp;=P\left(\beta, \sigma^{2} \mid y\right) \cdot P\left(\tilde{y} \mid \beta, \sigma^{2}, y\right) \\
@@ -573,7 +677,20 @@ P\left(\tilde{y} \mid y\right)
 &amp;=\int IG\left(\sigma^{2} \mid a_{1}, b_{1}\right) \cdot N\left(\tilde{X} M_{1} m_{1}, \sigma^2\left(I_{\tilde{n}} + \tilde{X} M_{1} \tilde{X}^{\mathrm{\scriptscriptstyle T}}\right)\right) \  d\sigma^{2} \\
 &amp;= t_{2a_1}\left(\tilde{X} M_1 m_1, \frac{b_1}{a_1}\left(I_{\tilde{n}} + \tilde{X} M_{1} \tilde{X}^{\mathrm{\scriptscriptstyle T}}\right)\right) \;
 \end{align}\]</span></p>
-</details>
+</div>
+<script>
+function toggleDisplay9(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button9');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 </div>
 <div id="sampling-from-the-posterior-distribution" class="section level2 hasAnchor" number="1.6">
 <h2><span class="header-section-number">1.6</span> Sampling from the posterior distribution<a href="basics-of-bayesian-linear-regression.html#sampling-from-the-posterior-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>

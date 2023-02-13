@@ -1,5 +1,5 @@
 --- 
-title: "Bayesian Linear Regression"
+title: "Bayesian Linear Regression Tutorial"
 author: "Xiang Chen, Valentina Arputhasamy, Daniel Zhou, Sudipto Banerjee"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -17,6 +17,6 @@ header-includes:
 
 # Preface {-}
 
-This is a first tutorial for Bayesian Linear Regression assembled in book form.
+This is a tutorial for Bayesian Linear Regression assembled in book form.
 
 ## Acknowledgements {-}

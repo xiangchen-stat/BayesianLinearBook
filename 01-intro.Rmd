@@ -36,8 +36,10 @@ We use a Normal-Inverse-Gamma prior for $(\beta, \sigma^2)$
 
 where $Q(x, m, M)=(x-m)^{\T} M^{-1} (x-m) \, .$
 
-<details>
-  <summary>Click to show or hide details</summary>
+<button id="toggle-button1" type="button" onclick="toggleDisplay1('formula1')">Show details</button>
+
+
+<div id="formula1" style="display: none;">
 
 \begin{align}
     P(\beta, \sigma^{2})
@@ -53,7 +55,24 @@ where $Q(x, m, M)=(x-m)^{\T} M^{-1} (x-m) \, .$
 
 Note: the Inverse-Gamma ($IG$) distribution has a relationship with Gamma distribution. Given $X \sim  Gamma(\alpha, \beta)$, the density function of $X$ is $f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x}$. Then $Y=\frac{1}{X} \sim IG\left(\alpha, \beta\right)$ with density function $f(y)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{-\alpha-1} e^{-\frac{\beta}{x}}$.
 
-</details>
+</div>
+
+<script>
+function toggleDisplay1(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button1');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
+
+
+
 
 
 ### Marginal distribution of NIG prior
@@ -66,8 +85,11 @@ P(\beta) & = \int N I G\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\r
 \end{aligned}
 $$
 
-<details>
-  <summary>Click to show or hide details</summary>
+<button id="toggle-button2" type="button" onclick="toggleDisplay2('formula2')">Show details</button>
+
+
+<div id="formula2" style="display: none;">
+
 
   
 \begin{align}
@@ -103,8 +125,22 @@ u^{a_{0}+\frac{p}{2}-1} e^{-\left(b_{0}+\frac{1}{2} Q \left(\beta, m_{0}, M_{0}\
 & =t_{2a_0}\left(m_0, \frac{b_0}{a_0}M_0\right) \;
 \end{align}
 
-</details>
+</div>
 
+
+<script>
+function toggleDisplay2(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button2');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 
 Note: the density of multivariate t-distribution is given by
 
@@ -137,9 +173,10 @@ a_{1}&=a_{0}+\frac{p}{2}  \\
 b_{1}&=b_{0}+\frac{c^{\ast}}{2}= b_{0}+\frac{1}{2}\left(m_{0}^{\T} M_{0}^{-1} m_{0}+y^{\T} V^{-1} y-m_{1}^{\T} M_{1} m_{1}\right)
 \end{align}
 
-<details>
-  <summary>Click to show or hide details</summary>
+<button id="toggle-button3" type="button" onclick="toggleDisplay3('formula3')">Show details</button>
 
+
+<div id="formula3" style="display: none;">
 
 \begin{align}\label{eq:post_dist}
 P\left(\beta, \sigma^{2} \mid y\right) & \propto NIG\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \cdot N\left(y \mid X \beta, \sigma^{2} V\right) \nonumber\\
@@ -201,7 +238,22 @@ a_{1}&=a_{0}+\frac{p}{2}  \\
 b_{1}&=b_{0}+\frac{c^{\ast}}{2}= b_{0}+\frac{1}{2}\left(m_{0}^{\T} M_{0}^{-1} m_{0}+y^{\T} V^{-1} y-m_{1}^{\T} M_{1} m_{1}\right)
 \end{align}
 
-</details>
+</div>
+
+
+<script>
+function toggleDisplay3(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button3');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 
 From derivation in marginal priors, the marginal posterior distributions can be easily get by updating corresponding parameters 
 
@@ -244,8 +296,9 @@ M_1 m_1 & =m_0+M_0 X^{\T} Q^{-1}\left(y-X m_0\right)
 \end{align}
 $$
 
-<details>
-  <summary>Click to show or hide details</summary>
+<button id="toggle-button4" type="button" onclick="toggleDisplay4('formula4')">Show details</button>
+
+<div id="formula4" style="display: none;">
 
   
   \begin{align}
@@ -262,8 +315,21 @@ $$
   & = m_0+M_0 X^{\T} Q^{-1}\left(y-X m_0\right) \\
   \end{align}
 
-</details>
+</div>
 
+<script>
+function toggleDisplay4(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button4');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 
 Furthermore, we can simplify that
 $$
@@ -272,8 +338,9 @@ m_0^{\T} M_0^{-1} m_0+y^{\T} V^{-1} y-m_1^{\T} M_1 m_1 & = \left(y-X m_0\right)^
 \end{align}
 $$
 
-<details>
-  <summary>Click to show or hide details</summary>
+<button id="toggle-button5" type="button" onclick="toggleDisplay5('formula5')">Show details</button>
+
+<div id="formula5" style="display: none;">
 
   
   \begin{align}
@@ -296,8 +363,21 @@ $$
   & =\left(y-X m_0\right)^{\T} Q^{-1}\left(y-X m_0\right) \\
   \end{align}
 
-</details>
+</div>
 
+<script>
+function toggleDisplay5(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button5');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 
 So, we get the following updating form of the posterior distribution from Bayesian linear regression
 
@@ -360,8 +440,9 @@ where
 & b_1 = b_0 + \frac{1}{2} (y-Xm_0)^{\T} Q^{-1} \left(y-Xm_0\right)
 \end{align}
 
-<details>
-  <summary>Click to show or hide details</summary>
+<button id="toggle-button6" type="button" onclick="toggleDisplay6('formula6')">Show details</button>
+
+<div id="formula6" style="display: none;">
   
   \begin{align}
   P\left(\sigma^2 \mid y\right) & \propto P\left(\sigma^2\right) P\left(y \mid \sigma^2\right) \\
@@ -378,7 +459,21 @@ where
   \end{align}
 
 
-</details>
+</div>
+
+<script>
+function toggleDisplay6(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button6');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 
 Next, we turn to $P\left(\beta \mid \sigma^2, y\right)$.
 Note that
@@ -394,8 +489,11 @@ Q & X M_0 \\
 M_0 X^{\T} & M_0
 \end{array}\right)\right) \;
 $$
-<details>
-  <summary>Click to show or hide details</summary>
+
+
+<button id="toggle-button7" type="button" onclick="toggleDisplay7('formula7')">Show details</button>
+
+<div id="formula7" style="display: none;">
 
   
   We have used the facts 
@@ -419,9 +517,21 @@ $$
   \end{aligned}
   $$
 
-</details>
+</div>
 
-
+<script>
+function toggleDisplay7(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button7');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 
 From the expression of a conditional distribution derived from a multivariate Gaussian, we obtain
 $$
@@ -434,8 +544,9 @@ where
 & \tilde{M}_1=M_0-M_0 X^{\T} Q^{-1} X M_0 \\
 \end{align}
 
-<details>
-  <summary>Click to show or hide details</summary>
+<button id="toggle-button8" type="button" onclick="toggleDisplay8('formula8')">Show details</button>
+
+<div id="formula8" style="display: none;">
 
   
 Note: 
@@ -474,9 +585,21 @@ X_2
 where $\mu_{2 \cdot 1}= \mu_2+\Sigma_{21} \Sigma_{11}^{-1}\left(X_1-\mu_1\right) \text { and } \Sigma_{2 \cdot 1}=\Sigma_{22}-\Sigma_{21} \Sigma_{11}^{-1} \Sigma_{12} \, .$
 
 
-</details>
+</div>
 
-
+<script>
+function toggleDisplay8(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button8');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 
 ## Bayesian prediction
 Assume $V=I_{n}$. Let $\tilde{y}$ denote an $\tilde{n}\times 1$ vector of outcomes. $\tilde{X}$ is corresponding predictors. We seek to predict $\tilde{y}$ based upon $y$
@@ -487,8 +610,9 @@ P(\tilde{y} \mid y)
 \end{align}
 
 
-<details>
-  <summary>Click to show or hide details</summary>
+<button id="toggle-button9" type="button" onclick="toggleDisplay9('formula9')">Show details</button>
+
+<div id="formula9" style="display: none;">
 
 
 \begin{align}
@@ -535,8 +659,21 @@ P\left(\tilde{y} \mid y\right)
 \end{align}
 
 
-</details>
+</div>
 
+<script>
+function toggleDisplay9(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button9');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
 
 ## Sampling from the posterior distribution
 We can get the joint posterior density $P\left(\beta, \sigma^{2}, \tilde{y} \mid y\right)$ by sampling process
