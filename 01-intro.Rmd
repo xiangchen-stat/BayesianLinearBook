@@ -57,6 +57,22 @@ Note: the Inverse-Gamma ($IG$) distribution has a relationship with Gamma distri
 
 </div>
 
+<style>
+button#toggle-button1 {
+  background-color: lightgray;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+button#toggle-button1:hover {
+  background-color: gray;
+  color: white;
+}
+</style>
+
 <script>
 function toggleDisplay1(id) {
   var element = document.getElementById(id);
@@ -126,6 +142,22 @@ u^{a_{0}+\frac{p}{2}-1} e^{-\left(b_{0}+\frac{1}{2} Q \left(\beta, m_{0}, M_{0}\
 \end{align}
 
 </div>
+
+<style>
+button#toggle-button2 {
+  background-color: lightgray;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+button#toggle-button2:hover {
+  background-color: gray;
+  color: white;
+}
+</style>
 
 
 <script>
@@ -240,6 +272,21 @@ b_{1}&=b_{0}+\frac{c^{\ast}}{2}= b_{0}+\frac{1}{2}\left(m_{0}^{\T} M_{0}^{-1} m_
 
 </div>
 
+<style>
+button#toggle-button3 {
+  background-color: lightgray;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+button#toggle-button3:hover {
+  background-color: gray;
+  color: white;
+}
+</style>
 
 <script>
 function toggleDisplay3(id) {
@@ -317,6 +364,22 @@ $$
 
 </div>
 
+<style>
+button#toggle-button4 {
+  background-color: lightgray;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+button#toggle-button4:hover {
+  background-color: gray;
+  color: white;
+}
+</style>
+
 <script>
 function toggleDisplay4(id) {
   var element = document.getElementById(id);
@@ -364,6 +427,22 @@ $$
   \end{align}
 
 </div>
+
+<style>
+button#toggle-button5 {
+  background-color: lightgray;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+button#toggle-button5:hover {
+  background-color: gray;
+  color: white;
+}
+</style>
 
 <script>
 function toggleDisplay5(id) {
@@ -461,6 +540,22 @@ where
 
 </div>
 
+<style>
+button#toggle-button6 {
+  background-color: lightgray;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+button#toggle-button6:hover {
+  background-color: gray;
+  color: white;
+}
+</style>
+
 <script>
 function toggleDisplay6(id) {
   var element = document.getElementById(id);
@@ -518,6 +613,22 @@ $$
   $$
 
 </div>
+
+<style>
+button#toggle-button7 {
+  background-color: lightgray;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+button#toggle-button7:hover {
+  background-color: gray;
+  color: white;
+}
+</style>
 
 <script>
 function toggleDisplay7(id) {
@@ -586,6 +697,22 @@ where $\mu_{2 \cdot 1}= \mu_2+\Sigma_{21} \Sigma_{11}^{-1}\left(X_1-\mu_1\right)
 
 
 </div>
+
+<style>
+button#toggle-button8 {
+  background-color: lightgray;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+button#toggle-button8:hover {
+  background-color: gray;
+  color: white;
+}
+</style>
 
 <script>
 function toggleDisplay8(id) {
@@ -660,6 +787,22 @@ P\left(\tilde{y} \mid y\right)
 
 
 </div>
+
+<style>
+button#toggle-button9 {
+  background-color: lightgray;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+button#toggle-button9:hover {
+  background-color: gray;
+  color: white;
+}
+</style>
 
 <script>
 function toggleDisplay9(id) {

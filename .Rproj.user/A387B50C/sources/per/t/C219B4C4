@@ -3,7 +3,7 @@
     "path": "D:/Documents/UCLA/GSR/BLR/BayesianLinearBook/01-intro.Rmd",
     "project_path": "01-intro.Rmd",
     "type": "r_markdown",
-    "hash": "2355299452",
+    "hash": "199750008",
     "contents": "",
     "dirty": false,
     "created": 1674956169860.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "6,47",
-        "scrollLine": "0"
+        "cursorPosition": "794,21",
+        "scrollLine": "786"
     },
     "folds": "",
-    "lastKnownWriteTime": 1676311956,
+    "lastKnownWriteTime": 1676316938,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1676311956,
+    "last_content_update": 1676316938252,
     "read_only": false,
     "read_only_alternatives": []
 }
