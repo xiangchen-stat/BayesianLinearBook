@@ -6,41 +6,172 @@ In this section, we apply the divide and conquer algorithm to the Bayesian linea
 
 ## The Problem
 
-Let $y = (y_1, y_2, ...,y_n)^{\T}$ be an $n \times 1$ random vector of outcomes and $X$ be a fixed $n \times p$ matrix of predictors with full column rank. Consider the following Bayesian (hierarchical) linear regression model,
+Let $y = (y_1, y_2, ...,y_n)^{T}$ be an $n \times 1$ random vector of outcomes and $X$ be a fixed $n \times p$ matrix of predictors with full column rank. Consider the following Bayesian (hierarchical) linear regression model,
 
-$$ IG(\sigma^2 \mid a_0,b_0) \times N(\beta \mid m_0, \sigma^2M_0) \times N(y \mid X\beta, \sigma^2I_n).$$
-The posterior density is $p(\beta, \sigma^2 \mid y) = IG(\sigma^2 \mid a_0^*, b_0^*) \times N(\beta \mid Mm, \sigma^2M)$, and to carry out Bayesian inference, we first sample $\sigma^2 \sim IG(a^*, b^*)$ and then, for each sampled $\sigma^2$, we sample $\beta \sim N(Mm, \sigma^2 M)$.
+$$ NIG(\beta, \sigma^2 \mid m_0, M_0, a_0, b_0) \times N(y \mid X\beta, \sigma^2I_n).$$
+The posterior density is $p(\beta, \sigma^2 \mid y) = IG(\sigma^2 \mid a_1, b_1) \times N(\beta \mid M_1m_1, \sigma^2M_1)$, and to carry out Bayesian inference, we first sample $\sigma^2 \sim IG(a_1, b_1)$ and then, for each sampled $\sigma^2$, we sample $\beta \sim N(M_1m_1, \sigma^2 M_1)$.
 
-Assume that $n$ is so large that we are unable to store or load $y$ or $X$ into our CPU to carry out computations for them. We decide to divide our data set into K mutually exclusive and exhaustive subsets, each comprising a manageable number of points. Note that $p$ is small, so computations involving $p \times p$ matrices are fine. Let $y_k$ denote the $m_k \times 1$ sub-vector of $y$, and $X_k$ be the $m_k \times p$ sub-matrix of $X$ in subset $k$, where each $m_k$ has been chosen by us so that $m_k > p$, and is small enough such that we can fit the above model on $\{y_k, X_k\}$. This section will clearly explain how we can still compute $a^*, b^*, M$ and $m$ without ever having to store or compute with $y$ or $X$, but with quantities computed using only the subsets $\{y_k, X_k\}$ for $k = 1,2,...,K$.
+Assume that $n$ is so large that we are unable to store or load $y$ or $X$ into our CPU to carry out computations for them. We decide to divide our data set into K mutually exclusive and exhaustive subsets, each comprising a manageable number of points. Note that $p$ is small, so computations involving $p \times p$ matrices are fine. Let $y_k$ denote the $q_k \times 1$ sub-vector of $y$, and $X_k$ be the $q_k \times p$ sub-matrix of $X$ in subset $k$, where each $q_k$ has been chosen by us so that $q_k > p$, and is small enough such that we can fit the above model on $\{y_k, X_k\}$. This section will clearly explain how we can still compute $a_1, b_1, M_1$ and $m_1$ without ever having to store or compute with $y$ or $X$, but with quantities computed using only the subsets $\{y_k, X_k\}$ for $k = 1,2,...,K$.
 
-## The Solution
+## Parallel Computing
 
-Using the multivariate completing the square method, we know that the explicit expressions for $a^*, b^*, m$ and $M$ are given by: 
+### Background and Motivation
+
+A first approach to the problem presented above is called 'parallel computing'. Parallel computing is a type of computation in which many calculations or processes are carried out simultaneously - which in our context, entails dividing our data set into manageable subsets, calculating posteriors for each of these subsets simultaneously, and finally expressing the posteriors of the entire data set as functions of the posteriors of the subsets. The motivation behind this method is to make computation more efficient. 
+
+### Solution
+
+Using the multivariate completing the square method, we know that the explicit expressions for $a_1, b_1, m_1$ and $M_1$ are given by: 
 
 ```{css, echo=FALSE}
 .ul { border: 2px solid black; }
 ```
 
-<ul> - $a_0^*$ = $a_0 + \frac{n}{2}$\
-- $b_0^{*}$ = $b_0 + \frac{c^*}{2}$ \
-- $c$ = $m_0^{\T}M^{-1}_0 m_0 + y^{\T}y - m^{\T}Mm$ \
-- $m$ = $(X^{\T}y + M_0^{-1}m_0)$ \
-- $M$ = $(X^{\T}X + M_0^{-1})^{-1}$ 
-</ul>          
+<ul class="custom"> 
+<li> $a_1$ = $a_0 + \frac{n}{2}$\
+<li> $b_1$ = $b_0 + \frac{c}{2}$ \
+<li> $c$ = $m_0^{T}M^{-1}_0 m_0 + y^{\T}y - m_1^{\T}M_1m_1$ \
+<li> $m_1$ = $(X^{\T}y + M_0^{-1}m_0)$ \
+<li> $M_1^{-1}$ = $X^{\T}X + M_0^{-1}$ 
+</ul>
 
-This implies that the explicit expressions for the $a_0^*, b_0^*, m$ and $M$ for the $i_th$ subset are given by: 
-<ul> 
-- $a_{0i}^*$ = $a_0 + \frac{m_i}{2}$\
-- $b_{0i}^{*}$ = $b_0 + \frac{c^*}{2}$ \
-- $c_i^{*}$ = $m_0^{\T}M^{-1}_0 m_0 + y_i^{\T}y_i - m_i^{\T}M_im_i$
-- $m_i$ = $(X_i^{\T}y_i + M_0^{-1}m_0)$ \
-- $M_i$ = $(X_i^{\T}X_i + M_0^{-1})^{-1}$ </ul>
+This implies that the explicit expressions for $a_1, b_1, m_1$ and $M_1$ for the $i^{th}$ subset are given by: 
+<ul class="custom"> 
+<li> $a_{1i}$ = $a_0 + \frac{q_i}{2}$ \
+<li> $b_{1i}$ = $b_0 + \frac{c}{2}$ \
+<li> $c_i$ = $m_0^{\T}M^{-1}_0 m_0 + y_i^{\T}y_i - m_{1i}^{\T}M_{1i}m_{1i}$
+<li> $m_i$ = $(X_i^{\T}y_i + M_0^{-1}m_0)$ \
+<li> $M_i^{-1}$ = $X_i^{\T}X_i + M_0^{-1}$ </ul>
 
-We can express the posteriors of the entire data set as a function of the posteriors of the subsets with some math, resulting in:
+We can express the posteriors of the entire data set as a function of the posteriors of the subsets as follows:  
 
-<ul> 
-- $a_0^{*}$ = $\sum_{i=1}^{k} a_{0i}^{*} + (k-1)a_0$
-- $b_0^{*}$ = $b_0 + m_0^{\T}M^{-1}_0 m_0 + \sum_{i=1}^{k}y_i^{\T}y_i - m^{\T}Mm$ \
-- $m$ = $\sum_{i=1}^{k}m_i - (k-1)M^{-1}_0m_0$ \
-- $M$ = $\sum_{i=1}^{k}(X_i^{\T}X_i + M^{-1}_0)^{-1} = (\sum_{i=1}^{k}M^{-1}_i - (k-1)M^{-1}_0)^{-1}$ </ul>
+<ul class="custom"> 
+<li> $a_1$ = $\sum_{i=1}^{k} a_{1i} + (k-1)a_0$
+<li> $b_1$ = $b_0 + m_0^{\T}M^{-1}_0 m_0 + \sum_{i=1}^{k}y_i^{\T}y_i - m_{1i}^{\T}M_{1i}m_{1i}$ \
+<li> $m_1$ = $\sum_{i=1}^{k}m_{1i} - (k-1)M^{-1}_0m_0$ \
+<li> $M_1^{-1}$ = $\sum_{i=1}^{k}x_i^{\T}x_i + M^{-1}_0 = \sum_{i=1}^{k}M^{-1}_{1i} - (k-1)M^{-1}_0$ </ul>
+
+### Algebra
+
+This section details the algebra used to obtain the posteriors of the entire
+data set expressed as functions of the posteriors of the subsets.
+
+
+<p class="round1">Starting with $a_1$:</p>
+
+\begin{align*}
+\sum_{i=1}^{k} a_{i1} &= \sum_{i=1}^{k} a_0 + \sum_{i=1}^{k}\frac{q_i}{2} \\
+&= ka_0 + \frac{n}{2} \\
+&= (k-1)a_0 + a_0 + \frac{n}{2} \\
+&= (k-1)a_0 + a_1 \\
+\end{align*}
+
+\begin{equation}
+\Longrightarrow a_1 = \sum_{i=1}^{k} a_{i1} - (k-1)a_0
+\end{equation}
+
+<p class="round1">Moving onto $m$:</p>
+
+Recall that $m_1 = X^{\T}y + V_\beta^{-1}\mu_\beta$, 
+
+where 
+$$X = \begin{bmatrix}x_1\\
+x_2 \\
+\vdots \\
+x_k
+\end{bmatrix} \text{, where}\ x_i \in \mathbb{R}^{m_i \times 1} \ \text{and} \ y = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n 
+\end{bmatrix} \text{, where}\ y_i \in \mathbb{R}.$$
+
+Using linear algebra we can see that:
+
+$$
+X^{\T}y = \begin{bmatrix}x_1^{\T} &
+x_2^{\T} & \dots & x_k^{T} \end{bmatrix} \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} = \sum_{i=1}^{k} x_i^{\T}y_i
+$$
+Thus:
+
+\begin{align*}
+\sum_{i=1}^{k} m_i &= \sum_{i=1}^{k} x_i^{\T}y_i + kV_\beta\mu_\beta^{-1} \\
+&= X^{\T}y + kV_\beta^{-1}\mu_\beta \\
+&= X^{\T}y + V_\beta^{-1}\mu_\beta + (k-1)V_\beta^{-1}\mu_\beta \\
+&= m + (k-1)V_\beta^{-1}\mu_\beta
+\end{align*}
+
+\begin{equation}
+\Longrightarrow m_1 = \sum_{i=1}^{k}m_i - (k-1)V_\beta^{-1}\mu_\beta
+\end{equation}
+
+<p class="round1">Next is $M^{-1}_1$:</p>
+
+Recall that $M_1^{-1} = X^{\T}X + V_\beta^{-1}$.
+
+Using linear algebra again, we can see that:
+
+$$
+X^{\T}X = \begin{bmatrix}x_1^{\T} &
+x_2^{\T} & \dots & x_k^{\T} \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_k \end{bmatrix} = \sum_{i=1}^{k} x_i^{\T}x_i
+$$
+\begin{equation}
+\Longrightarrow M_1^{-1} = \sum_{i=1}^{k}x_i^{\T}x_i + V_\beta^{-1}
+\end{equation}
+
+
+<p class="round1"> Last is $b_1$:</p>
+
+Recall that $b_1 = b_0 + \frac{m_0^{\T}M^{-1}_0 m_0 + y^{\T}y - m_1^{\T}M_1m_1}{2}$.
+
+Using linear algebra once again, we can see that:
+
+$$
+y^{\T}y = \begin{bmatrix}y_1^{\T} &
+y_2^{\T} & \dots & y_n^{\T} \end{bmatrix} \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} = \sum_{i=1}^{n} y_i^{\T}y_i
+$$
+\begin{equation}
+\Longrightarrow b_1 = b_0 + \frac{m_0^{\T}M^{-1}_0 m_0 + \sum_{i=1}^{n} y_i^{\T}y_i - m_1^{\T}M_1m_1}{2}
+\end{equation}
+
+
+Which concludes the algebra behind obtaining $a_1, b_1, M_1, \text{and} \ m_1$ from the posteriors computed using the subsetted data. 
+
+## Sequential Computing
+
+### Background and Motivation
+
+A second approach to the problem presented in this section is called 'sequential computing'. Sequential computing is a type of computation where one instruction is given at a particular time and the next instruction has to wait for the first instruction to execute. For our problem, this entails 
+computing the posterior for the first subset, using it to
+compute posterior of next subset, and so on until we get to the last
+subset, which will upon computation will give us the posterior of the entire data set. 
+
+### Solution
+
+Let $D_k = \{y_k, X_k\}$ be the $i^{th}$ subset of the entire data set for $k = 1, ..., K$, such that $D_i \perp D_j ,\ \forall \ i \neq j$. We will start with a simple example of how sequential computing works by setting $k = 2$. \
+
+
+The posterior density of the first subset is: 
+\begin{equation}
+p(\beta, \sigma^2 \mid D_1) \propto IG(\sigma^2 \mid a_1, b_1) \times N(\beta \mid M_1m_1, \sigma^2M_1)
+\end{equation}
+
+The posteriors $\{a_1, b_1, M_1, \text{and} \ m_1\}$ then replace $\{a_0, b_0\, M_0, \text{and} \ m_0\}$ as priors when using the second subset to calculate posteriors:
+
+\begin{align*}
+p(\beta, \sigma^2 \mid D_1, D_1) &\propto p(\beta, \sigma^2, D_1, D_2) \\
+&\propto p(\beta, \sigma^2) \times p(D_1, D_2, \mid \beta, \sigma^2) \\
+&\propto p(\beta, \sigma^2) \times p(D_1 \mid \beta, \sigma^2) \times p(D_2 \mid \beta, \sigma^2) \\
+&\propto p(\beta, \sigma^2 \mid D_1) \times p(D_2 \mid \beta, \sigma^2)
+\end{align*}
+
+Which illustrates how the posteriors of the previous subset act as a priors when calculating the posteriors of the current subset. 
+
+If we generalize this to $k$ subsets and do some algebra, we can derive equations for the posteriors of the last subset, which are equivalent to the posteriors obtained using the full data set. 
+
+<ul class="custom"> 
+<li> $a_{1k}$ = $a_0 + \sum_{i=1}^{k}\frac{q_i}{2}$\
+<li> $b_1$ = $b_0 + \frac{c}{2}$ \
+<li> $c$ = $m_0^{\T}M^{-1}_0 m_0 + y^{\T}y - m_1^{\T}M_1m_1$ \
+<li> $m_1$ = $(X^{\T}y + M_0^{-1}m_0)$ \
+<li> $M_1^{-1}$ = $X^{\T}X + M_0^{-1}$ 
+</ul>
+
+
 
