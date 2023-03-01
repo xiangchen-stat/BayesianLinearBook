@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Bayesian Linear Regression Tutorial</title>
   <meta name="description" content="This is a first tutorial for Bayesian Linear Regression assembled in book form." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Bayesian Linear Regression Tutorial" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Xiang Chen, Valentina Arputhasamy, Daniel Zhou, Sudipto Banerjee" />
 
 
-<meta name="date" content="2023-02-17" />
+<meta name="date" content="2023-03-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,7 +49,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -69,50 +68,61 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html"><i class="fa fa-check"></i><b>1</b> Basics of Bayesian linear regression</a><ul>
+<li class="chapter" data-level="1" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html"><i class="fa fa-check"></i><b>1</b> Basics of Bayesian linear regression</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#bayes-theorem"><i class="fa fa-check"></i><b>1.1</b> Bayes’ theorem</a></li>
-<li class="chapter" data-level="1.2" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#normal-inverse-gamma-nig-prior"><i class="fa fa-check"></i><b>1.2</b> Normal-Inverse-Gamma (NIG) prior</a><ul>
+<li class="chapter" data-level="1.2" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#normal-inverse-gamma-nig-prior"><i class="fa fa-check"></i><b>1.2</b> Normal-Inverse-Gamma (NIG) prior</a>
+<ul>
 <li class="chapter" data-level="1.2.1" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#joint-distribution-of-nig-prior"><i class="fa fa-check"></i><b>1.2.1</b> Joint distribution of NIG prior</a></li>
 <li class="chapter" data-level="1.2.2" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#marginal-distribution-of-nig-prior"><i class="fa fa-check"></i><b>1.2.2</b> Marginal distribution of NIG prior</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#conjugate-bayesian-linear-regression-and-mm-formula"><i class="fa fa-check"></i><b>1.3</b> Conjugate Bayesian linear regression and M&amp;m formula</a></li>
-<li class="chapter" data-level="1.4" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#updating-form-of-the-posterior-distribution"><i class="fa fa-check"></i><b>1.4</b> Updating form of the posterior distribution</a><ul>
+<li class="chapter" data-level="1.4" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#updating-form-of-the-posterior-distribution"><i class="fa fa-check"></i><b>1.4</b> Updating form of the posterior distribution</a>
+<ul>
 <li class="chapter" data-level="1.4.1" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#method-1-sherman-woodbury-morrison-identity"><i class="fa fa-check"></i><b>1.4.1</b> Method 1: Sherman-Woodbury-Morrison identity</a></li>
 <li class="chapter" data-level="1.4.2" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#method-2-distribution-theory"><i class="fa fa-check"></i><b>1.4.2</b> Method 2: Distribution theory</a></li>
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#bayesian-prediction"><i class="fa fa-check"></i><b>1.5</b> Bayesian prediction</a></li>
 <li class="chapter" data-level="1.6" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#sampling-from-the-posterior-distribution"><i class="fa fa-check"></i><b>1.6</b> Sampling from the posterior distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html"><i class="fa fa-check"></i><b>2</b> The Divide &amp; Conquer Algorithm</a><ul>
+<li class="chapter" data-level="2" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html"><i class="fa fa-check"></i><b>2</b> The Divide &amp; Conquer Algorithm</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#the-problem"><i class="fa fa-check"></i><b>2.1</b> The Problem</a></li>
-<li class="chapter" data-level="2.2" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#parallel-computing"><i class="fa fa-check"></i><b>2.2</b> Parallel Computing</a><ul>
+<li class="chapter" data-level="2.2" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#parallel-computing"><i class="fa fa-check"></i><b>2.2</b> Parallel Computing</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#background-and-motivation"><i class="fa fa-check"></i><b>2.2.1</b> Background and Motivation</a></li>
 <li class="chapter" data-level="2.2.2" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#solution"><i class="fa fa-check"></i><b>2.2.2</b> Solution</a></li>
 <li class="chapter" data-level="2.2.3" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#algebra"><i class="fa fa-check"></i><b>2.2.3</b> Algebra</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#sequential-computing"><i class="fa fa-check"></i><b>2.3</b> Sequential Computing</a><ul>
+<li class="chapter" data-level="2.3" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#sequential-computing"><i class="fa fa-check"></i><b>2.3</b> Sequential Computing</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#background-and-motivation-1"><i class="fa fa-check"></i><b>2.3.1</b> Background and Motivation</a></li>
 <li class="chapter" data-level="2.3.2" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#solution-1"><i class="fa fa-check"></i><b>2.3.2</b> Solution</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="posteriors-using-sufficient-statistics.html"><a href="posteriors-using-sufficient-statistics.html"><i class="fa fa-check"></i><b>3</b> Posteriors Using Sufficient Statistics</a><ul>
+<li class="chapter" data-level="3" data-path="posteriors-using-sufficient-statistics.html"><a href="posteriors-using-sufficient-statistics.html"><i class="fa fa-check"></i><b>3</b> Posteriors Using Sufficient Statistics</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="posteriors-using-sufficient-statistics.html"><a href="posteriors-using-sufficient-statistics.html#methods"><i class="fa fa-check"></i><b>3.1</b> Methods</a></li>
 <li class="chapter" data-level="3.2" data-path="posteriors-using-sufficient-statistics.html"><a href="posteriors-using-sufficient-statistics.html#posterior-from-improper-priors"><i class="fa fa-check"></i><b>3.2</b> Posterior From Improper Priors</a></li>
 <li class="chapter" data-level="3.3" data-path="posteriors-using-sufficient-statistics.html"><a href="posteriors-using-sufficient-statistics.html#extension-to-divide-conquer-algorithm"><i class="fa fa-check"></i><b>3.3</b> Extension to Divide &amp; Conquer Algorithm</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html"><i class="fa fa-check"></i><b>4</b> Forward Filtering Backward Sampling - Shared Variance</a><ul>
+<li class="chapter" data-level="4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html"><i class="fa fa-check"></i><b>4</b> Forward Filtering Backward Sampling - Shared Variance</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#background"><i class="fa fa-check"></i><b>4.1</b> Background</a></li>
-<li class="chapter" data-level="4.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-forward-filter"><i class="fa fa-check"></i><b>4.2</b> Derivation of the Forward Filter</a><ul>
+<li class="chapter" data-level="4.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-forward-filter"><i class="fa fa-check"></i><b>4.2</b> Derivation of the Forward Filter</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_tvert-y_t"><i class="fa fa-check"></i><b>4.2.1</b> Deriving <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span></a></li>
 <li class="chapter" data-level="4.2.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2vert-y_t"><i class="fa fa-check"></i><b>4.2.2</b> Deriving <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span></a></li>
 <li class="chapter" data-level="4.2.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#commentary"><i class="fa fa-check"></i><b>4.2.3</b> Commentary</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-backwards-sampling"><i class="fa fa-check"></i><b>4.3</b> Derivation of the Backwards Sampling</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i>Appendix</a>
+<ul>
 <li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#deriving-x_2-vert-x_1-when-x_1-x_2mathrmscriptscriptstyle-t-is-a-block-normal-multivariate-random-variable"><i class="fa fa-check"></i>Deriving <span class="math inline">\(x_{2} \vert x_{1}\)</span> when <span class="math inline">\((x_{1} x_{2})^{\mathrm{\scriptscriptstyle T}}\)</span> is a block-normal multivariate random variable</a></li>
 </ul></li>
 </ul>
@@ -135,7 +145,7 @@
 <div id="header">
 <h1 class="title">Bayesian Linear Regression Tutorial</h1>
 <p class="author"><em>Xiang Chen, Valentina Arputhasamy, Daniel Zhou, Sudipto Banerjee</em></p>
-<p class="date"><em>2023-02-17</em></p>
+<p class="date"><em>2023-03-01</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
