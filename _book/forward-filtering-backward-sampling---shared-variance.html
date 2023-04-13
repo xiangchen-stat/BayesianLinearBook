@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Forward Filtering Backward Sampling - Shared Variance | Bayesian Linear Regression</title>
+  <title>Chapter 4 Forward Filtering Backward Sampling - Shared Variance | Bayesian Linear Regression Tutorial</title>
   <meta name="description" content="This is a first tutorial for Bayesian Linear Regression assembled in book form." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Forward Filtering Backward Sampling - Shared Variance | Bayesian Linear Regression" />
+  <meta property="og:title" content="Chapter 4 Forward Filtering Backward Sampling - Shared Variance | Bayesian Linear Regression Tutorial" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a first tutorial for Bayesian Linear Regression assembled in book form." />
   <meta name="github-repo" content="xiangchen-stat/BayesianLinearBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Forward Filtering Backward Sampling - Shared Variance | Bayesian Linear Regression" />
+  <meta name="twitter:title" content="Chapter 4 Forward Filtering Backward Sampling - Shared Variance | Bayesian Linear Regression Tutorial" />
   
   <meta name="twitter:description" content="This is a first tutorial for Bayesian Linear Regression assembled in book form." />
   
@@ -23,14 +23,14 @@
 <meta name="author" content="Xiang Chen, Valentina Arputhasamy, Daniel Zhou, Sudipto Banerjee" />
 
 
-<meta name="date" content="2023-01-28" />
+<meta name="date" content="2023-03-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="the-divide-conquer-algorithm.html"/>
+<link rel="prev" href="posteriors-using-sufficient-statistics.html"/>
 <link rel="next" href="appendix.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -92,18 +92,34 @@
 <li class="chapter" data-level="2" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html"><i class="fa fa-check"></i><b>2</b> The Divide &amp; Conquer Algorithm</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#the-problem"><i class="fa fa-check"></i><b>2.1</b> The Problem</a></li>
-<li class="chapter" data-level="2.2" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#the-solution"><i class="fa fa-check"></i><b>2.2</b> The Solution</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html"><i class="fa fa-check"></i><b>3</b> Forward Filtering Backward Sampling - Shared Variance</a>
+<li class="chapter" data-level="2.2" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#parallel-computing"><i class="fa fa-check"></i><b>2.2</b> Parallel Computing</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#background"><i class="fa fa-check"></i><b>3.1</b> Background</a></li>
-<li class="chapter" data-level="3.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-forward-filter"><i class="fa fa-check"></i><b>3.2</b> Derivation of the Forward Filter</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_tvert-y_t"><i class="fa fa-check"></i><b>3.2.1</b> Deriving <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span></a></li>
-<li class="chapter" data-level="3.2.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2vert-y_t"><i class="fa fa-check"></i><b>3.2.2</b> Deriving <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span></a></li>
-<li class="chapter" data-level="3.2.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#commentary"><i class="fa fa-check"></i><b>3.2.3</b> Commentary</a></li>
+<li class="chapter" data-level="2.2.1" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#background-and-motivation"><i class="fa fa-check"></i><b>2.2.1</b> Background and Motivation</a></li>
+<li class="chapter" data-level="2.2.2" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#solution"><i class="fa fa-check"></i><b>2.2.2</b> Solution</a></li>
+<li class="chapter" data-level="2.2.3" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#algebra"><i class="fa fa-check"></i><b>2.2.3</b> Algebra</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-backwards-sampling"><i class="fa fa-check"></i><b>3.3</b> Derivation of the Backwards Sampling</a></li>
+<li class="chapter" data-level="2.3" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#sequential-computing"><i class="fa fa-check"></i><b>2.3</b> Sequential Computing</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#background-and-motivation-1"><i class="fa fa-check"></i><b>2.3.1</b> Background and Motivation</a></li>
+<li class="chapter" data-level="2.3.2" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html#solution-1"><i class="fa fa-check"></i><b>2.3.2</b> Solution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="posteriors-using-sufficient-statistics.html"><a href="posteriors-using-sufficient-statistics.html"><i class="fa fa-check"></i><b>3</b> Posteriors Using Sufficient Statistics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="posteriors-using-sufficient-statistics.html"><a href="posteriors-using-sufficient-statistics.html#methods"><i class="fa fa-check"></i><b>3.1</b> Methods</a></li>
+<li class="chapter" data-level="3.2" data-path="posteriors-using-sufficient-statistics.html"><a href="posteriors-using-sufficient-statistics.html#posterior-from-improper-priors"><i class="fa fa-check"></i><b>3.2</b> Posterior From Improper Priors</a></li>
+<li class="chapter" data-level="3.3" data-path="posteriors-using-sufficient-statistics.html"><a href="posteriors-using-sufficient-statistics.html#extension-to-divide-conquer-algorithm"><i class="fa fa-check"></i><b>3.3</b> Extension to Divide &amp; Conquer Algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html"><i class="fa fa-check"></i><b>4</b> Forward Filtering Backward Sampling - Shared Variance</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#background"><i class="fa fa-check"></i><b>4.1</b> Background</a></li>
+<li class="chapter" data-level="4.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-forward-filter"><i class="fa fa-check"></i><b>4.2</b> Derivation of the Forward Filter</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_tvert-y_t"><i class="fa fa-check"></i><b>4.2.1</b> Deriving <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span></a></li>
+<li class="chapter" data-level="4.2.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2vert-y_t"><i class="fa fa-check"></i><b>4.2.2</b> Deriving <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span></a></li>
+<li class="chapter" data-level="4.2.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#commentary"><i class="fa fa-check"></i><b>4.2.3</b> Commentary</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-backwards-sampling"><i class="fa fa-check"></i><b>4.3</b> Derivation of the Backwards Sampling</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i>Appendix</a>
 <ul>
@@ -118,7 +134,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Linear Regression</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Linear Regression Tutorial</a>
           </h1>
         </div>
 
@@ -126,12 +142,12 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="forward-filtering-backward-sampling---shared-variance" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Forward Filtering Backward Sampling - Shared Variance<a href="forward-filtering-backward-sampling---shared-variance.html#forward-filtering-backward-sampling---shared-variance" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="forward-filtering-backward-sampling---shared-variance" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Forward Filtering Backward Sampling - Shared Variance<a href="forward-filtering-backward-sampling---shared-variance.html#forward-filtering-backward-sampling---shared-variance" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This chapter discusses the Dynamic Linear Model with a scale factor for the variance shared across time and its derivations at each step. The approach taken in this chapter is borrowed from West and Harrison (1997), with some details derived from Petris et al (2009). The solution we take to estimate the parameters of this model is utilized via Forward Filtering Backward Sampling.</p>
 <p>For full generality and to maintain a multivariate normal system in both the data and parameter matrices, we assume all <span class="math inline">\(Y_{t} \in \mathbb{R}^{n}\)</span>, <span class="math inline">\(\beta_{t} \in \mathbb{R}^{p}\)</span>, and <span class="math inline">\(t \in \{1,\ldots,T\}\)</span> for some integer <span class="math inline">\(T\)</span>.</p>
-<div id="background" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Background<a href="forward-filtering-backward-sampling---shared-variance.html#background" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="background" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Background<a href="forward-filtering-backward-sampling---shared-variance.html#background" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The model we are concerned with studying is a class of time-varying models called the Dynamic Linear Model. The setup for the equation follows:</p>
 <p><span class="math display">\[\begin{eqnarray*}
 Y_{t}\vert\beta_{t}, \sigma^{2} &amp;\sim&amp; N(F_{t}^{\mathrm{\scriptscriptstyle T}}\beta_{t}, \sigma^{2}V_{t})\\
@@ -147,8 +163,8 @@ Y_{t},\sigma^{2}\vert \beta_{t} &amp;\sim&amp; NIG(F_{t}^{\mathrm{\scriptscripts
 \end{eqnarray*}\]</span></p>
 <p>The task is to acquire estimates for <span class="math inline">\(\beta_{0,\ldots,T}\)</span> and <span class="math inline">\(\sigma^{2}\)</span>. This task may be divided into the forward filter and backwards sampling steps (collectively referred to as the Forward Filter-Backwards Sampling (FFBS) algorithm): The forward filter to acquire sequential estimates, and the backwards sampling step to retroactively “smooth” our initial estimates given estimates at the last time stamp. We are given a set of observations <span class="math inline">\(Y_{t,j}\)</span>, and known parameters <span class="math inline">\(F_{t}\)</span>, <span class="math inline">\(G_{t}\)</span>, <span class="math inline">\(V_{t}\)</span>, <span class="math inline">\(W_{t}\)</span>, and <span class="math inline">\(n_{t-1}\)</span>, although Frankenburg and Banerjee also apply FFBS to cases where <span class="math inline">\(F_{t}\)</span> and <span class="math inline">\(G_{t}\)</span> are not pre-specified.</p>
 </div>
-<div id="derivation-of-the-forward-filter" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Derivation of the Forward Filter<a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-forward-filter" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="derivation-of-the-forward-filter" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Derivation of the Forward Filter<a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-forward-filter" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We proceed for some arbitrary <span class="math inline">\(t\)</span>:</p>
 <p><span class="math display">\[\begin{eqnarray*}
 \beta_{t} &amp;=&amp; G_{t}\beta_{t-1} + \omega_{t}, \omega_{t} \sim N(0, \sigma^{2}W_{t})\\
@@ -164,8 +180,8 @@ Y_{t}\vert \sigma^{2} &amp;\sim&amp; N(F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*
 Y_{t} &amp;\sim&amp; T_{2a_{t-1}}(F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t}, \frac{b_{t-1}}{a_{t-1}}(F_{t}^{\mathrm{\scriptscriptstyle T}}R_{t}F_{t} + V_{t}))
 \end{eqnarray*}\]</span></p>
 <p>We now have the apparatus needed to compute the sequential posterior <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span> and <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span>:</p>
-<div id="deriving-beta_tvert-y_t" class="section level3 hasAnchor" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Deriving <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_tvert-y_t" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="deriving-beta_tvert-y_t" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Deriving <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_tvert-y_t" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><span class="math display">\[\begin{eqnarray*}
 p(\beta_{t} \vert Y_{t}, \sigma^{2}) &amp;\propto&amp; p(\beta_{t}, Y_{t}\vert \sigma^{2})\\
 &amp;\propto&amp; p(Y_{t}\vert \beta_{t},\sigma^{2})p(\beta_{t}\vert \sigma^{2})\\
@@ -196,8 +212,8 @@ x_{2}\vert x_{1} &amp;\sim&amp; N(\mu_{2} + \Sigma_{21}\Sigma_{11}^{-1}(x_{1} - 
 <p>where <span class="math inline">\(Q_{t} = F_{t}^{\mathrm{\scriptscriptstyle T}}R_{t}F_{t} + V_{t}\)</span>.</p>
 <p>(Note that Petris’s expression for the variance suffers from a typo; to see this, simply take their <span class="math inline">\(\widetilde{C}_{t}^{\mathrm{\scriptscriptstyle T}}\)</span>.)</p>
 </div>
-<div id="deriving-sigma2vert-y_t" class="section level3 hasAnchor" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Deriving <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2vert-y_t" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="deriving-sigma2vert-y_t" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Deriving <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2vert-y_t" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We next deduce the density of <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span>. Note before we begin that since <span class="math inline">\(Y_{t} \sim T_{2a_{t-1}}(F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t}, Q_{t}) = \int NIG_{Y_{t}}(F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t}, Q_{t}, a_{t-1}, b_{t-1})d\sigma^{2}\)</span>, we can write <span class="math inline">\(Y_{t}\vert \sigma^{2} \sim N(F_{t}m^{*}_{t}, \sigma^{2}Q_{t})\)</span>. Hence:</p>
 <p><span class="math display">\[\begin{eqnarray*}
 p(\sigma^{2}\vert Y_{t}) &amp;\propto&amp; p(Y_{t}\vert \sigma^{2})p(\sigma^{2})\\
@@ -207,8 +223,8 @@ p(\sigma^{2}\vert Y_{t}) &amp;\propto&amp; p(Y_{t}\vert \sigma^{2})p(\sigma^{2})
 <p>We conclude that <span class="math inline">\(\sigma^{-2}\vert Y_{t} \sim \Gamma(a_{t},b_{t})\)</span>, where <span class="math inline">\(a_{t} = a_{t-1} + \frac{n}{2}\)</span> and <span class="math inline">\(b_{t} = b_{t-1} + \frac{1}{2}(y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t})^{\mathrm{\scriptscriptstyle T}}Q_{t}^{-1}(y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t})\)</span>.</p>
 <p>This gives us the set of updating equations according to Petris Proposition 4.1.</p>
 </div>
-<div id="commentary" class="section level3 hasAnchor" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> Commentary<a href="forward-filtering-backward-sampling---shared-variance.html#commentary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="commentary" class="section level3 hasAnchor" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Commentary<a href="forward-filtering-backward-sampling---shared-variance.html#commentary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Note that we have derived the forward filtering step for the set of equations for time <span class="math inline">\(t\)</span> given the parameters for the distributions at time <span class="math inline">\(t-1\)</span>. Hence the equation’s setup is Markovian, i.e. the state of this set of equations only depends on that of the preceding time point. Nevertheless, applications where the forward filter’s equations propagate from an initial time point <span class="math inline">\(t=0\)</span> are written so that the dependence of the parameters’ values <span class="math inline">\(\beta_{t}\)</span> and <span class="math inline">\(\sigma^{2}\)</span> on the data up to time <span class="math inline">\(t-1\)</span> or time <span class="math inline">\(t\)</span> are made explicit. Specifically, letting <span class="math inline">\(D_{t} = \{Y_{\tau}\}_{\tau=1,\ldots,t}\)</span>, we may write the set of equations in our setup as:</p>
 <p><span class="math display">\[\begin{eqnarray*}
 Y_{t},\sigma^{2}\vert \beta_{t},D_{t-1} &amp;\sim&amp; NIG(F_{t}^{\mathrm{\scriptscriptstyle T}}\beta_{t}, V_{t}, a_{t-1}, b_{t-1})\\
@@ -218,8 +234,8 @@ Y_{t},\sigma^{2}\vert \beta_{t},D_{t-1} &amp;\sim&amp; NIG(F_{t}^{\mathrm{\scrip
 <p>and the sequential posteriors we have derived, <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span> and <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span>, as <span class="math inline">\(\beta_{t}\vert D_{t}\)</span> and <span class="math inline">\(\sigma^{2} \vert D_{t}\)</span> respectively.</p>
 </div>
 </div>
-<div id="derivation-of-the-backwards-sampling" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Derivation of the Backwards Sampling<a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-backwards-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="derivation-of-the-backwards-sampling" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Derivation of the Backwards Sampling<a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-backwards-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now that we have the parameters <span class="math inline">\(\{\theta_{t},\phi\vert D_{t}\}_{t=1,\ldots,T}\)</span>, we would like to work backwards and derive <span class="math inline">\(\{\theta_{t},\phi\vert \theta_{t+1}, D_{T}\}_{t=1,\ldots,T-1}\)</span> to smooth our initial variable estimates:</p>
 <!-- TODO: Include pictoral graph here -->
 <p><span class="math display">\[\begin{eqnarray*}
@@ -262,7 +278,7 @@ C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}C_{t}G_{t+1}^{\ma
           </div>
         </div>
       </div>
-<a href="the-divide-conquer-algorithm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="posteriors-using-sufficient-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="appendix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

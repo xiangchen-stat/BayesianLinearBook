@@ -1,0 +1,184 @@
+# Posteriors Using Sufficient Statistics
+
+Recall the following Bayesian (hierarchical) linear regression model from part 1: 
+
+\begin{equation*}
+NIG(M_0, m_0, a_0, b_0) \times N(y \mid X\beta, \sigma^2 I_n)
+(\#eq:part1nig)
+\end{equation*}
+
+where $y = (y_1, y_2, ..., y_n)^{\T}$ is an $n \times 1$ vector of outcomes and $X$ is a fixed $n \times p$ matrix of predictors with full column rank. \
+
+Suppose that due to privacy reasons, instead of $y = (y_1, y_2, ..., y_n)^{\T}$ we are given data that only consists of the sufficient statistics, $s^2$ and $\bar{y}$. Further suppose that we are working with the following simpler model: 
+
+\begin{equation*}
+y = 1_n \beta_0 + \epsilon
+(\#eq:simplelin)
+\end{equation*}
+
+How do we obtain $p(\beta_0, \sigma^2 \mid y)$ using this data set?
+
+## Methods 
+
+We can use the factorization theorem to factor the normal distribution's pdf into a function of the sufficient statistics, $s^2$ and $\bar{y}.$ 
+\begin{equation*}
+\begin{split}
+f(y \mid \beta_0, \sigma^2) &= \Pi_{i=1}^{n} (2\pi\sigma^2)^{-\frac{1}{2}} \exp\{-\frac{1}{2\sigma^2}(y_i-\beta_0)^2\}\\
+&= (2\pi\sigma^2)^{-\frac{n}{2}} \exp\{-\frac{1}{2\sigma^2}\Sigma(y_i - \beta_0)^2\} \\
+&= (2\pi\sigma^2)^{-\frac{n}{2}} \exp\{-\frac{1}{2\sigma^2}\Sigma(y_i - \bar{y} + \bar{y} - \beta_0)^2\} \\
+&= (2\pi\sigma^2)^{-\frac{n}{2}} \exp\{-\frac{1}{2\sigma^2}\Sigma[(y_i - \bar{y})^2 + (\bar{y} - \beta_0)^2]\} \\
+&= (2\pi\sigma^2)^{-\frac{n}{2}} \exp\{-\frac{1}{2\sigma^2}[(n-1)s^2 + n(\bar{y} - \beta_0)^2]\}
+\end{split}
+(\#eq:sufficientstatfactorization)
+\end{equation*}
+
+We have now successfully expressed our likelihood as a function of the sufficient statistics $s^2$ and $\bar{x}$ and can use this factorized likelihood along with Bayes' Rule to compute $p(\beta_0, \sigma^2)$.
+
+\begin{align*}
+p(\beta_0, \sigma^2 \mid y) &= p(\beta_0 \mid \mu_\beta, \sigma^2) \times p(\sigma^2 \mid a_0, b_0) \times p(y \mid \beta_0, \sigma^2) \\
+&= N(\beta_0 \mid \mu_\beta, \sigma^2) \times IG(\sigma^2 \mid a_0,b_0) \times N(y \mid \beta_0, \sigma^2) \\
+&= (2\pi\sigma^2)^{-\frac{1}{2}}\exp\{-\frac{1}{2\sigma^2}(\beta_0 - \mu_\beta)^2\} \times
+\frac{b_0^{a_0}}{\Gamma(a_0)}(\sigma^2)^{-a-1}\exp\{-\frac{b}{\sigma^2}\} \\
+&\times (2\pi\sigma^2)^{-\frac{n}{2}}\exp\{-\frac{1}{2\sigma^2}[(n-1)s^2 + n(\bar{y} - \beta_0)^2]\} \\
+&\propto (\sigma^2)^{-a_0-1} \times (\sigma^2)^{-\frac{n+1}{2}} \times \exp\{-\frac{b_0}{\sigma^2}\} \times \exp\{-\frac{1}{2\sigma^2}(\beta_0 - \mu_\beta)^2\} \\ &\times \exp\{-\frac{1}{2\sigma^2}[(n-1)s^2 + n(\bar{y} - \beta_0)^2]\} \\
+&= (\sigma^2)^{-a_0-1} \times (\sigma^2)^{-\frac{n+1}{2}} \exp\{-\frac{b_0}{\sigma^2}\} \times \exp\{-\frac{1}{2\sigma^2}[(\beta_0 - \mu_{\beta})^2 +(n-1)s^2 + n(\bar{y}-\beta_0)^2]\}
+\end{align*}
+
+Complete the square on the following term:
+\begin{align*}
+&(\beta_0 - \mu_{\beta})^2 +(n-1)s^2 + n(\bar{y}-\beta_0)^2 \\
+&= (n+1)\beta_0^2 - 2(\mu_{\beta} + n\bar{y})\beta_0 + n\bar{y}^2 + \mu_\beta^2 + (n-1)s^2 \\
+&= (n+1)(\beta_0 - \frac{\mu_{\beta} + n\bar{y}}{n+1})^2 + n\bar{y}^2 + \mu_\beta^2 + (n-1)s^2 - \frac{(\mu_\beta + n\bar{y})^2}{n+1}\\
+&= (n+1)(\beta_0 - \frac{\mu_{\beta} + n\bar{y}}{n+1})^2 + y^{\T}\Big(\frac{1_n1_n^{\T}}{n}\Big)y + y^{\T}\Big(I - \frac{1_n1_n^{\T}}{n}\Big)y + \mu_\beta^2 -
+\frac{(\mu_\beta + n\bar{y})^2}{n+1} \\
+&= (n+1)(\beta_0 - \frac{\mu_{\beta} + n\bar{y}}{n+1})^2 + y^{\T}y + \mu_\beta^2 - \frac{(\mu_\beta + n\bar{y})^2}{n+1}
+\end{align*}
+
+```{css, echo=FALSE}
+.ul { border: 2px solid black; }
+```
+
+
+We now let:\
+<ul> - $\mu_\beta^{*} = \frac{n\bar{y} + \mu_\beta}{n+1}$ \
+- $c = y^{\T}y + \mu_\beta^2 - \frac{(n\bar{y} + \mu_\beta)^2}{n+1}$,</ul>
+
+and apply this expansion of this term into the original problem.
+
+\begin{align*}
+&=(\sigma^2)^{-a_0-1} \times (\sigma^2)^{-\frac{n+1}{2}} \times \exp\{-\frac{b_0}{\sigma^2}\} \times \exp\{-\frac{1}{2\sigma^2}(n+1)(\beta_0 - \mu_\beta^{*})^2\} \times \exp\{-\frac{c}{2\sigma^2}\} \\
+&= (\sigma^2)^{-a_0-1} \times (\sigma^2)^{-\frac{n+1}{2}} \times \exp\{-\frac{b_0}{\sigma^2}\} \times \exp\{-\frac{1}{2\sigma^{2\ast}}(\beta_0 - \mu_\beta^{*})^2\} \times \exp\{-\frac{c}{2\sigma^2}\} \\
+&= (\sigma^2)^{-a_0-1-\frac{n}{2}} \times \exp\{-\frac{(b_0 + \frac{c}{2})}{\sigma^2}\} \times (\sigma^2)^{-\frac{1}{2}} \times \exp\{-\frac{1}{2\sigma^{2\ast}}(\beta_0 - \mu_\beta^{*})^2\} \\
+&= \underbrace{(\sigma^2)^{a_1-1} \times \exp\{-\frac{b_1}{\sigma^2}\}}_\text{kernal of $IG(a_1, b_1)$} \times 
+\underbrace{(\sigma^2)^{\frac{1}{2}} \times \exp\{-\frac{1}{2\sigma^{2\ast}}(\beta_0 - \mu_\beta^{*})^2\}}_\text{kernal of $N(\mu_\beta^{\ast}, \sigma^{2\ast})$}
+\end{align*}
+
+Where:
+<ul> 
+- $\mu_\beta^{*} = \frac{n\bar{y} + \mu_\beta}{n+1}$
+- $\sigma^{2*} = \frac{\sigma^2}{n+1}$  
+- $a_1 = a_0 + \frac{n}{2}$
+- $b_1 = b_0 + \frac{c}{2}$ 
+- $c = y^{\T}y + \mu_\beta^2 - \frac{(n\bar{y} + \mu_\beta)^2}{n+1}$
+</ul>
+
+## Posterior From Improper Priors
+
+Recall that when we work with this model in a general regression setting where $X$ is an $n \times p$ matrix predictors with full column rank, the posterior density is:
+
+\begin{equation*}
+\begin{split}
+p(\beta, \sigma^2 \mid y) &= IG(\sigma^2 \mid a_1, b_1) \times N(\beta \mid M_1m_1, \sigma^2M_1)
+\end{split}
+(\#eq:nigpost)
+\end{equation*}
+We end up with:
+<ul> 
+- $m_0^{*} = Mm$
+- $M_1 = (X^{\T}X + M_{0}^{-1})^{-1}$
+- $m_1 = X^{\T}y + M_{0}^{-1}m_0$
+- $a_1 = a_0 + \frac{n}{2}$
+- $b_1 = b_0 + \frac{c}{2}$
+- $c  = y^{\T}y + m_0^{\T}M_0^{-1}m_0 - m_1^{\T}M_1m_1$
+</ul>
+
+If we take $M_0^{-1} \rightarrow 0$ (i.e. the null matrix), and $a_0 \rightarrow -\frac{p}{2}$, and $b_0 \rightarrow 0$ we can see that it leads to the improper prior $p(\beta, \sigma^2) \propto \frac{1}{\sigma^2}$
+
+\begin{align*}
+p(\beta, \sigma^2) &= IG(\sigma^2 \mid a_0, b_0) \times N(\beta \mid m_0, \sigma^2M_0) \\
+&= \frac{b_0^{a_0}}{\Gamma(a_0)}(\sigma^2)^{-a_0-1} \exp\{-\frac{b_0}{\sigma^2}\} \times (2\pi)^{-p/2}\det(\sigma^2M_0)^{-\frac{1}{2}} \exp\{-\frac{1}{2\sigma^2}(\beta - m_0)^{\T}\frac{M_0^{-1}}{\sigma^2}(\beta - m_0)\} \\
+&\propto (\sigma^2)^{-a_0-1}\exp\{-\frac{b_0}{\sigma^2}\} \times (\sigma^2)^{-\frac{p}{2}}\exp\{-\frac{1}{2}(\beta - m_0)^{\T}\frac{M_0^{-1}}{\sigma^2}(\beta - m_0)\} \\
+&= (\sigma^2)^{-(\frac{p}{2}+1})\exp\{-\frac{b_0}{\sigma^2}\} \times (\sigma^2)^{-\frac{p}{2}}\exp\{-\frac{1}{2}(\beta - m_0)^{\T}
+\frac{0}{\sigma^2}(\beta - m_0)\}\\
+&= \frac{1}{\sigma^2},
+\end{align*}
+and ultimately yields a posterior distribution with:
+
+<ul> 
+- $m_1 = (X^{\T}X)^{-1}X^{\T}y$
+- $a_1 = \frac{n-p}{2}$
+- $b_1 = b_0 + \frac{c^{*}}{2}$
+- $c^{*} = y^{\T}y - m_1^{\T}M_1m_1 = y^{\T}(I - P_x)y = (n-p)s^2$
+</ul>
+where $P_x = X(X^{\T}X)^{-1}X^{\T}$.
+
+If we apply this framework, to the simpler model presented at the beginning of the section,
+$y = 1_n\beta_0 + \epsilon$,
+where  $X$ is a vector of 1's instead of an $n \times p$ matrix, our posteriors should be:
+<ul> 
+- $\mu_\beta^{*} = \bar{y}$
+- $a_1 = \frac{n-1}{2}$
+- $b_1 = \frac{(n-1)s^2}{2}$
+- $c = y^{\T}y - m_1^{\T}M_1m_1 = y^{\T}(I - P_x)y = (n-1)s^2$
+</ul>
+
+## Extension to Divide & Conquer Algorithm
+
+While maintaining the frameworks we established in parts 1 and 2, let's now additionally assume *n* is so large that we are unable to store or load $y$ or $X$ into our CPU to carry out computations. As a result, we divide the data set into $K$ mutually exclusive and exhaustive subsets, each comprising a manageable number of points. Let $y_k$ denote the $q_k \times 1$ subvector of $y$ and $X_k$ be the $q_k \times p$ submatrix of $X$ in subset $k$, such that $q_k > p$ and is small enough so that we can now fit the desired model on $\{y_k, X_k\}$. It is shown below that it is possible to still compute $a_1$, $b_1$, 
+$M_1$ and $m_1$ wihout ever having to store or compute with $y$ or $X$, but with quantities computed using only the subsets $\{y_k, X_k\}$, for $k$ = 1,2,...,$K$.
+
+Starting with a simple example where $K$ = 2, and where we are taking the assumptions made in parts 1 and 2 into consideration, we note that:
+
+<ul> 
+- $\bar{y_1} = \frac{\sum_{i=1}^{q_1}y_{1i}}{q_1}$
+- $\bar{y_2} = \frac{\sum_{i=1}^{q_2}y_{2i}}{q_2}$
+- This implies that: $\bar{y} = \frac{q_1\bar{y_1} + q_2\bar{y2}}{n}$, where $q_1+q_2 = n$
+- Extending this to k subsets: $\bar{y} = \frac{\sum_{i=1}^K{q_i\bar{y_i}}}{n}$, where $\sum_{i=1}^k{q_i} = n$
+</ul>
+
+Similarly, 
+<ul> 
+- $s_1^2 = \sum_{i=1}^{q_1}\frac{({y_{1i}-\bar{y_1}})^2}{q_1}$
+- $s_2^2 = \sum_{i=1}^{q_2}\frac{({y_{2i}-\bar{y_2}})^2}{q_2}$
+- This implies that: $s^2 = \frac{(q_1-1)s_1^2 + (q_2-1)s_2^2}{q_1+q_2-1}$, where $q_1+q_2 = n$
+- Extending this to k subsets: $s^2 = \frac{\sum_{i=1}^k(q_i -1)s_i^2}{\sum_{i=1}^{k}{q_i}}$, where $\sum_{i=1}^{k}{q_i-1} = n$
+</ul>
+
+Applying what we already derived in the previous parts, we can see that for $i=1,2$,:
+<ul> 
+- $\mu_{i\beta}^* = \bar{y_i}$
+- $a_{i1}^ = \frac{q_i- 1}{2}$
+- $b_{i1}^{*} = \frac{(q_i - 1)s_i^2}{2}$
+- $c_{i1}= (q_i -1)s_i^2$ 
+</ul>
+
+We also know that the posteriors for the full data set are:
+<ul> 
+- $\mu_\beta^{*} = \bar{y}$
+- $a_1 = \frac{n-1}{2}$
+- $b_1 = \frac{(n-1)s^2}{2}$
+- $c = y^{\T}y - m_1^{\T}M_1m_1 = y^{\T}(I - P_x)y = (n-1)s^2$
+</ul>
+
+We can see that the posteriors for the full data set can be expressed as functions of the posteriors of the subsets $(k = 1, 2)$,
+<ul> 
+- $\mu_\beta^{*} = \bar{y} = \frac{q_1\bar{y_1} + q_2\bar{y2}}{n}$
+- $a_1 = \frac{q_1 + q_2-1}{2}$
+- $b_1 = \frac{(q_1 - 1)s_1^2 + (q_2 -1)s_2^2}{2}$
+- $c  = (q_1 - 1)s_1^2 + (q_2 -1)s_2^2$
+</ul>
+
+which proves that it is possible to still compute $a_1$, $b_1$, 
+$M_1$ and $m_1$ without ever having to store or compute with $y$ or $X$, but with quantities computed using only the subsets (for $k = 1,2$).
+
+

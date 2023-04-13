@@ -1,4 +1,5 @@
 # BayesianLinearBook
 
-This is a first tutorial for Bayesian Linear Regression assembled in book form.
+This is a tutorial for Bayesian Linear Regression assembled in bookdown format.
 
+Link to the website: https://bookdown.org/xchenjhu/bayesianlinearbook/
