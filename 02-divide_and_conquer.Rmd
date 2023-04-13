@@ -8,7 +8,10 @@ In this section, we apply the divide and conquer algorithm to the Bayesian linea
 
 Let $y = (y_1, y_2, ...,y_n)^{\T}$ be an $n \times 1$ random vector of outcomes and $X$ be a fixed $n \times p$ matrix of predictors with full column rank. Consider the following Bayesian (hierarchical) linear regression model,
 
-$$ IG(\sigma^2 \mid a_0,b_0) \times N(\beta \mid m_0, \sigma^2M_0) \times N(y \mid X\beta, \sigma^2I_n).$$
+\begin{equation*}
+IG(\sigma^2 \mid a_0,b_0) \times N(\beta \mid m_0, \sigma^2M_0) \times N(y \mid X\beta, \sigma^2I_n)\\
+(\#eq:hierlinreg)
+\end{equation*}
 The posterior density is $p(\beta, \sigma^2 \mid y) = IG(\sigma^2 \mid a_0^*, b_0^*) \times N(\beta \mid Mm, \sigma^2M)$, and to carry out Bayesian inference, we first sample $\sigma^2 \sim IG(a^*, b^*)$ and then, for each sampled $\sigma^2$, we sample $\beta \sim N(Mm, \sigma^2 M)$.
 
 Assume that $n$ is so large that we are unable to store or load $y$ or $X$ into our CPU to carry out computations for them. We decide to divide our data set into K mutually exclusive and exhaustive subsets, each comprising a manageable number of points. Note that $p$ is small, so computations involving $p \times p$ matrices are fine. Let $y_k$ denote the $m_k \times 1$ sub-vector of $y$, and $X_k$ be the $m_k \times p$ sub-matrix of $X$ in subset $k$, where each $m_k$ has been chosen by us so that $m_k > p$, and is small enough such that we can fit the above model on $\{y_k, X_k\}$. This section will clearly explain how we can still compute $a^*, b^*, M$ and $m$ without ever having to store or compute with $y$ or $X$, but with quantities computed using only the subsets $\{y_k, X_k\}$ for $k = 1,2,...,K$.
