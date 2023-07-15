@@ -32,31 +32,44 @@ Using the multivariate completing the square method, we know that the explicit e
 .ul { border: 2px solid black; }
 ```
 
-<ul class="custom"> 
-<li> $a_1$ = $a_0 + \frac{n}{2}$\
-<li> $b_1$ = $b_0 + \frac{c}{2}$ \
-<li> $c$ = $m_0^{T}M^{-1}_0 m_0 + y^{\T}y - m_1^{\T}M_1m_1$ \
-<li> $m_1$ = $(X^{\T}y + M_0^{-1}m_0)$ \
-<li> $M_1^{-1}$ = $X^{\T}X + M_0^{-1}$ 
-</ul>
+\begin{equation*}
+\begin{split}
+a_1 &= a_0 + \frac{n}{2}\\
+b_1 &= b_0 + \frac{c}{2} \\
+c &= m_0^{T}M^{-1}_0 m_0 + y^{\T}y - m_1^{\T}M_1 m_1 \\
+m_1 &= (X^{\T}y + M_0^{-1}m_0) \\
+M_1^{-1} &= X^{\T}X + M_0^{-1}
+\end{split}
+(\#eq:linregparams)
+\end{equation*}
 
 This implies that the explicit expressions for $a_1, b_1, m_1$ and $M_1$ for the $i^{th}$ subset are given by: 
-<ul class="custom"> 
-<li> $a_{1i}$ = $a_0 + \frac{q_i}{2}$ \
-<li> $b_{1i}$ = $b_0 + \frac{c}{2}$ \
-<li> $c_i$ = $m_0^{\T}M^{-1}_0 m_0 + y_i^{\T}y_i - m_{1i}^{\T}M_{1i}m_{1i}$
-<li> $m_i$ = $(X_i^{\T}y_i + M_0^{-1}m_0)$ \
-<li> $M_i^{-1}$ = $X_i^{\T}X_i + M_0^{-1}$ </ul>
+
+\begin{equation*}
+\begin{split}
+a_{1i} &= a_0 + \frac{q_i}{2} \\
+b_{1i} &= b_0 + \frac{c}{2} \\
+c_i &= m_0^{\T}M^{-1}_0 m_0 + y_i^{\T}y_i - m_{1i}^{\T}M_{1i}m_{1i}\\
+m_i &= (X_i^{\T}y_i + M_0^{-1}m_0) \\
+M_i^{-1} &= X_i^{\T}X_i + M_0^{-1}
+\end{split}
+(\#eq:linregparamssplit)
+\end{equation*}
 
 We can express the posteriors of the entire data set as a function of the posteriors of the subsets as follows:  
 
-<ul class="custom"> 
-<li> $a_1$ = $\sum_{i=1}^{k} a_{1i} + (k-1)a_0$
-<li> $b_1$ = $b_0 + m_0^{\T}M^{-1}_0 m_0 + \sum_{i=1}^{k}y_i^{\T}y_i - m_{1i}^{\T}M_{1i}m_{1i}$ \
-<li> $m_1$ = $\sum_{i=1}^{k}m_{1i} - (k-1)M^{-1}_0m_0$ \
-<li> $M_1^{-1}$ = $\sum_{i=1}^{k}x_i^{\T}x_i + M^{-1}_0 = \sum_{i=1}^{k}M^{-1}_{1i} - (k-1)M^{-1}_0$ </ul>
+\begin{equation*}
+\begin{split}
+a_1 &= \sum_{i=1}^{k} a_{1i} + (k-1)a_0\\
+b_1 &= b_0 + m_0^{\T}M^{-1}_0 m_0 + \sum_{i=1}^{k}y_i^{\T}y_i - m_{1i}^{\T}M_{1i}m_{1i} \\
+m_1 &= \sum_{i=1}^{k}m_{1i} - (k-1)M^{-1}_0m_0 \\
+M_1^{-1} &= \sum_{i=1}^{k}x_i^{\T}x_i + M^{-1}_0 = \sum_{i=1}^{k}M^{-1}_{1i} - (k-1)M^{-1}_0
+\end{split}
+(\#eq:linregparamsumsplit)
+\end{equation*}
 
 ### Algebra
+<!--TODO: rename "Derivation"? -->
 
 This section details the algebra used to obtain the posteriors of the entire
 data set expressed as functions of the posteriors of the subsets.
@@ -64,12 +77,15 @@ data set expressed as functions of the posteriors of the subsets.
 
 <p class="round1">Starting with $a_1$:</p>
 
-\begin{align*}
+\begin{equation*}
+\begin{split}
 \sum_{i=1}^{k} a_{i1} &= \sum_{i=1}^{k} a_0 + \sum_{i=1}^{k}\frac{q_i}{2} \\
 &= ka_0 + \frac{n}{2} \\
 &= (k-1)a_0 + a_0 + \frac{n}{2} \\
-&= (k-1)a_0 + a_1 \\
-\end{align*}
+&= (k-1)a_0 + a_1
+\end{split}
+(\#eq:aderiv)
+\end{equation*}
 
 \begin{equation}
 \Longrightarrow a_1 = \sum_{i=1}^{k} a_{i1} - (k-1)a_0
@@ -80,6 +96,7 @@ data set expressed as functions of the posteriors of the subsets.
 Recall that $m_1 = X^{\T}y + V_\beta^{-1}\mu_\beta$, 
 
 where 
+
 $$X = \begin{bmatrix}x_1\\
 x_2 \\
 \vdots \\
@@ -89,18 +106,25 @@ x_k
 
 Using linear algebra we can see that:
 
-$$
+\begin{equation*}
+\begin{split}
 X^{\T}y = \begin{bmatrix}x_1^{\T} &
 x_2^{\T} & \dots & x_k^{T} \end{bmatrix} \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} = \sum_{i=1}^{k} x_i^{\T}y_i
-$$
+\end{split}
+(\#eq:dotprod)
+\end{equation*}
+
 Thus:
 
-\begin{align*}
+\begin{equation*}
+\begin{split}
 \sum_{i=1}^{k} m_i &= \sum_{i=1}^{k} x_i^{\T}y_i + kV_\beta\mu_\beta^{-1} \\
 &= X^{\T}y + kV_\beta^{-1}\mu_\beta \\
 &= X^{\T}y + V_\beta^{-1}\mu_\beta + (k-1)V_\beta^{-1}\mu_\beta \\
 &= m + (k-1)V_\beta^{-1}\mu_\beta
-\end{align*}
+\end{split}
+(\#eq:mderiv)
+\end{equation*}
 
 \begin{equation}
 \Longrightarrow m_1 = \sum_{i=1}^{k}m_i - (k-1)V_\beta^{-1}\mu_\beta
@@ -112,10 +136,14 @@ Recall that $M_1^{-1} = X^{\T}X + V_\beta^{-1}$.
 
 Using linear algebra again, we can see that:
 
-$$
+\begin{equation*}
+\begin{split}
 X^{\T}X = \begin{bmatrix}x_1^{\T} &
 x_2^{\T} & \dots & x_k^{\T} \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_k \end{bmatrix} = \sum_{i=1}^{k} x_i^{\T}x_i
-$$
+\end{split}
+(\#eq:grammatrix)
+\end{equation*}
+
 \begin{equation}
 \Longrightarrow M_1^{-1} = \sum_{i=1}^{k}x_i^{\T}x_i + V_\beta^{-1}
 \end{equation}
@@ -127,10 +155,14 @@ Recall that $b_1 = b_0 + \frac{m_0^{\T}M^{-1}_0 m_0 + y^{\T}y - m_1^{\T}M_1m_1}{
 
 Using linear algebra once again, we can see that:
 
-$$
+\begin{equation}
+\begin{split}
 y^{\T}y = \begin{bmatrix}y_1^{\T} &
 y_2^{\T} & \dots & y_n^{\T} \end{bmatrix} \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} = \sum_{i=1}^{n} y_i^{\T}y_i
-$$
+\end{split}
+(\#eq:ynorm)
+\end{equation}
+
 \begin{equation}
 \Longrightarrow b_1 = b_0 + \frac{m_0^{\T}M^{-1}_0 m_0 + \sum_{i=1}^{n} y_i^{\T}y_i - m_1^{\T}M_1m_1}{2}
 \end{equation}
@@ -155,25 +187,33 @@ Let $D_k = \{y_k, X_k\}$ be the $i^{th}$ subset of the entire data set for $k = 
 The posterior density of the first subset is: 
 \begin{equation}
 p(\beta, \sigma^2 \mid D_1) \propto IG(\sigma^2 \mid a_1, b_1) \times N(\beta \mid M_1m_1, \sigma^2M_1)
+(\#eq:sub1post)
 \end{equation}
 
 The posteriors $\{a_1, b_1, M_1, \text{and} \ m_1\}$ then replace $\{a_0, b_0\, M_0, \text{and} \ m_0\}$ as priors when using the second subset to calculate posteriors:
 
-\begin{align*}
+\begin{equation*}
+\begin{split}
 p(\beta, \sigma^2 \mid D_1, D_1) &\propto p(\beta, \sigma^2, D_1, D_2) \\
 &\propto p(\beta, \sigma^2) \times p(D_1, D_2, \mid \beta, \sigma^2) \\
 &\propto p(\beta, \sigma^2) \times p(D_1 \mid \beta, \sigma^2) \times p(D_2 \mid \beta, \sigma^2) \\
 &\propto p(\beta, \sigma^2 \mid D_1) \times p(D_2 \mid \beta, \sigma^2)
-\end{align*}
+\end{split}
+(\#eq:postud)
+\end{equation*}
 
-Which illustrates how the posteriors of the previous subset act as a priors when calculating the posteriors of the current subset. 
+which illustrates how the posteriors of the previous subset act as a priors when calculating the posteriors of the current subset. 
 
 If we generalize this to $k$ subsets and do some algebra, we can derive equations for the posteriors of the last subset, which are equivalent to the posteriors obtained using the full data set. 
 
-<ul class="custom"> 
-<li> $a_{1k}$ = $a_0 + \sum_{i=1}^{k}\frac{q_i}{2}$\
-<li> $b_1$ = $b_0 + \frac{c}{2}$ \
-<li> $c$ = $m_0^{\T}M^{-1}_0 m_0 + y^{\T}y - m_1^{\T}M_1m_1$ \
-<li> $m_1$ = $(X^{\T}y + M_0^{-1}m_0)$ \
-<li> $M_1^{-1}$ = $X^{\T}X + M_0^{-1}$ 
-</ul>
+\begin{equation*}
+\begin{split}
+a_{1k} &= a_0 + \sum_{i=1}^{k}\frac{q_i}{2}\\
+b_1 &= b_0 + \frac{c}{2} \\
+c &= m_0^{\T}M^{-1}_0 m_0 + y^{\T}y - m_1^{\T}M_1m_1 \\
+m_1 &= (X^{\T}y + M_0^{-1}m_0) \\
+M_1^{-1} &= X^{\T}X + M_0^{-1}
+\end{split}
+(\#eq:kud)
+\end{equation*}
+

@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Basics of Bayesian linear regression | Bayesian Linear Regression Tutorial</title>
-  <meta name="description" content="This is a first tutorial for Bayesian Linear Regression assembled in book form." />
+  <title>Chapter 1 Basics of Bayesian linear regression | Bayesian Linear Regression</title>
+  <meta name="description" content="This is a tutorial for Bayesian Linear Regressione." />
   <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Basics of Bayesian linear regression | Bayesian Linear Regression Tutorial" />
+  <meta property="og:title" content="Chapter 1 Basics of Bayesian linear regression | Bayesian Linear Regression" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This is a first tutorial for Bayesian Linear Regression assembled in book form." />
-  <meta name="github-repo" content="xiangchen-stat/BayesianLinearBook" />
+  <meta property="og:description" content="This is a tutorial for Bayesian Linear Regressione." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Basics of Bayesian linear regression | Bayesian Linear Regression Tutorial" />
+  <meta name="twitter:title" content="Chapter 1 Basics of Bayesian linear regression | Bayesian Linear Regression" />
   
-  <meta name="twitter:description" content="This is a first tutorial for Bayesian Linear Regression assembled in book form." />
+  <meta name="twitter:description" content="This is a tutorial for Bayesian Linear Regressione." />
   
 
-<meta name="author" content="Xiang Chen, Valentina Arputhasamy, Daniel Zhou, Sudipto Banerjee" />
+<meta name="author" content="Xiang Chen, Sudipto Banerjee" />
 
 
-<meta name="date" content="2023-03-01" />
+<meta name="date" content="2023-07-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,8 +54,73 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -68,6 +133,9 @@
       <nav role="navigation">
 
 <ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
@@ -112,19 +180,26 @@
 </ul></li>
 <li class="chapter" data-level="4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html"><i class="fa fa-check"></i><b>4</b> Forward Filtering Backward Sampling - Shared Variance</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#background"><i class="fa fa-check"></i><b>4.1</b> Background</a></li>
+<li class="chapter" data-level="4.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#background"><i class="fa fa-check"></i><b>4.1</b> Background</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#a-preliminary-note"><i class="fa fa-check"></i><b>4.1.1</b> A Preliminary Note</a></li>
+</ul></li>
 <li class="chapter" data-level="4.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-forward-filter"><i class="fa fa-check"></i><b>4.2</b> Derivation of the Forward Filter</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_tvert-y_t"><i class="fa fa-check"></i><b>4.2.1</b> Deriving <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span></a></li>
-<li class="chapter" data-level="4.2.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2vert-y_t"><i class="fa fa-check"></i><b>4.2.2</b> Deriving <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span></a></li>
-<li class="chapter" data-level="4.2.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#commentary"><i class="fa fa-check"></i><b>4.2.3</b> Commentary</a></li>
+<li class="chapter" data-level="4.2.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_t-vert-d_t"><i class="fa fa-check"></i><b>4.2.1</b> Deriving <span class="math inline">\(\beta_{t} \vert D_{t}\)</span></a></li>
+<li class="chapter" data-level="4.2.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2-vert-d_t"><i class="fa fa-check"></i><b>4.2.2</b> Deriving <span class="math inline">\(\sigma^{2} \vert D_{t}\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-backwards-sampling"><i class="fa fa-check"></i><b>4.3</b> Derivation of the Backwards Sampling</a></li>
+<li class="chapter" data-level="4.4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#sample-code"><i class="fa fa-check"></i><b>4.4</b> Sample Code</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i>Appendix</a>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="matrix-algebra.html"><a href="matrix-algebra.html"><i class="fa fa-check"></i><b>A</b> Matrix Algebra</a>
 <ul>
-<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#deriving-x_2-vert-x_1-when-x_1-x_2mathrmscriptscriptstyle-t-is-a-block-normal-multivariate-random-variable"><i class="fa fa-check"></i>Deriving <span class="math inline">\(x_{2} \vert x_{1}\)</span> when <span class="math inline">\((x_{1} x_{2})^{\mathrm{\scriptscriptstyle T}}\)</span> is a block-normal multivariate random variable</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#deriving-x_2-x_1-when-x_1text-x_2mathrmscriptscriptstyle-t-is-a-block-normal-multivariate-random-variable"><i class="fa fa-check"></i>Deriving <span class="math inline">\(x_{2} | x_{1}\)</span> when <span class="math inline">\((x_{1}\text{ }x_{2})^{\mathrm{\scriptscriptstyle T}}\)</span> is a block-normal multivariate random variable</a></li>
 </ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -134,7 +209,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Linear Regression Tutorial</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Linear Regression</a>
           </h1>
         </div>
 
@@ -148,31 +223,44 @@
 <h2><span class="header-section-number">1.1</span> Bayes’ theorem<a href="basics-of-bayesian-linear-regression.html#bayes-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="theorem">
 <p><span id="thm:bayes" class="theorem"><strong>Theorem 1.1  (Bayes' theorem) </strong></span>For events <span class="math inline">\(U, K\)</span> and <span class="math inline">\(P(K) \neq 0\)</span>, we have</p>
-<p><span class="math display">\[P(U \mid K) = \frac{P(K \mid U) P(U)}{P(K)}\]</span></p>
+<p><span class="math display" id="eq:bayeslaw">\[\begin{equation*}
+\begin{split}
+P(U \mid K) &amp;= \frac{P(K \mid U) P(U)}{P(K)}
+\end{split}
+\tag{1.1}
+\end{equation*}\]</span></p>
 </div>
-<p>We denote <span class="math inline">\(U\)</span> as unknown parameters and <span class="math inline">\(K\)</span> as known parameters. We call <span class="math inline">\(P(U)\)</span> prior and <span class="math inline">\(P(K|U)\)</span> likelihood. The Bayes’ theorem gives us the posterior distribution of unknown parameters given the known parameters
-<span class="math display">\[ P(U \mid K) \propto P(U) \cdot P(K \mid U)\]</span></p>
+<p>We denote <span class="math inline">\(U\)</span> as unknown parameters and <span class="math inline">\(K\)</span> as known parameters. We call <span class="math inline">\(P(U)\)</span> prior and <span class="math inline">\(P(K|U)\)</span> likelihood. The Bayes’ theorem gives us the posterior distribution of unknown parameters given the known parameters</p>
+<p><span class="math display" id="eq:bayeslawprop">\[\begin{equation*}
+\begin{split}
+P(U \mid K) &amp;\propto P(K \mid U) \cdot P(U)
+\end{split}
+\tag{1.2}
+\end{equation*}\]</span></p>
 </div>
 <div id="normal-inverse-gamma-nig-prior" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Normal-Inverse-Gamma (NIG) prior<a href="basics-of-bayesian-linear-regression.html#normal-inverse-gamma-nig-prior" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="joint-distribution-of-nig-prior" class="section level3 hasAnchor" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> Joint distribution of NIG prior<a href="basics-of-bayesian-linear-regression.html#joint-distribution-of-nig-prior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="definition">
-<p><span id="def:NIG" class="definition"><strong>Definition 1.1  (Normal-Inverse-Gamma Distribution) </strong></span>Suppose
-<span class="math display">\[
-\begin{aligned}
+<p><span id="def:NIG" class="definition"><strong>Definition 1.1  (Normal-Inverse-Gamma Distribution) </strong></span>Suppose</p>
+<p><span class="math display" id="eq:normalinversegamma">\[\begin{equation*}
+\begin{split}
 &amp; \beta \mid \sigma^2, \mu, M \sim N(\mu,\sigma^2 M) \\
-&amp; \sigma^2 \mid a, b \sim IG(a, b)
-\end{aligned}
-\]</span>
-Then <span class="math inline">\((\beta,\sigma^2)\)</span> has a Normal-Inverse-Gamma distribution, denoted as <span class="math inline">\((\beta,\sigma^2) \sim NIG(\mu,M,a,b)\)</span>.</p>
+&amp; \sigma^2 \mid a, b \sim IG(a, b) \end{split}
+\tag{1.3}
+\end{equation*}\]</span></p>
+<p>Then <span class="math inline">\((\beta,\sigma^2)\)</span> has a Normal-Inverse-Gamma distribution, denoted as <span class="math inline">\((\beta,\sigma^2) \sim NIG(\mu,M,a,b)\)</span>.</p>
 </div>
 <p>We use a Normal-Inverse-Gamma prior for <span class="math inline">\((\beta, \sigma^2)\)</span></p>
-<p><span class="math display">\[\begin{align}
-    P(\beta, \sigma^{2}) &amp;= NIG \left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \\
+<p><span class="math display" id="eq:nigdensity">\[\begin{equation*}
+\begin{split}
+P(\beta, \sigma^{2}) &amp;= NIG \left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \\
     &amp;= \frac{b_0^{a_0}}{\Gamma\left(a_{0}\right)}
     \left(\frac{1}{\sigma^{2}}\right)^{a_{0}+1} e^{-\frac{b_{0}}{\sigma^{2}}} \frac{1}{(2 \pi \sigma^{2})^{\frac{p}{2}}\left| M_{0}\right|^{\frac{1}{2}}} e^{-\frac{1}{2 \sigma^{2}} Q \left(\beta, m_{0}, M_{0}\right)}
-\end{align}\]</span></p>
+\end{split}
+\tag{1.4}
+\end{equation*}\]</span></p>
 <p>where <span class="math inline">\(Q(x, m, M)=(x-m)^{\mathrm{\scriptscriptstyle T}} M^{-1} (x-m) \, .\)</span></p>
 <button id="toggle-button1" type="button" onclick="toggleDisplay1(&#39;formula1&#39;)">
 Show details
@@ -222,12 +310,13 @@ function toggleDisplay1(id) {
 <div id="marginal-distribution-of-nig-prior" class="section level3 hasAnchor" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Marginal distribution of NIG prior<a href="basics-of-bayesian-linear-regression.html#marginal-distribution-of-nig-prior" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As for marginal priors, we can can get it by integration</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display" id="eq:tmarginal">\[\begin{equation*}
+\begin{split}
 P(\sigma^2) &amp; = \int N I G\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \  d\beta=I G\left(\sigma^{2} \mid a_{0}, b_{0}\right) \\
 P(\beta) &amp; = \int N I G\left(\beta, \sigma^{2} \mid m_{0}, M_{0}, a_{0}, b_{0}\right) \  d\sigma^{2}=t_{2a_0}\left(m_0, \frac{b_0}{a_0}M_0\right) \\
-\end{aligned}
-\]</span></p>
+\end{split}
+\tag{1.5}
+\end{equation*}\]</span></p>
 <button id="toggle-button2" type="button" onclick="toggleDisplay2(&#39;formula2&#39;)">
 Show details
 </button>
@@ -293,30 +382,40 @@ function toggleDisplay2(id) {
 }
 </script>
 <p>Note: the density of multivariate t-distribution is given by</p>
-<p><span class="math display">\[
+<p><span class="math display" id="eq:mvtdensity">\[\begin{equation*}
+\begin{split}
 t_v(\mu, \Sigma)=\frac{\Gamma\left(\frac{v+p}{2}\right)}{(v \pi)^{\frac{p}{2}} \Gamma\left(\frac{v}{2}\right)  |\Sigma|^{\frac{1}{2}}}\left(1+\frac{1}{v}(x-\mu)^{\mathrm{\scriptscriptstyle T}} \Sigma^{-1}(x-\mu)\right)^{-\frac{v+p}{2}}
-\]</span></p>
+\end{split}
+\tag{1.6}
+\end{equation*}\]</span></p>
 </div>
 </div>
 <div id="conjugate-bayesian-linear-regression-and-mm-formula" class="section level2 hasAnchor" number="1.3">
 <h2><span class="header-section-number">1.3</span> Conjugate Bayesian linear regression and M&amp;m formula<a href="basics-of-bayesian-linear-regression.html#conjugate-bayesian-linear-regression-and-mm-formula" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let <span class="math inline">\(y_{n \times 1}\)</span> be outcome variable and <span class="math inline">\(X_{n \times p}\)</span> be corresponding covariates. Assume <span class="math inline">\(V\)</span> is known. The model is given by</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display" id="eq:conjbayeslinreg">\[\begin{equation*}
+\begin{split}
 &amp; y=X \beta+\epsilon \ , \  \epsilon \sim N\left(0, \sigma^2 V\right) \\
 &amp; \beta=m_0+\omega \ ,  \  \omega \sim N\left(0, \sigma^2 M_0\right) \\
 &amp; \sigma^2 \sim I G\left(a_0, b_0\right)
-\end{align}\]</span></p>
+\end{split}
+\tag{1.7}
+\end{equation*}\]</span></p>
 <p>The posterior distribution of <span class="math inline">\((\beta, \sigma^2)\)</span> is given by</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display" id="eq:conjbayeslinregposterior">\[\begin{equation*}
 P\left(\beta, \sigma^{2} \mid y\right) = NIG\left(\beta, \sigma^{2} \mid M_{1}m_{1}, M_{1}, a_{1}, b_{1}\right) \;
-\end{align}\]</span></p>
+\tag{1.8}
+\end{equation*}\]</span></p>
 <p>where</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display" id="eq:conjbayesparams">\[\begin{equation*}
+\begin{split}
 M_{1}^{-1} &amp;= M_{0}^{-1}+X^{\mathrm{\scriptscriptstyle T}} V^{-1} X  \\
 m_{1}&amp;=M_{0}^{-1} m_{0}+X^{\mathrm{\scriptscriptstyle T}} V^{-1} y  \\
 a_{1}&amp;=a_{0}+\frac{p}{2}  \\
 b_{1}&amp;=b_{0}+\frac{c^{\ast}}{2}= b_{0}+\frac{1}{2}\left(m_{0}^{\mathrm{\scriptscriptstyle T}} M_{0}^{-1} m_{0}+y^{\mathrm{\scriptscriptstyle T}} V^{-1} y-m_{1}^{\mathrm{\scriptscriptstyle T}} M_{1} m_{1}\right)
-\end{align}\]</span></p>
+\end{split}
+\tag{1.9}
+\end{equation*}\]</span></p>
 <button id="toggle-button3" type="button" onclick="toggleDisplay3(&#39;formula3&#39;)">
 Show details
 </button>
@@ -400,12 +499,13 @@ function toggleDisplay3(id) {
 }
 </script>
 <p>From derivation in marginal priors, the marginal posterior distributions can be easily get by updating corresponding parameters</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display" id="eq:conjbayesupdate">\[\begin{equation*}
+\begin{split}
 &amp;P\left(\sigma^{2} \mid y\right)=I G\left(\sigma^{2} \mid a_{1}, b_{1}\right) \\
 &amp;P(\beta \mid y)=t_{2a_1}\left(M_1m_1, \frac{b_1}{a_1}M_1\right)
-\end{aligned}
-\]</span></p>
+\end{split}
+\tag{1.10}
+\end{equation*}\]</span></p>
 </div>
 <div id="updating-form-of-the-posterior-distribution" class="section level2 hasAnchor" number="1.4">
 <h2><span class="header-section-number">1.4</span> Updating form of the posterior distribution<a href="basics-of-bayesian-linear-regression.html#updating-form-of-the-posterior-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -420,20 +520,22 @@ function toggleDisplay3(id) {
 where <span class="math inline">\(A\)</span> and <span class="math inline">\(D\)</span> are square matrices that are invertible and <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> are rectangular (square if <span class="math inline">\(A\)</span> and <span class="math inline">\(D\)</span> have the same dimensions) matrices such that the multiplications are well-defined.</p>
 </div>
 <p><a href="https://en.wikipedia.org/wiki/Woodbury_matrix_identity">Sherman-Woodbury-Morrison identity</a> is easily verified by multiplying the right hand side with <span class="math inline">\(A + BDC\)</span> and simplifying to reduce it to the identity matrix. Using this formula, we have</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display" id="eq:woodbury2conjbayes">\[\begin{equation*}
+\begin{split}
 M_1 &amp; = (M_{0}^{-1} + X^{\mathrm{\scriptscriptstyle T}}V^{-1}X)^{-1} \\
 &amp; = M_0-M_0 X^{\mathrm{\scriptscriptstyle T}}\left(V+X M_0 X^{\mathrm{\scriptscriptstyle T}}\right)^{-1} X M_0 \\
 &amp; = M_0-M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1} X M_0
-\end{aligned}
-\]</span></p>
+\end{split}
+\tag{1.11}
+\end{equation*}\]</span></p>
 <p>where <span class="math inline">\(Q = V + X M_0 X^{\mathrm{\scriptscriptstyle T}}\)</span></p>
-<p>We can show that
-<span class="math display">\[
-\begin{align}
-M_1 m_1 &amp; =m_0+M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X m_0\right)
-\end{align}
-\]</span></p>
+<p>We can show that</p>
+<p><span class="math display" id="eq:mnmsmean">\[\begin{equation*}
+\begin{split}
+M_1 m_1 &amp;= m_0 + M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X m_0\right)\\
+\end{split}
+\tag{1.12}
+\end{equation*}\]</span></p>
 <button id="toggle-button4" type="button" onclick="toggleDisplay4(&#39;formula4&#39;)">
 Show details
 </button>
@@ -481,11 +583,12 @@ function toggleDisplay4(id) {
 }
 </script>
 <p>Furthermore, we can simplify that
-<span class="math display">\[
-\begin{align}
-m_0^{\mathrm{\scriptscriptstyle T}} M_0^{-1} m_0+y^{\mathrm{\scriptscriptstyle T}} V^{-1} y-m_1^{\mathrm{\scriptscriptstyle T}} M_1 m_1 &amp; = \left(y-X m_0\right)^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X m_0\right)
-\end{align}
-\]</span></p>
+<span class="math display" id="eq:qform">\[\begin{equation*}
+\begin{split}
+m_0^{\mathrm{\scriptscriptstyle T}} M_0^{-1} m_0+y^{\mathrm{\scriptscriptstyle T}} V^{-1} y-m_1^{\mathrm{\scriptscriptstyle T}} M_1 m_1 &amp; = \left(y-X m_0\right)^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X m_0\right)\\
+\end{split}
+\tag{1.13}
+\end{equation*}\]</span></p>
 <button id="toggle-button5" type="button" onclick="toggleDisplay5(&#39;formula5&#39;)">
 Show details
 </button>
@@ -539,52 +642,92 @@ function toggleDisplay5(id) {
 }
 </script>
 <p>So, we get the following updating form of the posterior distribution from Bayesian linear regression</p>
-<p><span class="math display">\[
-\begin{aligned}
-P\left(\beta, \sigma^{2} \mid y\right) = NIG\left(\beta, \sigma^{2} \mid \tilde{m}_1, \tilde{M}_1, a_{1}, b_{1}\right) \;
-\end{aligned}
-\]</span>
-where</p>
-<p><span class="math display">\[
-\begin{aligned}
-\tilde{m}_1 &amp; =M_1 m_1=m_0+M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X m_0\right) \\
-\tilde{M}_1 &amp; =M_1=M_0-M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1} X M_0 \\
+<!-- \begin{subequations}\label{eq:conjbayesdensity} -->
+<p><span class="math display" id="eq:conjbayesdensity">\[\begin{equation*}
+P\left(\beta, \sigma^{2} \mid y\right) = NIG\left(\beta, \sigma^{2} \mid \tilde{m}_1, \tilde{M}_1, a_{1}, b_{1}\right) \\
+\tag{1.14}
+\end{equation*}\]</span></p>
+<p>where</p>
+<!--\begin{subequations}
+\label{eq:conjbayes}
+\begin{equation*}
+\begin{split}
+\begin{align}
+\tilde{m}_1 & =M_1 m_1 =m_0+M_0 X^{\T} Q^{-1}\left(y-X m_0\right) \\
+\end{split}\label{eq:conjbayesm}
+\begin{split}
+\tilde{M}_1 & =M_1 =M_0-M_0 X^{\T} Q^{-1} X M_0\\
+\end{split}\label{eq:conjbayesM}
+\begin{split}
+a_1 & =a_0+\frac{p}{2} \\
+\end{split}\label{eq:conjbayesa}
+\begin{split}
+b_1 & =b_0+\frac{1}{2}\left(y-X m_0\right)^{\T} Q^{-1}\left(y-X m_0\right) \\
+\end{split}\label{eq:conjbayesb}
+\begin{split}
+Q & =V+X M_0 X^{\T} \\
+\end{split}\label{eq:conjbayesQ}
+\end{equation*}
+\end{subequations}-->
+<!--
+\begin{subequations}
+\label{eq:conjbayes}-->
+<p><span class="math display" id="eq:conjbayes">\[\begin{equation*}
+\begin{split}
+\tilde{m}_1 &amp; =M_1 m_1 =m_0+M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X m_0\right)\\
+\tilde{M}_1 &amp; =M_1 =M_0-M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1} X M_0\\
 a_1 &amp; =a_0+\frac{p}{2} \\
 b_1 &amp; =b_0+\frac{1}{2}\left(y-X m_0\right)^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X m_0\right) \\
 Q &amp; =V+X M_0 X^{\mathrm{\scriptscriptstyle T}}
-\end{aligned}
-\]</span></p>
+\end{split}
+\tag{1.15}
+\end{equation*}\]</span>
+<!--\end{subequations}
+--></p>
 </div>
 <div id="method-2-distribution-theory" class="section level3 hasAnchor" number="1.4.2">
 <h3><span class="header-section-number">1.4.2</span> Method 2: Distribution theory<a href="basics-of-bayesian-linear-regression.html#method-2-distribution-theory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Previously, we got the Bayesian Linear Regression Updater using <a href="https://en.wikipedia.org/wiki/Woodbury_matriX_identity">Sherman-Woodbury-Morrison identity</a>. Here, we will derive the results without resorting to it. Recall that the model is given by</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display" id="eq:conjbayesmodel">\[\begin{equation*}
+\begin{split}
 &amp; y=X \beta+\epsilon \ , \  \epsilon \sim N\left(0, \sigma^2 V\right) \\
 &amp; \beta=m_0+\omega \ ,  \  \omega \sim N\left(0, \sigma^2 M_0\right) \\
-&amp; \sigma^2 \sim I G\left(a_0, b_0\right)
-\end{align}\]</span></p>
+&amp; \sigma^2 \sim I G\left(a_0, b_0\right)\\
+\end{split}
+\tag{1.16}
+\end{equation*}\]</span></p>
 <p>This corresponds to the posterior distribution</p>
-<p><span class="math display">\[\begin{align}
-P\left(\beta, \sigma^2 \mid y\right) \propto I G\left(\sigma^2 \mid a_0, b_0\right) &amp; \times N\left(\beta \mid m_0, \sigma^2 M_0\right) \times N\left(y \mid X \beta, \sigma^2 V\right)
-\end{align}\]</span></p>
+<p><span class="math display" id="eq:conjbayesmodelposterior">\[\begin{equation*}
+\begin{split}
+P\left(\beta, \sigma^2 \mid y\right) \propto I G\left(\sigma^2 \mid a_0, b_0\right) &amp; \times N\left(\beta \mid m_0, \sigma^2 M_0\right) \times N\left(y \mid X \beta, \sigma^2 V\right)\\
+\end{split}
+\tag{1.17}
+\end{equation*}\]</span></p>
 <p>We will derive <span class="math inline">\(P\left(\sigma^2 \mid y\right)\)</span> and <span class="math inline">\(P\left(\beta \mid \sigma^2, y\right)\)</span> in a form that will reflect updates from the prior to the posterior. Integrating out <span class="math inline">\(\beta\)</span> from the model is equivalent to substituting <span class="math inline">\(\beta\)</span> from its prior model. Thus, <span class="math inline">\(P\left(y \mid \sigma^2\right)\)</span> is derived simply from <span class="math inline">\(y =X \beta+\epsilon =X\left(m_0+\omega\right)+\epsilon =X m_0 + X \omega + \epsilon =X m_0+ \eta\)</span></p>
 <!-- \begin{align} -->
 <!-- y =X \beta+\epsilon =X\left(m_0+\omega\right)+\epsilon =X m_0 + X \omega + \epsilon =X m_0+ \eta -->
 <!-- \end{align} -->
 <p>where <span class="math inline">\(\eta = X \omega + \epsilon \sim N\left(0, \sigma^2Q\right)\)</span> and <span class="math inline">\(Q=X M_0 X^{\mathrm{\scriptscriptstyle T}}+V \, .\)</span></p>
 <p>Therefore,</p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display" id="eq:dataprior">\[\begin{equation*}
 y \mid \sigma^2 \sim N\left(X m_0, \sigma^2 Q\right)\\
-\end{align}\]</span></p>
+\tag{1.18}
+\end{equation*}\]</span></p>
 <p>The posterior distribution is given by
-<span class="math display">\[\begin{align}
-P\left(\sigma^2 \mid y\right) &amp; \propto IG \left(\sigma^2 \mid a_1, b_1\right)
-\end{align}\]</span></p>
+<span class="math display" id="eq:sigma2posterior">\[\begin{equation*}
+\begin{split}
+P\left(\sigma^2 \mid y\right) &amp; \propto IG \left(\sigma^2 \mid a_1, b_1\right)\\
+\end{split}
+\tag{1.19}
+\end{equation*}\]</span></p>
 <p>where
-<span class="math display">\[\begin{align}
+<span class="math display" id="eq:sigma2parameters">\[\begin{equation*}
+\begin{split}
 &amp; a_1 = a_0 + \frac{p}{2} \\
-&amp; b_1 = b_0 + \frac{1}{2} (y-Xm_0)^{\mathrm{\scriptscriptstyle T}} Q^{-1} \left(y-Xm_0\right)
-\end{align}\]</span></p>
+&amp; b_1 = b_0 + \frac{1}{2} (y-Xm_0)^{\mathrm{\scriptscriptstyle T}} Q^{-1} \left(y-Xm_0\right)\\
+\end{split}
+\tag{1.20}
+\end{equation*}\]</span></p>
 <button id="toggle-button6" type="button" onclick="toggleDisplay6(&#39;formula6&#39;)">
 Show details
 </button>
@@ -628,11 +771,12 @@ function toggleDisplay6(id) {
     element.style.display = 'block';
     button.innerHTML = 'Hide details';
   }
-}
+
 </script>
 <p>Next, we turn to <span class="math inline">\(P\left(\beta \mid \sigma^2, y\right)\)</span>.
 Note that
-<span class="math display">\[
+<span class="math display" id="eq:vectoraugment">\[\begin{equation*}
+\begin{split}
 \left(\begin{array}{l}
 y \\
 \beta
@@ -643,11 +787,13 @@ m_0
 Q &amp; X M_0 \\
 M_0 X^{\mathrm{\scriptscriptstyle T}} &amp; M_0
 \end{array}\right)\right) \;
-\]</span></p>
-<button id="toggle-button7" type="button" onclick="toggleDisplay7(&#39;formula7&#39;)">
-Show details
-</button>
-<div id="formula7" style="display: none;">
+\end{split}
+\tag{1.21}
+\end{equation*}\]</span></p>
+<details>
+<summary>
+Click to show or hide details
+</summary>
 <p>We have used the facts</p>
 <p><span class="math display">\[
   \begin{aligned}
@@ -695,15 +841,21 @@ function toggleDisplay7(id) {
   }
 }
 </script>
-<p>From the expression of a conditional distribution derived from a multivariate Gaussian, we obtain
-<span class="math display">\[
+<p>From the expression of a conditional distribution derived from a multivariate Gaussian, we obtain</p>
+<p><span class="math display" id="eq:betaposterior">\[\begin{equation*}
+\begin{split}
 \beta \mid \sigma^2, y \sim N\left(\tilde{m}_1, \sigma^2 \tilde{M}_1\right)
-\]</span></p>
+\end{split}
+\tag{1.22}
+\end{equation*}\]</span></p>
 <p>where
-<span class="math display">\[\begin{align}
+<span class="math display" id="eq:betaposteriorparameters">\[\begin{equation*}
+\begin{split}
 &amp; \tilde{m}_1=\operatorname{E}\left[\beta \mid \sigma^2, y\right]=m_0+M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1}\left(y-X{m_0}\right) \\
 &amp; \tilde{M}_1=M_0-M_0 X^{\mathrm{\scriptscriptstyle T}} Q^{-1} X M_0 \\
-\end{align}\]</span></p>
+\end{split}
+\tag{1.23}
+\end{equation*}\]</span></p>
 <button id="toggle-button8" type="button" onclick="toggleDisplay8(&#39;formula8&#39;)">
 Show details
 </button>
@@ -772,10 +924,13 @@ function toggleDisplay8(id) {
 <div id="bayesian-prediction" class="section level2 hasAnchor" number="1.5">
 <h2><span class="header-section-number">1.5</span> Bayesian prediction<a href="basics-of-bayesian-linear-regression.html#bayesian-prediction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Assume <span class="math inline">\(V=I_{n}\)</span>. Let <span class="math inline">\(\tilde{y}\)</span> denote an <span class="math inline">\(\tilde{n}\times 1\)</span> vector of outcomes. <span class="math inline">\(\tilde{X}\)</span> is corresponding predictors. We seek to predict <span class="math inline">\(\tilde{y}\)</span> based upon <span class="math inline">\(y\)</span></p>
-<p><span class="math display">\[\begin{align}
+<p><span class="math display" id="eq:bayesprediction">\[\begin{equation*}
+\begin{split}
 P(\tilde{y} \mid y)
 &amp;= t_{2a_1}\left(\tilde{X} M_1 m_1, \frac{b_1}{a_1}\left(I_{\tilde{n}} + \tilde{X} M_{1} \tilde{X}^{\mathrm{\scriptscriptstyle T}}\right)\right) \;
-\end{align}\]</span></p>
+\end{split}
+\tag{1.24}
+\end{equation*}\]</span></p>
 <button id="toggle-button9" type="button" onclick="toggleDisplay9(&#39;formula9&#39;)">
 Show details
 </button>
@@ -891,8 +1046,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,
@@ -902,7 +1057,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null

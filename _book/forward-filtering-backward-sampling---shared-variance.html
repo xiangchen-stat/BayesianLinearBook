@@ -23,7 +23,7 @@
 <meta name="author" content="Xiang Chen, Valentina Arputhasamy, Daniel Zhou, Sudipto Banerjee" />
 
 
-<meta name="date" content="2023-03-01" />
+<meta name="date" content="2023-07-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="posteriors-using-sufficient-statistics.html"/>
-<link rel="next" href="appendix.html"/>
+<link rel="next" href="matrix-algebra.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -54,8 +54,73 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -68,6 +133,9 @@
       <nav role="navigation">
 
 <ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
@@ -112,19 +180,26 @@
 </ul></li>
 <li class="chapter" data-level="4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html"><i class="fa fa-check"></i><b>4</b> Forward Filtering Backward Sampling - Shared Variance</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#background"><i class="fa fa-check"></i><b>4.1</b> Background</a></li>
+<li class="chapter" data-level="4.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#background"><i class="fa fa-check"></i><b>4.1</b> Background</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#a-preliminary-note"><i class="fa fa-check"></i><b>4.1.1</b> A Preliminary Note</a></li>
+</ul></li>
 <li class="chapter" data-level="4.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-forward-filter"><i class="fa fa-check"></i><b>4.2</b> Derivation of the Forward Filter</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_tvert-y_t"><i class="fa fa-check"></i><b>4.2.1</b> Deriving <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span></a></li>
-<li class="chapter" data-level="4.2.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2vert-y_t"><i class="fa fa-check"></i><b>4.2.2</b> Deriving <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span></a></li>
-<li class="chapter" data-level="4.2.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#commentary"><i class="fa fa-check"></i><b>4.2.3</b> Commentary</a></li>
+<li class="chapter" data-level="4.2.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_t-vert-d_t"><i class="fa fa-check"></i><b>4.2.1</b> Deriving <span class="math inline">\(\beta_{t} \vert D_{t}\)</span></a></li>
+<li class="chapter" data-level="4.2.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2-vert-d_t"><i class="fa fa-check"></i><b>4.2.2</b> Deriving <span class="math inline">\(\sigma^{2} \vert D_{t}\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-backwards-sampling"><i class="fa fa-check"></i><b>4.3</b> Derivation of the Backwards Sampling</a></li>
+<li class="chapter" data-level="4.4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#sample-code"><i class="fa fa-check"></i><b>4.4</b> Sample Code</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i>Appendix</a>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="matrix-algebra.html"><a href="matrix-algebra.html"><i class="fa fa-check"></i><b>A</b> Matrix Algebra</a>
 <ul>
-<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#deriving-x_2-vert-x_1-when-x_1-x_2mathrmscriptscriptstyle-t-is-a-block-normal-multivariate-random-variable"><i class="fa fa-check"></i>Deriving <span class="math inline">\(x_{2} \vert x_{1}\)</span> when <span class="math inline">\((x_{1} x_{2})^{\mathrm{\scriptscriptstyle T}}\)</span> is a block-normal multivariate random variable</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#deriving-x_2-x_1-when-x_1text-x_2mathrmscriptscriptstyle-t-is-a-block-normal-multivariate-random-variable"><i class="fa fa-check"></i>Deriving <span class="math inline">\(x_{2} | x_{1}\)</span> when <span class="math inline">\((x_{1}\text{ }x_{2})^{\mathrm{\scriptscriptstyle T}}\)</span> is a block-normal multivariate random variable</a></li>
 </ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -144,142 +219,617 @@
             <section class="normal" id="section-">
 <div id="forward-filtering-backward-sampling---shared-variance" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Forward Filtering Backward Sampling - Shared Variance<a href="forward-filtering-backward-sampling---shared-variance.html#forward-filtering-backward-sampling---shared-variance" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter discusses the Dynamic Linear Model with a scale factor for the variance shared across time and its derivations at each step. The approach taken in this chapter is borrowed from West and Harrison (1997), with some details derived from Petris et al (2009). The solution we take to estimate the parameters of this model is utilized via Forward Filtering Backward Sampling.</p>
-<p>For full generality and to maintain a multivariate normal system in both the data and parameter matrices, we assume all <span class="math inline">\(Y_{t} \in \mathbb{R}^{n}\)</span>, <span class="math inline">\(\beta_{t} \in \mathbb{R}^{p}\)</span>, and <span class="math inline">\(t \in \{1,\ldots,T\}\)</span> for some integer <span class="math inline">\(T\)</span>.</p>
+<p>This chapter discusses the Dynamic Linear Model with a scale factor for the variance shared across time and its derivations at each step. The approach taken in this chapter is borrowed from West and Harrison (1997), with some details derived from Petris et al (2009). The solution we take to estimate the parameters of this model is utilized via Forward Filtering Backward Sampling (FFBS).</p>
+<p>For full generality and to maintain a multivariate normal system in both the data and parameter matrices, we assume all <span class="math inline">\(Y_{t} \in \mathbb{R}^{n_{t}}\)</span>, <span class="math inline">\(\beta_{t} \in \mathbb{R}^{p}\)</span>, and <span class="math inline">\(t \in \{1,\ldots,T\}\)</span> for some integer <span class="math inline">\(T\)</span>. Notice that we choose <span class="math inline">\(n_{t}\)</span> to vary with time, because the number of observations at each time point may vary depending on how much of the data is missing.</p>
 <div id="background" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Background<a href="forward-filtering-backward-sampling---shared-variance.html#background" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The model we are concerned with studying is a class of time-varying models called the Dynamic Linear Model. The setup for the equation follows:</p>
-<p><span class="math display">\[\begin{eqnarray*}
-Y_{t}\vert\beta_{t}, \sigma^{2} &amp;\sim&amp; N(F_{t}^{\mathrm{\scriptscriptstyle T}}\beta_{t}, \sigma^{2}V_{t})\\
-\beta_{t}\vert \beta_{t-1},\sigma^{2} &amp;\sim&amp; N(G_{t}\beta_{t-1}, \sigma^{2}W_{t})\\
-\sigma^{-2} &amp;\sim&amp; \Gamma(a_{t-1},b_{t-1})\\
-\beta_{t-1}\vert \sigma^{2} &amp;\sim&amp; N(m_{t-1}, \sigma^{2}C_{t-1})\\
-\end{eqnarray*}\]</span></p>
+<p><span class="math display" id="eq:dlmsetup">\[\begin{equation*}
+\begin{split}
+Y_{t}\vert\beta_{t}, \sigma^{2} &amp;\sim N(F_{t}\beta_{t}, \sigma^{2}V_{t})\\
+\beta_{t}\vert \beta_{t-1},\sigma^{2} &amp;\sim N(G_{t}\beta_{t-1}, \sigma^{2}W_{t})\\
+\sigma^{-2} &amp;\sim \Gamma(a_{t-1},b_{t-1})\\
+\beta_{t-1}\vert \sigma^{2} &amp;\sim N(m_{t-1}, \sigma^{2}C_{t-1})\\
+\end{split}
+\tag{4.1}
+\end{equation*}\]</span></p>
 <p>Alternatively, using Normal-Inverse Gamma notation, where, if <span class="math inline">\(\sigma^{-2} \sim \Gamma(a_{t-1},b_{t-1})\)</span>, <span class="math inline">\(\sigma^{2} \sim IG(a_{t-1},b_{t-1})\)</span>, where <span class="math inline">\(IG\)</span> denotes an inverse Gamma distribution, we may write the above set of equations as the following:
-<span class="math display">\[\begin{eqnarray*}
-Y_{t},\sigma^{2}\vert \beta_{t} &amp;\sim&amp; NIG(F_{t}^{\mathrm{\scriptscriptstyle T}}\beta_{t}, V_{t}, a_{t-1}, b_{t-1})\\
-\beta_{t},\sigma^{2}\vert \beta_{t-1} &amp;\sim&amp; NIG(G_{t}\beta_{t-1}, W_{t}, a_{t-1}, b_{t-1})\\
-\beta_{t-1},\sigma^{2} &amp;\sim&amp; NIG(m_{t-1}, C_{t-1}, a_{t-1}, b_{t-1})
-\end{eqnarray*}\]</span></p>
-<p>The task is to acquire estimates for <span class="math inline">\(\beta_{0,\ldots,T}\)</span> and <span class="math inline">\(\sigma^{2}\)</span>. This task may be divided into the forward filter and backwards sampling steps (collectively referred to as the Forward Filter-Backwards Sampling (FFBS) algorithm): The forward filter to acquire sequential estimates, and the backwards sampling step to retroactively “smooth” our initial estimates given estimates at the last time stamp. We are given a set of observations <span class="math inline">\(Y_{t,j}\)</span>, and known parameters <span class="math inline">\(F_{t}\)</span>, <span class="math inline">\(G_{t}\)</span>, <span class="math inline">\(V_{t}\)</span>, <span class="math inline">\(W_{t}\)</span>, and <span class="math inline">\(n_{t-1}\)</span>, although Frankenburg and Banerjee also apply FFBS to cases where <span class="math inline">\(F_{t}\)</span> and <span class="math inline">\(G_{t}\)</span> are not pre-specified.</p>
+<span class="math display" id="eq:dlmsetupnig">\[\begin{equation*}
+\begin{split}
+Y_{t},\sigma^{2}\vert \beta_{t} &amp;\sim NIG(F_{t}\beta_{t}, V_{t}, a_{t-1}, b_{t-1})\\
+\beta_{t},\sigma^{2}\vert \beta_{t-1} &amp;\sim NIG(G_{t}\beta_{t-1}, W_{t}, a_{t-1}, b_{t-1})\\
+\beta_{t-1},\sigma^{2} &amp;\sim NIG(m_{t-1}, C_{t-1}, a_{t-1}, b_{t-1})
+\end{split}
+\tag{4.2}
+\end{equation*}\]</span></p>
+<p>The task is to acquire estimates for <span class="math inline">\(\beta_{0,\ldots,T}\)</span> and <span class="math inline">\(\sigma^{2}\)</span>. This task may be divided into the forward filtering (FF) and backwards sampling (BS) steps (collectively referred to as the Forward Filter-Backwards Sampling (FFBS) algorithm): The forward filter to acquire sequential estimates of parameters and key values for the backwards sampling step to retroactively “smooth” these estimates in reverse time order. We are given a set of observations <span class="math inline">\(Y_{t,j}\)</span>, and known parameters <span class="math inline">\(F_{t}\)</span>, <span class="math inline">\(G_{t}\)</span>, <span class="math inline">\(V_{t}\)</span>, <span class="math inline">\(W_{t}\)</span>, and <span class="math inline">\(n_{t}\)</span>. (Frankenburg and Banerjee also apply FFBS to cases where <span class="math inline">\(F_{t}\)</span> and <span class="math inline">\(G_{t}\)</span> are not pre-specified.)</p>
+<center>
+<div class="float" id="id">
+<img src="dlm_sharedvar_graph.png" class="class" style="width:60.0%;height:60.0%" alt="Figure 3.1: The dependency graph of the DLM. The grey arrows to the data Y_1 to Y_T are colored to emphasize the relations of the parameters other than \phi to each other, not to suggest differences in the nature of their dependency." />
+<div class="figcaption"><strong>Figure 3.1</strong>: The dependency graph of the DLM. The grey arrows to the data <span class="math inline">\(Y_1\)</span> to <span class="math inline">\(Y_T\)</span> are colored to emphasize the relations of the parameters other than <span class="math inline">\(\phi\)</span> to each other, not to suggest differences in the nature of their dependency.</div>
+</div>
+</center>
+<div id="a-preliminary-note" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> A Preliminary Note<a href="forward-filtering-backward-sampling---shared-variance.html#a-preliminary-note" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The following equations cover the forward filtering step for the set of equations for time <span class="math inline">\(t\)</span> given the parameters for the distributions at time <span class="math inline">\(t-1\)</span>. Hence the equation’s setup is Markovian, i.e. the state of this set of equations only depends on that of the preceding time point. Nevertheless, applications where forward filtering propagates from an initial time point <span class="math inline">\(t=0\)</span> constitute the majority of cases, and we frequently deal with cases where all the data from time <span class="math inline">\(t = 0\)</span> (no data) to <span class="math inline">\(t = T\)</span> are accounted for.</p>
+<p>Specifically, letting <span class="math inline">\(D_{t} = \{Y_{\tau}\}_{\tau=1,\ldots,t}\)</span>, we may write the set of equations in our setup as:</p>
+<p><span class="math display" id="eq:setupudfulldata">\[\begin{equation*}
+\begin{split}
+Y_{t},\sigma^{2}\vert \beta_{t},D_{t-1} &amp;\sim NIG(F_{t}\beta_{t}, V_{t}, a_{t-1}, b_{t-1})\\
+\beta_{t},\sigma^{2}\vert \beta_{t-1},D_{t-1} &amp;\sim NIG(G_{t}\beta_{t-1}, W_{t}, a_{t-1}, b_{t-1})\\
+\beta_{t-1},\sigma^{2}\vert D_{t-1} &amp;\sim NIG(m_{t-1}, C_{t-1}, a_{t-1}, b_{t-1})
+\end{split}
+\tag{4.3}
+\end{equation*}\]</span></p>
+<p>We aim to derive the sequential posteriors <span class="math inline">\(\beta_{t}\vert D_{t}\)</span> and <span class="math inline">\(\sigma^{2} \vert D_{t}\)</span> respectively.</p>
+</div>
 </div>
 <div id="derivation-of-the-forward-filter" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Derivation of the Forward Filter<a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-forward-filter" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We proceed for some arbitrary <span class="math inline">\(t\)</span>:</p>
-<p><span class="math display">\[\begin{eqnarray*}
-\beta_{t} &amp;=&amp; G_{t}\beta_{t-1} + \omega_{t}, \omega_{t} \sim N(0, \sigma^{2}W_{t})\\
-\beta_{t}\vert \sigma^{2} &amp;\sim&amp; N(G_{t}m_{t-1}, \sigma^{2}(G_{t}C_{t-1}G_{t}^{\mathrm{\scriptscriptstyle T}} + W_{t}))\\
-\end{eqnarray*}\]</span></p>
+<p><span class="math display" id="eq:Gsetup">\[\begin{equation*}
+\begin{split}
+\beta_{t}\vert D_{t-1} &amp;= G_{t}\beta_{t-1} + \omega_{t}, \omega_{t} \sim N(0, \sigma^{2}W_{t})\\
+\beta_{t}\vert \sigma^{2}, D_{t-1} &amp;\sim N(G_{t}m_{t-1}, \sigma^{2}(G_{t}C_{t-1}G_{t}^{\mathrm{\scriptscriptstyle T}} + W_{t}))\\
+\end{split}
+\tag{4.4}
+\end{equation*}\]</span></p>
 <p>Now, let <span class="math inline">\(m^{*}_{t} = G_{t}m_{t-1}\)</span> and <span class="math inline">\(R_{t} = G_{t}C_{t-1}G_{t}^{\mathrm{\scriptscriptstyle T}} + W_{t}\)</span>. We then have:</p>
-<p><span class="math display">\[\begin{eqnarray*}
-Y_{t} &amp;=&amp; F_{t}^{\mathrm{\scriptscriptstyle T}}\beta_{t} + \nu_{t}, \nu_{t}\sim N(0, \sigma^{2}V_{t})\\
-Y_{t}\vert \sigma^{2} &amp;\sim&amp; N(F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t}, \sigma^{2}(F_{t}^{\mathrm{\scriptscriptstyle T}}R_{t}F_{t} + V_{t}))
-\end{eqnarray*}\]</span></p>
+<p><span class="math display" id="eq:Fsetup">\[\begin{equation*}
+\begin{split}
+Y_{t}\vert D_{t-1} &amp;= F_{t}\beta_{t} + \nu_{t}, \nu_{t}\sim N(0, \sigma^{2}V_{t})\\
+Y_{t}\vert \sigma^{2}, D_{t-1} &amp;\sim N(F_{t}m^{*}_{t}, \sigma^{2}(F_{t}R_{t}F_{t}^{\mathrm{\scriptscriptstyle T}} + V_{t}))
+\end{split}
+\tag{4.5}
+\end{equation*}\]</span></p>
 <p>Since <span class="math inline">\(\sigma^{2} \sim IG(a_{t-1},b_{t-1})\)</span>, we marginalize it out of <span class="math inline">\(Y_{t}\vert \sigma^{2}\)</span> to get</p>
-<p><span class="math display">\[\begin{eqnarray*}
-Y_{t} &amp;\sim&amp; T_{2a_{t-1}}(F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t}, \frac{b_{t-1}}{a_{t-1}}(F_{t}^{\mathrm{\scriptscriptstyle T}}R_{t}F_{t} + V_{t}))
-\end{eqnarray*}\]</span></p>
+<p><span class="math display" id="eq:Ymargin">\[\begin{equation*}
+Y_{t}\vert D_{t-1} \sim T_{2a_{t-1}}(F_{t}m^{*}_{t}, \frac{b_{t-1}}{a_{t-1}}(F_{t}R_{t}F_{t}^{\mathrm{\scriptscriptstyle T}} + V_{t}))
+\tag{4.6}
+\end{equation*}\]</span></p>
 <p>We now have the apparatus needed to compute the sequential posterior <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span> and <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span>:</p>
-<div id="deriving-beta_tvert-y_t" class="section level3 hasAnchor" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> Deriving <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_tvert-y_t" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><span class="math display">\[\begin{eqnarray*}
-p(\beta_{t} \vert Y_{t}, \sigma^{2}) &amp;\propto&amp; p(\beta_{t}, Y_{t}\vert \sigma^{2})\\
-&amp;\propto&amp; p(Y_{t}\vert \beta_{t},\sigma^{2})p(\beta_{t}\vert \sigma^{2})\\
-&amp;\propto&amp; \sigma^{-n}\exp(-\frac{1}{2\sigma^{2}}(y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}\beta_{t})^{\mathrm{\scriptscriptstyle T}}V_{t}^{-1}(y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}\beta_{t}))\sigma^{-p}\exp(-\frac{1}{2\sigma^{2}}(\beta_{t} - m^{*}_{t})^{\mathrm{\scriptscriptstyle T}}R_{t}^{-1}(\beta_{t} - m^{*}_{t}))\\
-&amp;\propto&amp; \sigma^{-(n+p)}\exp(-\frac{1}{2\sigma^{2}}[(y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}\beta_{t})^{\mathrm{\scriptscriptstyle T}}V_{t}^{-1}(y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}\beta_{t}) + (\beta_{t} - m^{*}_{t})^{\mathrm{\scriptscriptstyle T}}R_{t}^{-1}(\beta_{t} - m^{*}_{t})])\\
-\end{eqnarray*}\]</span></p>
+<div id="deriving-beta_t-vert-d_t" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Deriving <span class="math inline">\(\beta_{t} \vert D_{t}\)</span><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_t-vert-d_t" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display" id="eq:betaud1">\[\begin{equation*}
+\begin{split}
+p(\beta_{t} \vert \sigma^{2}, D_{t}) &amp;\propto p(\beta_{t}, Y_{t}\vert \sigma^{2}, D_{t-1})\\
+&amp;\propto p(Y_{t}\vert \beta_{t},\sigma^{2}\vert D_{t-1})p(\beta_{t}\vert \sigma^{2},  D_{t-1})\\
+&amp;\propto \sigma^{-n_{t}}\exp\left(-\frac{1}{2\sigma^{2}}(y_{t} - F_{t}\beta_{t})^{\mathrm{\scriptscriptstyle T}}V_{t}^{-1}(y_{t} - F_{t}\beta_{t})\right)\\
+&amp;\sigma^{-p}\exp\left(-\frac{1}{2\sigma^{2}}(\beta_{t} - m^{*}_{t})^{\mathrm{\scriptscriptstyle T}}R_{t}^{-1}(\beta_{t} - m^{*}_{t})\right)\\
+&amp;\propto \sigma^{-(n_{t}+p)}\exp\bigl(-\frac{1}{2\sigma^{2}}[(y_{t} - F_{t}\beta_{t})^{\mathrm{\scriptscriptstyle T}}V_{t}^{-1}(y_{t} - F_{t}\beta_{t})\\
+&amp;+ (\beta_{t} - m^{*}_{t})^{\mathrm{\scriptscriptstyle T}}R_{t}^{-1}(\beta_{t} - m^{*}_{t})]\bigr)\\
+\end{split}
+\tag{4.7}
+\end{equation*}\]</span></p>
 <p>Note next that
-<span class="math display">\[\begin{eqnarray*}
-\begin{bmatrix}Y_{t}\\ \beta_{t}\end{bmatrix}\vert \sigma^{2} &amp;\sim&amp; N\left(\begin{bmatrix}F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t}\\ m^{*}_{t}\end{bmatrix},\sigma^{2}\begin{bmatrix}F_{t}^{\mathrm{\scriptscriptstyle T}}R_{t}F_{t} + V_{t} &amp; F_{t}^{\mathrm{\scriptscriptstyle T}}R_{t}\\
-R_{t}F_{t} &amp; R_{t}\end{bmatrix}\right)
-\end{eqnarray*}\]</span></p>
-<p>with the cross-terms <span class="math inline">\(\mathrm{Cov}(Y_{t},\beta_{t}) = \mathrm{Cov}(F_{t}^{\mathrm{\scriptscriptstyle T}}\beta_{t} + \nu_{t},\beta_{t}) = F_{t}^{\mathrm{\scriptscriptstyle T}}\mathrm{Cov}(\beta_{t}, \beta_{t}) = F_{t}^{\mathrm{\scriptscriptstyle T}}R_{t}\)</span>.</p>
+<span class="math display" id="eq:blocksetup">\[\begin{equation*}
+\begin{split}
+\begin{bmatrix}Y_{t}\\ \beta_{t}\end{bmatrix}\vert \sigma^{2},D_{t-1} &amp;\sim N\left(\begin{bmatrix}F_{t}m^{*}_{t}\\ m^{*}_{t}\end{bmatrix},\sigma^{2}\begin{bmatrix}F_{t}R_{t}F_{t}^{\mathrm{\scriptscriptstyle T}} + V_{t} &amp; F_{t}R_{t}\\
+R_{t}F_{t}^{\mathrm{\scriptscriptstyle T}} &amp; R_{t}\end{bmatrix}\right)
+\end{split}
+\tag{4.8}
+\end{equation*}\]</span></p>
+<p>with the cross-terms <span class="math inline">\(\mathrm{Cov}(Y_{t},\beta_{t}\vert D_{t-1}) = \mathrm{Cov}(F_{t}\beta_{t} + \nu_{t},\beta_{t}\vert D_{t-1}) = F_{t}\mathrm{Cov}(\beta_{t}, \beta_{t}\vert D_{t-1}) = F_{t}R_{t}\)</span>.</p>
 <p>Since, for the following block-normal system</p>
-<p><span class="math display">\[\begin{eqnarray*}
-\begin{bmatrix}x_{1}\\ x_{2}\end{bmatrix} &amp;\sim&amp; N\left(\begin{bmatrix}\mu_{1}\\ \mu_{2}\end{bmatrix}, \begin{bmatrix}\Sigma_{11} &amp; \Sigma_{12}\\
+<p><span class="math display" id="eq:blockmateq">\[\begin{equation*}
+\begin{split}
+\begin{bmatrix}x_{1}\\ x_{2}\end{bmatrix} &amp;\sim N\left(\begin{bmatrix}\mu_{1}\\ \mu_{2}\end{bmatrix}, \begin{bmatrix}\Sigma_{11} &amp; \Sigma_{12}\\
 \Sigma_{21} &amp; \Sigma_{22}\end{bmatrix}\right)
-\end{eqnarray*}\]</span></p>
+\end{split}
+\tag{4.9}
+\end{equation*}\]</span></p>
 <p>we have</p>
-<p><span class="math display">\[\begin{eqnarray*}
-x_{2}\vert x_{1} &amp;\sim&amp; N(\mu_{2} + \Sigma_{21}\Sigma_{11}^{-1}(x_{1} - \mu_{1}), \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})
-\end{eqnarray*}\]</span></p>
-<p>(The derivation of the density of <span class="math inline">\(x_{2}\vert x_{1}\)</span> can be found in the Appendix.)</p>
+<p><span class="math display" id="eq:blockcondeq">\[\begin{equation*}
+x_{2}\vert x_{1} \sim N(\mu_{2} + \Sigma_{21}\Sigma_{11}^{-1}(x_{1} - \mu_{1}), \Sigma_{22} - \Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12})
+\tag{4.10}
+\end{equation*}\]</span></p>
+<p>(The derivation of <a href="forward-filtering-backward-sampling---shared-variance.html#eq:blockcondeq">(4.10)</a> can be found in the Appendix.)</p>
 <p>We arrive at,</p>
-<p><span class="math display">\[\begin{eqnarray*}
-\beta_{t}\vert \sigma^{2},Y_{t} &amp;\sim&amp; N(m_{t}^{*} + R_{t}F_{t}(F_{t}^{\mathrm{\scriptscriptstyle T}}R_{t}F_{t} + V_{t})^{-1}(Y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}m_{t}^{*}), R_{t} - R_{t}F_{t}(F_{t}^{\mathrm{\scriptscriptstyle T}}R_{t}F_{t} + V_{t})^{-1}F_{t}^{\mathrm{\scriptscriptstyle T}}R_{t})\\
-&amp;\sim&amp; N(m_{t}^{*} + R_{t}F_{t}Q_{t}^{-1}(Y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}m_{t}^{*}), R_{t} - R_{t}F_{t}Q_{t}^{-1}F_{t}^{\mathrm{\scriptscriptstyle T}}R_{t})
-\end{eqnarray*}\]</span></p>
-<p>where <span class="math inline">\(Q_{t} = F_{t}^{\mathrm{\scriptscriptstyle T}}R_{t}F_{t} + V_{t}\)</span>.</p>
+<p><span class="math display" id="eq:betaud2">\[\begin{equation*}
+\begin{split}
+\beta_{t}\vert \sigma^{2},D_{t} &amp;\sim N(m_{t}^{*} + R_{t}F_{t}^{\mathrm{\scriptscriptstyle T}}(F_{t}R_{t}F_{t}^{\mathrm{\scriptscriptstyle T}} + V_{t})^{-1}(Y_{t} - F_{t}m_{t}^{*}),\\
+&amp;R_{t} - R_{t}F_{t}^{\mathrm{\scriptscriptstyle T}}(F_{t}R_{t}F_{t}^{\mathrm{\scriptscriptstyle T}} + V_{t})^{-1}F_{t}R_{t})\\
+&amp;\sim N(m_{t}^{*} + R_{t}F_{t}^{\mathrm{\scriptscriptstyle T}}Q_{t}^{-1}(Y_{t} - F_{t}m_{t}^{*}), R_{t} - R_{t}F_{t}^{\mathrm{\scriptscriptstyle T}}Q_{t}^{-1}F_{t}R_{t})
+\end{split}
+\tag{4.11}
+\end{equation*}\]</span></p>
+<p>where <span class="math inline">\(Q_{t} = F_{t}R_{t}F_{t}^{\mathrm{\scriptscriptstyle T}} + V_{t}\)</span>.</p>
 <p>(Note that Petris’s expression for the variance suffers from a typo; to see this, simply take their <span class="math inline">\(\widetilde{C}_{t}^{\mathrm{\scriptscriptstyle T}}\)</span>.)</p>
 </div>
-<div id="deriving-sigma2vert-y_t" class="section level3 hasAnchor" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> Deriving <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2vert-y_t" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We next deduce the density of <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span>. Note before we begin that since <span class="math inline">\(Y_{t} \sim T_{2a_{t-1}}(F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t}, Q_{t}) = \int NIG_{Y_{t}}(F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t}, Q_{t}, a_{t-1}, b_{t-1})d\sigma^{2}\)</span>, we can write <span class="math inline">\(Y_{t}\vert \sigma^{2} \sim N(F_{t}m^{*}_{t}, \sigma^{2}Q_{t})\)</span>. Hence:</p>
-<p><span class="math display">\[\begin{eqnarray*}
-p(\sigma^{2}\vert Y_{t}) &amp;\propto&amp; p(Y_{t}\vert \sigma^{2})p(\sigma^{2})\\
-&amp;\propto&amp; \sigma^{-n}\exp(-\frac{1}{2\sigma^{2}}(y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t})^{\mathrm{\scriptscriptstyle T}}Q_{t}^{-1}(y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t}))\sigma^{-2(a_{t-1} + 1)}\exp(-b_{t-1}\sigma^{-2})\\
-&amp;\propto&amp; \sigma^{-2(a_{t-1} + \frac{n}{2} + 1)}\exp(-\sigma^{-2}[\frac{1}{2}(y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t})^{\mathrm{\scriptscriptstyle T}}Q_{t}^{-1}(y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t}) + b_{t-1}])
-\end{eqnarray*}\]</span></p>
-<p>We conclude that <span class="math inline">\(\sigma^{-2}\vert Y_{t} \sim \Gamma(a_{t},b_{t})\)</span>, where <span class="math inline">\(a_{t} = a_{t-1} + \frac{n}{2}\)</span> and <span class="math inline">\(b_{t} = b_{t-1} + \frac{1}{2}(y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t})^{\mathrm{\scriptscriptstyle T}}Q_{t}^{-1}(y_{t} - F_{t}^{\mathrm{\scriptscriptstyle T}}m^{*}_{t})\)</span>.</p>
+<div id="deriving-sigma2-vert-d_t" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Deriving <span class="math inline">\(\sigma^{2} \vert D_{t}\)</span><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2-vert-d_t" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We next deduce the density of <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span>. Note before we begin that since <span class="math inline">\(Y_{t}\vert D_{t-1} \sim T_{2a_{t-1}}(F_{t}m^{*}_{t}, Q_{t}) = \int NIG_{Y_{t}}(F_{t}m^{*}_{t}, Q_{t}, a_{t-1}, b_{t-1})d\sigma^{2}\)</span>, we can write <span class="math inline">\(Y_{t}\vert \sigma^{2}, D_{t-1} \sim N(F_{t}m^{*}_{t}, \sigma^{2}Q_{t})\)</span>. Hence:</p>
+<p><span class="math display" id="eq:sigmaud">\[\begin{equation*}
+\begin{split}
+p(\sigma^{2}\vert D_{t}) &amp;\propto p(Y_{t}\vert \sigma^{2}, D_{t-1})p(\sigma^{2}\vert D_{t-1})\\
+&amp;\propto \sigma^{-n_{t}}\exp(-\frac{1}{2\sigma^{2}}(y_{t} - F_{t}m^{*}_{t})^{\mathrm{\scriptscriptstyle T}}Q_{t}^{-1}(y_{t} - F_{t}m^{*}_{t}))\sigma^{-2(a_{t-1} + 1)}\exp(-b_{t-1}\sigma^{-2})\\
+&amp;\propto \sigma^{-2(a_{t-1} + \frac{n_{t}}{2} + 1)}\exp(-\sigma^{-2}[\frac{1}{2}(y_{t} - F_{t}m^{*}_{t})^{\mathrm{\scriptscriptstyle T}}Q_{t}^{-1}(y_{t} - F_{t}m^{*}_{t}) + b_{t-1}])
+\end{split}
+\tag{4.12}
+\end{equation*}\]</span></p>
+<p>We conclude that <span class="math inline">\(\sigma^{-2}\vert D_{t} \sim \Gamma(a_{t},b_{t})\)</span>, where <span class="math inline">\(a_{t} = a_{t-1} + \frac{n_{t}}{2}\)</span> and <span class="math inline">\(b_{t} = b_{t-1} + \frac{1}{2}(y_{t} - F_{t}m^{*}_{t})^{\mathrm{\scriptscriptstyle T}}Q_{t}^{-1}(y_{t} - F_{t}m^{*}_{t})\)</span>. Note in particular that we may write these recurrent equations in terms of <span class="math inline">\(a_{0}\)</span>, <span class="math inline">\(b_{0}\)</span>, so that:
+<span class="math display" id="eq:sigmaparams">\[\begin{equation*}
+\begin{split}
+a_{t} &amp;= a_{0} + \frac{n_{t}t}{2}\\
+b_{t} &amp;= b_{0} + \frac{1}{2}\sum_{s=1}^{t}(y_{s} - F_{s}m^{*}_{s})^{\mathrm{\scriptscriptstyle T}}Q_{s}^{-1}(y_{s} - F_{s}m^{*}_{s})
+\end{split}
+\tag{4.13}
+\end{equation*}\]</span></p>
 <p>This gives us the set of updating equations according to Petris Proposition 4.1.</p>
-</div>
-<div id="commentary" class="section level3 hasAnchor" number="4.2.3">
-<h3><span class="header-section-number">4.2.3</span> Commentary<a href="forward-filtering-backward-sampling---shared-variance.html#commentary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Note that we have derived the forward filtering step for the set of equations for time <span class="math inline">\(t\)</span> given the parameters for the distributions at time <span class="math inline">\(t-1\)</span>. Hence the equation’s setup is Markovian, i.e. the state of this set of equations only depends on that of the preceding time point. Nevertheless, applications where the forward filter’s equations propagate from an initial time point <span class="math inline">\(t=0\)</span> are written so that the dependence of the parameters’ values <span class="math inline">\(\beta_{t}\)</span> and <span class="math inline">\(\sigma^{2}\)</span> on the data up to time <span class="math inline">\(t-1\)</span> or time <span class="math inline">\(t\)</span> are made explicit. Specifically, letting <span class="math inline">\(D_{t} = \{Y_{\tau}\}_{\tau=1,\ldots,t}\)</span>, we may write the set of equations in our setup as:</p>
-<p><span class="math display">\[\begin{eqnarray*}
-Y_{t},\sigma^{2}\vert \beta_{t},D_{t-1} &amp;\sim&amp; NIG(F_{t}^{\mathrm{\scriptscriptstyle T}}\beta_{t}, V_{t}, a_{t-1}, b_{t-1})\\
-\beta_{t},\sigma^{2}\vert \beta_{t-1},D_{t-1} &amp;\sim&amp; NIG(G_{t}\beta_{t-1}, W_{t}, a_{t-1}, b_{t-1})\\
-\beta_{t-1},\sigma^{2}\vert D_{t-1} &amp;\sim&amp; NIG(m_{t-1}, C_{t-1}, a_{t-1}, b_{t-1})
-\end{eqnarray*}\]</span></p>
-<p>and the sequential posteriors we have derived, <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span> and <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span>, as <span class="math inline">\(\beta_{t}\vert D_{t}\)</span> and <span class="math inline">\(\sigma^{2} \vert D_{t}\)</span> respectively.</p>
 </div>
 </div>
 <div id="derivation-of-the-backwards-sampling" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Derivation of the Backwards Sampling<a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-backwards-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Now that we have the parameters <span class="math inline">\(\{\theta_{t},\phi\vert D_{t}\}_{t=1,\ldots,T}\)</span>, we would like to work backwards and derive <span class="math inline">\(\{\theta_{t},\phi\vert \theta_{t+1}, D_{T}\}_{t=1,\ldots,T-1}\)</span> to smooth our initial variable estimates:</p>
-<!-- TODO: Include pictoral graph here -->
-<p><span class="math display">\[\begin{eqnarray*}
-p(\theta_{t}\vert \theta_{(t+1):T},\sigma^{2},D_{T}) &amp;=&amp; p(\theta_{t}\vert \theta_{t+1},\sigma^{2},D_{t})\\
-&amp;=&amp; p(\theta_{t}\vert \theta_{t+1},\sigma^{2},D_{t})\\
-&amp;=&amp; \frac{p(\theta_{t+1}\vert \theta_{t},D_{t})p(\theta_{t}\vert D_{t})}{p(\theta_{t+1}\vert D_{t})}\\
-&amp;\propto&amp; p(\theta_{t+1}\vert \theta_{t},D_{t})p(\theta_{t}\vert D_{t})\\
-&amp;\propto&amp; \exp\left(-\frac{1}{2\sigma^{2}}\left[(\theta_{t+1} - G_{t+1}\theta_{t})^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}(\theta_{t+1} - G_{t+1}\theta_{t})\right.\right.\\
-&amp;&amp;\left.\left.+ (\theta_{t} - m_{t})^{\mathrm{\scriptscriptstyle T}}C_{t}^{-1}(\theta_{t} - m_{t})\right]\right)\\
-&amp;\propto&amp; \exp\left(-\frac{1}{2\sigma^{2}}\left[\theta_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\theta_{t+1} - 2\theta_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}G_{t+1}\theta_{t} + \theta_{t}^{\mathrm{\scriptscriptstyle T}}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}G_{t+1}\theta_{t}\right.\right.\\
-&amp;&amp;\left.\left.+\theta_{t}^{\mathrm{\scriptscriptstyle T}}C_{t}^{-1}\theta_{t} - 2m_{t}^{\mathrm{\scriptscriptstyle T}}C_{t}^{-1}\theta_{t} + m_{t}^{\mathrm{\scriptscriptstyle T}}C_{t}^{-1}m_{t}\right]\right)\\
-&amp;\propto&amp; \exp\left(-\frac{1}{2\sigma^{2}}\left[\theta_{t}^{\mathrm{\scriptscriptstyle T}}(G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}G_{t+1} + C_{t}^{-1})\theta_{t} - 2(C_{t}^{-1}m_{t} + G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\theta_{t+1})^{\mathrm{\scriptscriptstyle T}}\theta_{t}\right]\right)\\
-\theta_{t}\vert\theta_{t+1},\sigma^{2},D_{T} &amp;\sim&amp; N\left((G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}G_{t+1} + C_{t}^{-1})^{-1}(C_{t}^{-1}m_{t} + G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\theta_{t+1}),\right.\\
-&amp;&amp;\left.\sigma^{-2}(G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}G_{t+1} + C_{t}^{-1})^{-1}\right)\\
-&amp;\sim&amp; N\left(m_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}(W_{t+1} + G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}})^{-1}G_{t+1}m_{t} + C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\theta_{t+1}\right.\\
-&amp;&amp;\left.- C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}(W_{t+1} + G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}})^{-1}G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\theta_{t+1},\right.\\
-&amp;&amp;\left.C_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}(W_{t+1} + G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}})^{-1}G_{t+1}C_{t}\right)\\
-&amp;\sim&amp; N\left(m_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}m_{t} + C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\theta_{t+1}\right.\\
-&amp;&amp;\left. - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\theta_{t+1},\right.\\
-&amp;&amp;\left.C_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}C_{t}\right)\\
-\end{eqnarray*}\]</span></p>
+<p>Now that we have the parameters <span class="math inline">\(\{\beta_{t},\sigma^{2}\vert D_{t}\}_{t=1,\ldots,T}\)</span>, we would like to work backwards and derive <span class="math inline">\(\{\beta_{t},\sigma^{2}\vert \beta_{t+1}, D_{T}\}_{t=1,\ldots,T-1}\)</span> to smooth our initial variable estimates:</p>
+<p><span class="math display" id="eq:backsample1">\[\begin{equation*}
+\begin{split}
+p(\beta_{t}\vert \beta_{(t+1):T},\sigma^{2},D_{T}) &amp;= p(\beta_{t}\vert \beta_{t+1},\sigma^{2},D_{t})\\
+&amp;= p(\beta_{t}\vert \beta_{t+1},\sigma^{2},D_{t})\\
+&amp;= \frac{p(\beta_{t+1}\vert \beta_{t},D_{t})p(\beta_{t}\vert D_{t})}{p(\beta_{t+1}\vert D_{t})}\\
+&amp;\propto p(\beta_{t+1}\vert \beta_{t},D_{t})p(\beta_{t}\vert D_{t})\\
+&amp;\propto \exp\left(-\frac{1}{2\sigma^{2}}\left[(\beta_{t+1} - G_{t+1}\beta_{t})^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}(\beta_{t+1} - G_{t+1}\beta_{t})\right. \right.\\
+&amp;\left. \left.+ (\beta_{t} - m_{t})^{\mathrm{\scriptscriptstyle T}}C_{t}^{-1}(\beta_{t} - m_{t})\right]\right)\\
+&amp;\propto \exp\left(-\frac{1}{2\sigma^{2}}\left[\beta_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\beta_{t+1} - 2\beta_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}G_{t+1}\beta_{t} +\right.\right.\\
+&amp;\left.\left.\beta_{t}^{\mathrm{\scriptscriptstyle T}}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}G_{t+1}\beta_{t} +\beta_{t}^{\mathrm{\scriptscriptstyle T}}C_{t}^{-1}\beta_{t} - 2m_{t}^{\mathrm{\scriptscriptstyle T}}C_{t}^{-1}\beta_{t} + m_{t}^{\mathrm{\scriptscriptstyle T}}C_{t}^{-1}m_{t}\right]\right)\\
+&amp;\propto \exp\left(-\frac{1}{2\sigma^{2}}\left[\beta_{t}^{\mathrm{\scriptscriptstyle T}}(G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}G_{t+1} + C_{t}^{-1})\beta_{t}\right.\right.\\
+&amp;\left.\left. - 2(C_{t}^{-1}m_{t} + G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\beta_{t+1})^{\mathrm{\scriptscriptstyle T}}\beta_{t}\right]\right)\\
+\beta_{t}\vert\beta_{t+1},\sigma^{2},D_{T} &amp;\sim N\left((G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}G_{t+1} + C_{t}^{-1})^{-1}(C_{t}^{-1}m_{t} + G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\beta_{t+1}),\right.\\
+&amp;\left.\sigma^{-2}(G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}G_{t+1} + C_{t}^{-1})^{-1}\right)\\
+&amp;\sim N\left(m_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}(W_{t+1} + G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}})^{-1}G_{t+1}m_{t} +\right.\\
+&amp;\left.C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\beta_{t+1}\right.\\
+&amp;\left.- C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}(W_{t+1} + G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}})^{-1}G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\beta_{t+1},\right.\\
+&amp;\left.C_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}(W_{t+1} + G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}})^{-1}G_{t+1}C_{t}\right)\\
+&amp;\sim N\left(m_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}m_{t} + C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\beta_{t+1}\right.\\
+&amp;\left. - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\beta_{t+1},\right.\\
+&amp;\left.C_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}C_{t}\right)\\
+\end{split}
+\tag{4.14}
+\end{equation*}\]</span></p>
 <p>Notice that
-<span class="math display">\[\begin{eqnarray*}
-C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\theta_{t+1} &amp;=&amp; C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}(G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}} + W_{t+1} - W_{t+1})W_{t+1}^{-1}\theta_{t+1}\\
-&amp;=&amp; C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}(R_{t+1} - W_{t+1})W_{t+1}^{-1}\theta_{t+1}\\
-&amp;=&amp; C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\theta_{t+1} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}\theta_{t+1}
-\end{eqnarray*}\]</span></p>
+<span class="math display" id="eq:Rtbreakdown">\[\begin{equation*}
+\begin{split}
+C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\beta_{t+1} &amp;= C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}(R_{t+1} - W_{t+1})W_{t+1}^{-1}\beta_{t+1}\\
+&amp;= C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\beta_{t+1} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}\beta_{t+1}
+\end{split}
+\tag{4.15}
+\end{equation*}\]</span></p>
 <p>Hence,
-<span class="math display">\[\begin{eqnarray*}
-\theta_{t}\vert\theta_{t+1},\sigma^{2},D_{T} &amp;\sim&amp; N\left(m_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}m_{t} + C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\theta_{t+1}\right.\\
-&amp;&amp;\left. - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\theta_{t+1} + C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}\theta_{t+1},\right.\\
-&amp;&amp;\left.C_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}C_{t}\right)\\
-&amp;\sim&amp; N(m_{t} + C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}(\theta_{t+1} - a_{t+1}), C_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}C_{t})
-\end{eqnarray*}\]</span></p>
+<span class="math display" id="eq:backsample2">\[\begin{equation*}
+\begin{split}
+\beta_{t}\vert\beta_{t+1},\sigma^{2},D_{T} &amp;\sim N\left(m_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}m_{t} + C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\beta_{t+1}\right.\\
+&amp;\left. - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}W_{t+1}^{-1}\beta_{t+1} + C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}\beta_{t+1},\right.\\
+&amp;\left.C_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}C_{t}\right)\\
+&amp;\sim N(m_{t} + C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}(\beta_{t+1} - m_{t+1}^{*}), C_{t} - C_{t}G_{t+1}^{\mathrm{\scriptscriptstyle T}}R_{t+1}^{-1}G_{t+1}C_{t})
+\end{split}
+\tag{4.16}
+\end{equation*}\]</span></p>
+</div>
+<div id="sample-code" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Sample Code<a href="forward-filtering-backward-sampling---shared-variance.html#sample-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This section shows example implementations of the FFBS algorithm. Since the code can take up a lot of space in this chapter without contributing much to the discussion, code is shown only as relevant to the discussion; the messier segments of the code and the setup are largely hidden behind buttons to avoid bogging down discussion of the implementation.</p>
+<p>The following is a small example on the built-in airquality dataset:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb1-1" tabindex="-1"></a><span class="fu">head</span>(airquality)</span></code></pre></div>
+<pre><code>##   Ozone Solar.R Wind Temp Month Day
+## 1    41     190  7.4   67     5   1
+## 2    36     118  8.0   72     5   2
+## 3    12     149 12.6   74     5   3
+## 4    18     313 11.5   62     5   4
+## 5    NA      NA 14.3   56     5   5
+## 6    28      NA 14.9   66     5   6</code></pre>
+<p>The airquality data has 153 recorded data points from May 1 to Sept. 30 1973. We will fit a DLM for the average air quality for half of each month.</p>
+<p>Prior to doing so, we notice that there are some missing values in the airquality data. The details are discussed in the hidden segment below:</p>
+<details>
+<summary>
+Click to show or hide details
+</summary>
+<p>To keep things simple, we remove the rows with missing values so that we can focus on working with complete data. (This approach is not recommended in practice.)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb3-1" tabindex="-1"></a>airquality.complete <span class="ot">&lt;-</span> airquality[<span class="fu">complete.cases</span>(airquality),]</span></code></pre></div>
+</div>
+<style>
+button#toggle-button7 {
+  background-color: lightgray;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+button#toggle-button7:hover {
+  background-color: gray;
+  color: white;
+}
+</style>
+<script>
+function toggleDisplay7(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button7');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
+<p>Next we display an implementation of the FFBS in R:</p>
+<details>
+<summary>
+Click to show or hide details
+</summary>
+<p>The following contains preparatory code for rendering (and in some ways, understanding) the FFBS:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb4-1" tabindex="-1"></a><span class="co"># randomly generates a normal-inverse gamma random variable pair.</span></span>
+<span id="cb4-2"><a href="forward-filtering-backward-sampling---shared-variance.html#cb4-2" tabindex="-1"></a><span class="co">#   The inverse gamma v is sampled first from a gamma(a,b) distribution,</span></span>
+<span id="cb4-3"><a href="forward-filtering-backward-sampling---shared-variance.html#cb4-3" tabindex="-1"></a><span class="co">#   where a is the shape and b is the scale.</span></span>
+<span id="cb4-4"><a href="forward-filtering-backward-sampling---shared-variance.html#cb4-4" tabindex="-1"></a><span class="co">#   Then the normal m is sampled from N(mu, v * V).</span></span>
+<span id="cb4-5"><a href="forward-filtering-backward-sampling---shared-variance.html#cb4-5" tabindex="-1"></a><span class="co"># Returns: a list with the sampled normal and inverse gamma variable pair.</span></span>
+<span id="cb4-6"><a href="forward-filtering-backward-sampling---shared-variance.html#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="forward-filtering-backward-sampling---shared-variance.html#cb4-7" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;mvtnorm&quot;</span>)</span>
+<span id="cb4-8"><a href="forward-filtering-backward-sampling---shared-variance.html#cb4-8" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;testit&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: package &#39;testit&#39; was built under R version 4.2.2</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-1" tabindex="-1"></a>normal.inversegamma <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, V, a, b){</span>
+<span id="cb6-2"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-2" tabindex="-1"></a>  <span class="fu">assert</span>(<span class="st">&quot;We need an inverse gamma with finite mean and variance. a &gt; 2 is needed.&quot;</span>, a <span class="sc">&gt;</span> <span class="dv">2</span>) </span>
+<span id="cb6-3"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-3" tabindex="-1"></a>  v <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">rgamma</span>(<span class="dv">1</span>, <span class="at">shape =</span> a, <span class="at">scale =</span> b)</span>
+<span id="cb6-4"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-4" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, mu, v <span class="sc">*</span> V)</span>
+<span id="cb6-5"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-5" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">m =</span> m, <span class="at">v =</span> v))</span>
+<span id="cb6-6"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-6" tabindex="-1"></a>}</span>
+<span id="cb6-7"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-7" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-8" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;matrixcalc&quot;</span>)</span>
+<span id="cb6-9"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-10" tabindex="-1"></a><span class="co"># checks whether the matrix C is postive definite symmetric.</span></span>
+<span id="cb6-11"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-11" tabindex="-1"></a>check.pds <span class="ot">&lt;-</span> <span class="cf">function</span>(C, <span class="at">tol =</span> <span class="dv">10</span><span class="sc">^-</span><span class="dv">9</span>) {</span>
+<span id="cb6-12"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-12" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">norm</span>(C <span class="sc">-</span> <span class="fu">t</span>(C), <span class="at">type=</span><span class="st">&quot;F&quot;</span>) <span class="sc">&lt;</span> tol) {</span>
+<span id="cb6-13"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-13" tabindex="-1"></a>      C <span class="ot">&lt;-</span> (C <span class="sc">+</span> <span class="fu">t</span>(C))<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb6-14"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-14" tabindex="-1"></a>          <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.positive.definite</span>(C)) {</span>
+<span id="cb6-15"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-15" tabindex="-1"></a>          <span class="fu">cat</span>(<span class="st">&quot;Warning: Matrix is not positive definite. Listing eigenvalues:&quot;</span>, <span class="fu">eigen</span>(C)<span class="sc">$</span>values, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb6-16"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-16" tabindex="-1"></a>      }</span>
+<span id="cb6-17"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-17" tabindex="-1"></a>      <span class="fu">return</span>(C)</span>
+<span id="cb6-18"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-18" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb6-19"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-19" tabindex="-1"></a>      <span class="fu">throw</span>(<span class="st">&quot;Matrix symmetry is outside of tolerance: &quot;</span>,tol)</span>
+<span id="cb6-20"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-20" tabindex="-1"></a>  }</span>
+<span id="cb6-21"><a href="forward-filtering-backward-sampling---shared-variance.html#cb6-21" tabindex="-1"></a>}</span></code></pre></div>
+<p>The following functions support the operations of the DLM:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-1" tabindex="-1"></a><span class="co"># fills in a matrix with time-varying values to make it amenable to time-</span></span>
+<span id="cb7-2"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-2" tabindex="-1"></a><span class="co">#   varying DLM computation.</span></span>
+<span id="cb7-3"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-3" tabindex="-1"></a><span class="co"># returns: the filled matrix using values stored in X at a designated time-</span></span>
+<span id="cb7-4"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-4" tabindex="-1"></a><span class="co">#   coordinate</span></span>
+<span id="cb7-5"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-6" tabindex="-1"></a>vec2mat <span class="ot">&lt;-</span> <span class="cf">function</span>(v, <span class="at">to.row.vec =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb7-7"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-7" tabindex="-1"></a>  <span class="cf">if</span> (to.row.vec) {</span>
+<span id="cb7-8"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-8" tabindex="-1"></a>    M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(v, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="fu">length</span>(v))</span>
+<span id="cb7-9"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-9" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb7-10"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-10" tabindex="-1"></a>    M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(v, <span class="at">nrow =</span> <span class="fu">length</span>(v), <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb7-11"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-11" tabindex="-1"></a>  }</span>
+<span id="cb7-12"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-12" tabindex="-1"></a>  <span class="fu">return</span>(M)</span>
+<span id="cb7-13"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-13" tabindex="-1"></a>}</span>
+<span id="cb7-14"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-14" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-15" tabindex="-1"></a>timefill <span class="ot">&lt;-</span> <span class="cf">function</span>(templateMat, prevmat, X, time){</span>
+<span id="cb7-16"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-16" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">ncol</span>(templateMat)</span>
+<span id="cb7-17"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-17" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(templateMat)</span>
+<span id="cb7-18"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-18" tabindex="-1"></a>    outmat <span class="ot">&lt;-</span> <span class="fu">vec2mat</span>(prevmat, <span class="cn">TRUE</span>)</span>
+<span id="cb7-19"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-19" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-20" tabindex="-1"></a>    <span class="co"># record nonzero coordinates in templateMat</span></span>
+<span id="cb7-21"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-21" tabindex="-1"></a>    arr.inds <span class="ot">&lt;-</span> <span class="fu">which</span>(templateMat<span class="sc">!=</span><span class="dv">0</span>, <span class="at">arr.ind=</span><span class="cn">TRUE</span>)</span>
+<span id="cb7-22"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-22" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-23" tabindex="-1"></a>    <span class="co">#for the set of nonzero coordinates, copy the value at that coordinate</span></span>
+<span id="cb7-24"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-24" tabindex="-1"></a>    <span class="co">#  for that time slice at X to the outmat</span></span>
+<span id="cb7-25"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-25" tabindex="-1"></a>    <span class="cf">for</span> (ij <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(arr.inds)) {</span>
+<span id="cb7-26"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-26" tabindex="-1"></a>        i <span class="ot">&lt;-</span> arr.inds[ij,<span class="dv">1</span>]</span>
+<span id="cb7-27"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-27" tabindex="-1"></a>        j <span class="ot">&lt;-</span> arr.inds[ij,<span class="dv">2</span>]</span>
+<span id="cb7-28"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-28" tabindex="-1"></a>        outmat[i,j] <span class="ot">&lt;-</span> X[time, templateMat[i,j]]</span>
+<span id="cb7-29"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-29" tabindex="-1"></a>    }</span>
+<span id="cb7-30"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-30" tabindex="-1"></a>    <span class="fu">return</span>(outmat)</span>
+<span id="cb7-31"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-31" tabindex="-1"></a>}</span>
+<span id="cb7-32"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-32" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-33" tabindex="-1"></a><span class="co"># timefill all relevant parameters FF, GG, V, and W for the DLM</span></span>
+<span id="cb7-34"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-34" tabindex="-1"></a>get.time.varying.params <span class="ot">&lt;-</span> <span class="cf">function</span>(dlm.mod, time) {</span>
+<span id="cb7-35"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-35" tabindex="-1"></a>    is.FFt <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.null</span>(dlm.mod<span class="sc">$</span>JFF)</span>
+<span id="cb7-36"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-36" tabindex="-1"></a>    is.GGt <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.null</span>(dlm.mod<span class="sc">$</span>JGG)</span>
+<span id="cb7-37"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-37" tabindex="-1"></a>    is.Vt <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.null</span>(dlm.mod<span class="sc">$</span>JV)</span>
+<span id="cb7-38"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-38" tabindex="-1"></a>    is.Wt <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.null</span>(dlm.mod<span class="sc">$</span>JW)</span>
+<span id="cb7-39"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-39" tabindex="-1"></a>    FF <span class="ot">&lt;-</span> dlm.mod<span class="sc">$</span>FF</span>
+<span id="cb7-40"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-40" tabindex="-1"></a>    GG <span class="ot">&lt;-</span> dlm.mod<span class="sc">$</span>GG</span>
+<span id="cb7-41"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-41" tabindex="-1"></a>    V <span class="ot">&lt;-</span> dlm.mod<span class="sc">$</span>V</span>
+<span id="cb7-42"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-42" tabindex="-1"></a>    W <span class="ot">&lt;-</span> dlm.mod<span class="sc">$</span>W</span>
+<span id="cb7-43"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-43" tabindex="-1"></a>    <span class="cf">if</span> (is.FFt) {</span>
+<span id="cb7-44"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-44" tabindex="-1"></a>        FF <span class="ot">&lt;-</span> <span class="fu">timefill</span>(dlm.mod<span class="sc">$</span>JFF, dlm.mod<span class="sc">$</span>FF, dlm.mod<span class="sc">$</span>X, time)</span>
+<span id="cb7-45"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-45" tabindex="-1"></a>    }</span>
+<span id="cb7-46"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-46" tabindex="-1"></a>    <span class="cf">if</span> (is.GGt) {</span>
+<span id="cb7-47"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-47" tabindex="-1"></a>        GG <span class="ot">&lt;-</span> <span class="fu">timefill</span>(dlm.mod<span class="sc">$</span>JGG, dlm.mod<span class="sc">$</span>GG, dlm.mod<span class="sc">$</span>X, time)</span>
+<span id="cb7-48"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-48" tabindex="-1"></a>    }</span>
+<span id="cb7-49"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-49" tabindex="-1"></a>    <span class="cf">if</span> (is.Vt) {</span>
+<span id="cb7-50"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-50" tabindex="-1"></a>        V <span class="ot">&lt;-</span> <span class="fu">timefill</span>(dlm.mod<span class="sc">$</span>JV, dlm.mod<span class="sc">$</span>V, dlm.mod<span class="sc">$</span>X, time)</span>
+<span id="cb7-51"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-51" tabindex="-1"></a>    }</span>
+<span id="cb7-52"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-52" tabindex="-1"></a>    <span class="cf">if</span> (is.Wt) {</span>
+<span id="cb7-53"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-53" tabindex="-1"></a>        W <span class="ot">&lt;-</span> <span class="fu">timefill</span>(dlm.mod<span class="sc">$</span>JW, dlm.mod<span class="sc">$</span>W, dlm.mod<span class="sc">$</span>X, time)</span>
+<span id="cb7-54"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-54" tabindex="-1"></a>    }</span>
+<span id="cb7-55"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-55" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">FF =</span> FF, <span class="at">GG =</span> GG, <span class="at">V =</span> V, <span class="at">W =</span> W))</span>
+<span id="cb7-56"><a href="forward-filtering-backward-sampling---shared-variance.html#cb7-56" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<style>
+button#toggle-button7 {
+  background-color: lightgray;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+button#toggle-button7:hover {
+  background-color: gray;
+  color: white;
+}
+</style>
+<script>
+function toggleDisplay7(id) {
+  var element = document.getElementById(id);
+  var button = document.getElementById('toggle-button7');
+  if (element.style.display === 'block') {
+    element.style.display = 'none';
+    button.innerHTML = 'Show details';
+  } else {
+    element.style.display = 'block';
+    button.innerHTML = 'Hide details';
+  }
+}
+</script>
+<p>The following code generates the parameters via forward filter:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-1" tabindex="-1"></a>FF.params<span class="fl">.1</span>step <span class="ot">&lt;-</span> <span class="cf">function</span>(y, FF, GG, m, C, W, V, a, b, n, <span class="at">scale.random=</span><span class="cn">TRUE</span>) {</span>
+<span id="cb8-2"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-2" tabindex="-1"></a>    R <span class="ot">&lt;-</span> GG <span class="sc">%*%</span> C <span class="sc">%*%</span> <span class="fu">t</span>(GG) <span class="sc">+</span> W</span>
+<span id="cb8-3"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-3" tabindex="-1"></a>    mstar <span class="ot">&lt;-</span> GG <span class="sc">%*%</span> m</span>
+<span id="cb8-4"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-4" tabindex="-1"></a>    Q <span class="ot">&lt;-</span> FF <span class="sc">%*%</span> R <span class="sc">%*%</span> <span class="fu">t</span>(FF) <span class="sc">+</span> V</span>
+<span id="cb8-5"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-5" tabindex="-1"></a>    <span class="fu">rownames</span>(Q) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb8-6"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-6" tabindex="-1"></a>    <span class="fu">colnames</span>(Q) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb8-7"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-7" tabindex="-1"></a>    f <span class="ot">&lt;-</span> FF <span class="sc">%*%</span> mstar</span>
+<span id="cb8-8"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-8" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-9" tabindex="-1"></a>    lQt <span class="ot">&lt;-</span> <span class="fu">chol</span>(Q)</span>
+<span id="cb8-10"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-10" tabindex="-1"></a>    lQinv_e <span class="ot">&lt;-</span> <span class="fu">backsolve</span>(lQt, y <span class="sc">-</span> f, <span class="at">transpose=</span><span class="cn">TRUE</span>)</span>
+<span id="cb8-11"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-11" tabindex="-1"></a>    anew <span class="ot">&lt;-</span> a <span class="sc">+</span> n<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb8-12"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-12" tabindex="-1"></a>    bnew <span class="ot">&lt;-</span> b <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">norm</span>(lQinv_e, <span class="st">&quot;2&quot;</span>)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb8-13"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-13" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-14" tabindex="-1"></a>    lQinvFFR <span class="ot">&lt;-</span> <span class="fu">backsolve</span>(lQt, FF <span class="sc">%*%</span> R, <span class="at">transpose =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-15"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-15" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-16" tabindex="-1"></a>    mnew <span class="ot">&lt;-</span> mstar <span class="sc">+</span> <span class="fu">t</span>(lQinvFFR) <span class="sc">%*%</span> lQinv_e</span>
+<span id="cb8-17"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-17" tabindex="-1"></a>    <span class="co">#     R %*% t(FF) %*% Qinv_e</span></span>
+<span id="cb8-18"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-18" tabindex="-1"></a>    Cnew <span class="ot">&lt;-</span> R <span class="sc">-</span> <span class="fu">crossprod</span>(lQinvFFR)</span>
+<span id="cb8-19"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-19" tabindex="-1"></a>    Cnew <span class="ot">&lt;-</span> <span class="fu">check.pds</span>(Cnew)</span>
+<span id="cb8-20"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-20" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-21" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">mstar =</span> mstar, <span class="at">lRt =</span> <span class="fu">chol</span>(R), <span class="at">lQt =</span> lQt, <span class="at">f =</span> f, <span class="at">a =</span> anew, <span class="at">b =</span> bnew,</span>
+<span id="cb8-22"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-22" tabindex="-1"></a>            <span class="at">m =</span> mnew, <span class="at">C =</span> Cnew))</span>
+<span id="cb8-23"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-23" tabindex="-1"></a>}</span>
+<span id="cb8-24"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-24" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-25" tabindex="-1"></a></span>
+<span id="cb8-26"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-26" tabindex="-1"></a><span class="co"># the full forward filter step over all time. </span></span>
+<span id="cb8-27"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-27" tabindex="-1"></a><span class="co">#   dlm.mod is a list of parameters needed to compute the DLM package,</span></span>
+<span id="cb8-28"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-28" tabindex="-1"></a><span class="co">#       with FF and GG refering to the F_t and G_t matrices in equation 4.1, etc.</span></span>
+<span id="cb8-29"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-29" tabindex="-1"></a><span class="co">#       V and W referring to V_t and W_t respectively, and JFF, JGG, JV, and JW</span></span>
+<span id="cb8-30"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-30" tabindex="-1"></a><span class="co">#       referring to the set of entries in their respective matrices to change </span></span>
+<span id="cb8-31"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-31" tabindex="-1"></a><span class="co">#       as the next time iteration progresses, with X[t,k] replacing</span></span>
+<span id="cb8-32"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-32" tabindex="-1"></a><span class="co">#       the entry in FF, GG, V, or W with the JFF, JGG, JV, or JW entry </span></span>
+<span id="cb8-33"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-33" tabindex="-1"></a><span class="co">#       numbered by k respectively at time t.</span></span>
+<span id="cb8-34"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-34" tabindex="-1"></a><span class="co">#       Note here that for simplicity, we assume n_t is constant for all t.</span></span>
+<span id="cb8-35"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-35" tabindex="-1"></a><span class="co">#   scale.random determines if the model uses a random scale factor phi in the</span></span>
+<span id="cb8-36"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-36" tabindex="-1"></a><span class="co">#     shared variance case. If false, sets this scale factor to 1 for each case.</span></span>
+<span id="cb8-37"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-37" tabindex="-1"></a><span class="co">#   gibbs.df determines whether to use the Gibbs sampler implementation for the time-varying</span></span>
+<span id="cb8-38"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-38" tabindex="-1"></a><span class="co">#     discount factor for the variance. If not, the variance will be assumed to be the same</span></span>
+<span id="cb8-39"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-39" tabindex="-1"></a><span class="co">#     scale variance across all time.</span></span>
+<span id="cb8-40"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-40" tabindex="-1"></a><span class="co"># returns: full list of parameters</span></span>
+<span id="cb8-41"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-41" tabindex="-1"></a></span>
+<span id="cb8-42"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-42" tabindex="-1"></a>FF <span class="ot">&lt;-</span> <span class="cf">function</span>(y, dlm.mod, a0, b0, <span class="at">scale.random =</span> <span class="cn">TRUE</span>){</span>
+<span id="cb8-43"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-43" tabindex="-1"></a>    <span class="co">#NOTE: y should be a matrix with nrow being N and ncol being n</span></span>
+<span id="cb8-44"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-44" tabindex="-1"></a>    n <span class="ot">=</span> <span class="fu">ncol</span>(y)</span>
+<span id="cb8-45"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-45" tabindex="-1"></a>    N <span class="ot">=</span> <span class="fu">nrow</span>(y)</span>
+<span id="cb8-46"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-46" tabindex="-1"></a>    p <span class="ot">=</span> <span class="fu">length</span>(dlm.mod<span class="sc">$</span>m0)</span>
+<span id="cb8-47"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-47" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(dlm.mod<span class="sc">$</span>GG)) {</span>
+<span id="cb8-48"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-48" tabindex="-1"></a>        dlm.mod<span class="sc">$</span>GG <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">1</span>, p, p)</span>
+<span id="cb8-49"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-49" tabindex="-1"></a>    }</span>
+<span id="cb8-50"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-50" tabindex="-1"></a></span>
+<span id="cb8-51"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-51" tabindex="-1"></a>    <span class="co"># parameter lists</span></span>
+<span id="cb8-52"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-52" tabindex="-1"></a>    m_list <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, (N<span class="sc">+</span><span class="dv">1</span>) <span class="sc">*</span> p), <span class="at">nrow =</span> N<span class="sc">+</span><span class="dv">1</span>, <span class="at">ncol =</span> p)</span>
+<span id="cb8-53"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-53" tabindex="-1"></a>    C_list <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, (N<span class="sc">+</span><span class="dv">1</span>) <span class="sc">*</span> p <span class="sc">*</span> p), <span class="at">nrow =</span> N<span class="sc">+</span><span class="dv">1</span>, <span class="at">ncol =</span> p<span class="sc">*</span>p)</span>
+<span id="cb8-54"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-54" tabindex="-1"></a>    a_list <span class="ot">&lt;-</span> <span class="fu">rep</span>(a0, N<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb8-55"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-55" tabindex="-1"></a>    b_list <span class="ot">&lt;-</span> <span class="fu">rep</span>(b0, N<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb8-56"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-56" tabindex="-1"></a>    sigma2_list <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, N<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb8-57"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-57" tabindex="-1"></a>    beta_list <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, (N<span class="sc">+</span><span class="dv">1</span>) <span class="sc">*</span> p), <span class="at">nrow =</span> N<span class="sc">+</span><span class="dv">1</span>, <span class="at">ncol =</span> p)</span>
+<span id="cb8-58"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-58" tabindex="-1"></a>    lRt_list <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, N <span class="sc">*</span> p <span class="sc">*</span> p), <span class="at">nrow =</span> N, <span class="at">ncol =</span> p<span class="sc">*</span>p)</span>
+<span id="cb8-59"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-59" tabindex="-1"></a>    lQt_list <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, N <span class="sc">*</span> n <span class="sc">*</span> n), <span class="at">nrow =</span> N, <span class="at">ncol =</span> n<span class="sc">*</span>n)</span>
+<span id="cb8-60"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-60" tabindex="-1"></a>    f_list <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, N <span class="sc">*</span> n), <span class="at">nrow =</span> N, <span class="at">ncol =</span> n)</span>
+<span id="cb8-61"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-61" tabindex="-1"></a></span>
+<span id="cb8-62"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-62" tabindex="-1"></a>    m_list[<span class="dv">1</span>,] <span class="ot">&lt;-</span> dlm.mod<span class="sc">$</span>m0</span>
+<span id="cb8-63"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-63" tabindex="-1"></a>    C_list[<span class="dv">1</span>,] <span class="ot">&lt;-</span> <span class="fu">c</span>(dlm.mod<span class="sc">$</span>C0)</span>
+<span id="cb8-64"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-64" tabindex="-1"></a>    a_list[<span class="dv">1</span>] <span class="ot">&lt;-</span> a0</span>
+<span id="cb8-65"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-65" tabindex="-1"></a>    b_list[<span class="dv">1</span>] <span class="ot">&lt;-</span> b0</span>
+<span id="cb8-66"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-66" tabindex="-1"></a></span>
+<span id="cb8-67"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-67" tabindex="-1"></a>    <span class="cf">if</span> (scale.random) {</span>
+<span id="cb8-68"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-68" tabindex="-1"></a>        sigma2_list[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">rgamma</span>(<span class="dv">1</span>, a0, b0)</span>
+<span id="cb8-69"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-69" tabindex="-1"></a>        beta_list[<span class="dv">1</span>,] <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, dlm.mod<span class="sc">$</span>m0, sigma2_list[<span class="dv">1</span>] <span class="sc">*</span> dlm.mod<span class="sc">$</span>C0)</span>
+<span id="cb8-70"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-70" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb8-71"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-71" tabindex="-1"></a>        beta_list[<span class="dv">1</span>,] <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, dlm.mod<span class="sc">$</span>m0, dlm.mod<span class="sc">$</span>C0)</span>
+<span id="cb8-72"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-72" tabindex="-1"></a>        sigma2_list <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, N<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb8-73"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-73" tabindex="-1"></a>    }</span>
+<span id="cb8-74"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-74" tabindex="-1"></a></span>
+<span id="cb8-75"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-75" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb8-76"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-76" tabindex="-1"></a>        <span class="co"># preprocess time-variant FF and GG</span></span>
+<span id="cb8-77"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-77" tabindex="-1"></a>        time.param.list <span class="ot">&lt;-</span> <span class="fu">get.time.varying.params</span>(dlm.mod, i)</span>
+<span id="cb8-78"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-78" tabindex="-1"></a>        C <span class="ot">&lt;-</span> <span class="fu">matrix</span>(C_list[i,], p, p)</span>
+<span id="cb8-79"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-79" tabindex="-1"></a>        FF.param.list <span class="ot">&lt;-</span> <span class="fu">FF.params.1step</span>(y[i,], time.param.list<span class="sc">$</span>FF, time.param.list<span class="sc">$</span>GG,</span>
+<span id="cb8-80"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-80" tabindex="-1"></a>                      m_list[i,], C, time.param.list<span class="sc">$</span>W, time.param.list<span class="sc">$</span>V,</span>
+<span id="cb8-81"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-81" tabindex="-1"></a>                      a_list[i], b_list[i], n, scale.random)</span>
+<span id="cb8-82"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-82" tabindex="-1"></a>        m_list[i<span class="sc">+</span><span class="dv">1</span>,] <span class="ot">&lt;-</span> FF.param.list<span class="sc">$</span>m</span>
+<span id="cb8-83"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-83" tabindex="-1"></a>        C_list[i<span class="sc">+</span><span class="dv">1</span>,] <span class="ot">&lt;-</span> <span class="fu">c</span>(FF.param.list<span class="sc">$</span>C)</span>
+<span id="cb8-84"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-84" tabindex="-1"></a>        a_list[i<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> FF.param.list<span class="sc">$</span>a</span>
+<span id="cb8-85"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-85" tabindex="-1"></a>        b_list[i<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> FF.param.list<span class="sc">$</span>b</span>
+<span id="cb8-86"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-86" tabindex="-1"></a>        lRt_list[i,] <span class="ot">&lt;-</span> <span class="fu">c</span>(FF.param.list<span class="sc">$</span>lRt)</span>
+<span id="cb8-87"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-87" tabindex="-1"></a>        lQt_list[i,] <span class="ot">&lt;-</span> <span class="fu">c</span>(FF.param.list<span class="sc">$</span>lQt)</span>
+<span id="cb8-88"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-88" tabindex="-1"></a>        f_list[i,] <span class="ot">&lt;-</span> FF.param.list<span class="sc">$</span>f</span>
+<span id="cb8-89"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-89" tabindex="-1"></a></span>
+<span id="cb8-90"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-90" tabindex="-1"></a>        <span class="cf">if</span> (scale.random) {</span>
+<span id="cb8-91"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-91" tabindex="-1"></a>            sigma2_list[i<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">rgamma</span>(<span class="dv">1</span>, FF.param.list<span class="sc">$</span>a, FF.param.list<span class="sc">$</span>b)</span>
+<span id="cb8-92"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-92" tabindex="-1"></a>        }</span>
+<span id="cb8-93"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-93" tabindex="-1"></a></span>
+<span id="cb8-94"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-94" tabindex="-1"></a>        beta_list[i<span class="sc">+</span><span class="dv">1</span>,] <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, FF.param.list<span class="sc">$</span>m, sigma2_list[i<span class="sc">+</span><span class="dv">1</span>] <span class="sc">*</span> FF.param.list<span class="sc">$</span>C)</span>
+<span id="cb8-95"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-95" tabindex="-1"></a>    }</span>
+<span id="cb8-96"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-96" tabindex="-1"></a></span>
+<span id="cb8-97"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-97" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">m =</span> m_list, <span class="at">C =</span> C_list, <span class="at">a =</span> a_list, <span class="at">b =</span> b_list,</span>
+<span id="cb8-98"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-98" tabindex="-1"></a>            <span class="at">lRt =</span> lRt_list, <span class="at">lQt =</span> lQt_list, <span class="at">f =</span> f_list,</span>
+<span id="cb8-99"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-99" tabindex="-1"></a>            <span class="at">beta =</span> beta_list, <span class="at">sigma2 =</span> sigma2_list))</span>
+<span id="cb8-100"><a href="forward-filtering-backward-sampling---shared-variance.html#cb8-100" tabindex="-1"></a>}</span></code></pre></div>
+<p>The following code encompasses backwards sampling:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-1" tabindex="-1"></a><span class="co"># a single step of the backwards sampling. This computes beta_t | beta_{t+1}, D_T.</span></span>
+<span id="cb9-2"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-2" tabindex="-1"></a><span class="co">#   from the forward filter case</span></span>
+<span id="cb9-3"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-3" tabindex="-1"></a>BS.params<span class="fl">.1</span>step <span class="ot">&lt;-</span> <span class="cf">function</span>(beta, m, G, C, lRt){</span>
+<span id="cb9-4"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-4" tabindex="-1"></a>    hnew <span class="ot">&lt;-</span> beta <span class="sc">-</span> G <span class="sc">%*%</span> m</span>
+<span id="cb9-5"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-5" tabindex="-1"></a>    hnew <span class="ot">&lt;-</span> <span class="fu">backsolve</span>(lRt, hnew, <span class="at">transpose =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-6"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-6" tabindex="-1"></a>    hnew <span class="ot">&lt;-</span> <span class="fu">backsolve</span>(lRt, hnew)</span>
+<span id="cb9-7"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-7" tabindex="-1"></a>    hnew <span class="ot">&lt;-</span> <span class="fu">t</span>(G) <span class="sc">%*%</span> hnew</span>
+<span id="cb9-8"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-8" tabindex="-1"></a>    hnew <span class="ot">&lt;-</span> C <span class="sc">%*%</span> hnew</span>
+<span id="cb9-9"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-9" tabindex="-1"></a>    hnew <span class="ot">&lt;-</span> m <span class="sc">+</span> hnew</span>
+<span id="cb9-10"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-11" tabindex="-1"></a>    Hnew <span class="ot">&lt;-</span> G <span class="sc">%*%</span> C</span>
+<span id="cb9-12"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-12" tabindex="-1"></a>    Hnew <span class="ot">&lt;-</span> <span class="fu">backsolve</span>(lRt, Hnew, <span class="at">transpose =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-13"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-13" tabindex="-1"></a>    Hnew <span class="ot">&lt;-</span> <span class="fu">crossprod</span>(Hnew)</span>
+<span id="cb9-14"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-14" tabindex="-1"></a>    Hnew <span class="ot">&lt;-</span> C <span class="sc">-</span> Hnew</span>
+<span id="cb9-15"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-15" tabindex="-1"></a>    Hnew <span class="ot">&lt;-</span> <span class="fu">check.pds</span>(Hnew)</span>
+<span id="cb9-16"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-16" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">beta =</span> beta, <span class="at">h =</span> hnew, <span class="at">H =</span> Hnew))</span>
+<span id="cb9-17"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-17" tabindex="-1"></a>}</span>
+<span id="cb9-18"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-18" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-19" tabindex="-1"></a><span class="co"># the full backwards sampling algorithm for smoothing the parameters beta.</span></span>
+<span id="cb9-20"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-20" tabindex="-1"></a><span class="co">#   To get the nonrandom constant variance case,set sigma2.T = 1, or</span></span>
+<span id="cb9-21"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-21" tabindex="-1"></a><span class="co">#   alternatively, set scale.random = FALSE.</span></span>
+<span id="cb9-22"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-22" tabindex="-1"></a><span class="co"># returns: the full list of backwards-sampled beta</span></span>
+<span id="cb9-23"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-23" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-24" tabindex="-1"></a>BS <span class="ot">&lt;-</span> <span class="cf">function</span>(dlm.mod, m_list, C_list, lRt_list, sigma2.T, <span class="at">scale.random =</span> <span class="cn">TRUE</span>){</span>
+<span id="cb9-25"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-25" tabindex="-1"></a>    N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(m_list) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb9-26"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-26" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">ncol</span>(m_list)</span>
+<span id="cb9-27"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-27" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-28" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>scale.random) {</span>
+<span id="cb9-29"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-29" tabindex="-1"></a>        sigma2.T <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb9-30"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-30" tabindex="-1"></a>    }</span>
+<span id="cb9-31"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-31" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-32" tabindex="-1"></a>    beta_bs_list <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, (N <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">*</span> p), <span class="at">nrow =</span> N<span class="sc">+</span><span class="dv">1</span>, <span class="at">ncol =</span> p)</span>
+<span id="cb9-33"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-33" tabindex="-1"></a>    C.T <span class="ot">&lt;-</span> <span class="fu">matrix</span>(C_list[N<span class="sc">+</span><span class="dv">1</span>,], p, p)</span>
+<span id="cb9-34"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-34" tabindex="-1"></a>    <span class="cf">if</span> (scale.random) {</span>
+<span id="cb9-35"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-35" tabindex="-1"></a>        beta_bs_list[N<span class="sc">+</span><span class="dv">1</span>,] <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, m_list[N<span class="sc">+</span><span class="dv">1</span>,], sigma2.T <span class="sc">*</span> C.T)</span>
+<span id="cb9-36"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-36" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb9-37"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-37" tabindex="-1"></a>        beta_bs_list[N<span class="sc">+</span><span class="dv">1</span>,] <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, m_list[N<span class="sc">+</span><span class="dv">1</span>,], C.T)</span>
+<span id="cb9-38"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-38" tabindex="-1"></a>    }</span>
+<span id="cb9-39"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-39" tabindex="-1"></a>    h_list <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, (N<span class="sc">+</span><span class="dv">1</span>) <span class="sc">*</span> p), <span class="at">nrow =</span> N<span class="sc">+</span><span class="dv">1</span>, <span class="at">ncol =</span> p)</span>
+<span id="cb9-40"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-40" tabindex="-1"></a>    H_list <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, (N<span class="sc">+</span><span class="dv">1</span>) <span class="sc">*</span> p <span class="sc">*</span> p), <span class="at">nrow =</span> N<span class="sc">+</span><span class="dv">1</span>, <span class="at">ncol =</span> p <span class="sc">*</span> p)</span>
+<span id="cb9-41"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-41" tabindex="-1"></a>    h_list[N<span class="sc">+</span><span class="dv">1</span>,] <span class="ot">&lt;-</span> m_list[N<span class="sc">+</span><span class="dv">1</span>,]</span>
+<span id="cb9-42"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-42" tabindex="-1"></a>    H_list[N<span class="sc">+</span><span class="dv">1</span>,] <span class="ot">&lt;-</span> C_list[N<span class="sc">+</span><span class="dv">1</span>,]</span>
+<span id="cb9-43"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-43" tabindex="-1"></a></span>
+<span id="cb9-44"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-44" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> N<span class="sc">:</span><span class="dv">1</span>){</span>
+<span id="cb9-45"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-45" tabindex="-1"></a>        m <span class="ot">&lt;-</span> m_list[i,]  <span class="co">#NOTE: m and C go from 0 to N.</span></span>
+<span id="cb9-46"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-46" tabindex="-1"></a>        C <span class="ot">&lt;-</span> <span class="fu">matrix</span>(C_list[i,],p,p) </span>
+<span id="cb9-47"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-47" tabindex="-1"></a>        lRt <span class="ot">&lt;-</span> <span class="fu">matrix</span>(lRt_list[i,],p,p) <span class="co"># R and G go from 1 to N.</span></span>
+<span id="cb9-48"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-48" tabindex="-1"></a>            </span>
+<span id="cb9-49"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-49" tabindex="-1"></a>        time.param.list <span class="ot">&lt;-</span> <span class="fu">get.time.varying.params</span>(dlm.mod, i)</span>
+<span id="cb9-50"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-50" tabindex="-1"></a><span class="co">#       mstar &lt;- time.param.list$GG %*% m_list[i,] </span></span>
+<span id="cb9-51"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-51" tabindex="-1"></a><span class="co">#       H &lt;- matrix(H_list[i+1,],p,p)</span></span>
+<span id="cb9-52"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-52" tabindex="-1"></a><span class="co">#           bs.results.1step &lt;- BS.1step(h_list[i+1,], S, m_list[i,], time.param.list$GG,</span></span>
+<span id="cb9-53"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-53" tabindex="-1"></a><span class="co">#                        C, lRt, sigma2.T)</span></span>
+<span id="cb9-54"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-54" tabindex="-1"></a>        bs.results<span class="fl">.1</span>step <span class="ot">&lt;-</span> <span class="fu">BS.params.1step</span>(beta_bs_list[i<span class="sc">+</span><span class="dv">1</span>,], m, time.param.list<span class="sc">$</span>GG, C, lRt)</span>
+<span id="cb9-55"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-55" tabindex="-1"></a>        beta_bs_list[i,] <span class="ot">&lt;-</span> <span class="fu">rmvnorm</span>(<span class="dv">1</span>, bs.results<span class="fl">.1</span>step<span class="sc">$</span>h, sigma2.T <span class="sc">*</span> bs.results<span class="fl">.1</span>step<span class="sc">$</span>H)</span>
+<span id="cb9-56"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-56" tabindex="-1"></a>        h_list[i,] <span class="ot">&lt;-</span> bs.results<span class="fl">.1</span>step<span class="sc">$</span>h</span>
+<span id="cb9-57"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-57" tabindex="-1"></a>        H_list[i,] <span class="ot">&lt;-</span> bs.results<span class="fl">.1</span>step<span class="sc">$</span>H</span>
+<span id="cb9-58"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-58" tabindex="-1"></a>    }</span>
+<span id="cb9-59"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-59" tabindex="-1"></a></span>
+<span id="cb9-60"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-60" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">beta =</span> beta_bs_list, <span class="at">h =</span> h_list, <span class="at">H =</span> H_list))</span>
+<span id="cb9-61"><a href="forward-filtering-backward-sampling---shared-variance.html#cb9-61" tabindex="-1"></a>}</span></code></pre></div>
+<p>We want to regress Ozone level with Solar radiation, Wind, and temperature for each day. (Note that for this case that <span class="math inline">\(n_{t} = 1\)</span> for all <span class="math inline">\(t\)</span>). We begin by writing our data into the appropriate structure for our code:</p>
+<!-- TODO: transform the data into the dlm.mod form and throw it into the FFBS code. -->
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb10-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.2.2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-1" tabindex="-1"></a>airquality.complete <span class="ot">&lt;-</span> airquality.complete <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(Month,Day)</span>
+<span id="cb15-2"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-2" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-3" tabindex="-1"></a>airquality.complete<span class="sc">$</span>t <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="fu">nrow</span>(airquality.complete))</span>
+<span id="cb15-4"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-4" tabindex="-1"></a>airquality.complete<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">paste</span>(airquality.complete<span class="sc">$</span>Month, </span>
+<span id="cb15-5"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-5" tabindex="-1"></a>                                  airquality.complete<span class="sc">$</span>Day,</span>
+<span id="cb15-6"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-6" tabindex="-1"></a>                                  <span class="st">&quot;1973&quot;</span>, <span class="at">sep=</span><span class="st">&quot;/&quot;</span>)</span>
+<span id="cb15-7"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-7" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-8" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">c</span>(airquality.complete<span class="sc">$</span>Ozone), <span class="at">nrow =</span> N, <span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb15-9"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-9" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb15-10"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-10" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb15-11"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-11" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(airquality.complete)</span>
+<span id="cb15-12"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-12" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-13" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>, N <span class="sc">*</span> n <span class="sc">*</span> p), <span class="at">nrow =</span> N, <span class="at">ncol =</span> n <span class="sc">*</span> p)</span>
+<span id="cb15-14"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-14" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-15" tabindex="-1"></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">1</span>, N)) {</span>
+<span id="cb15-16"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-16" tabindex="-1"></a>  X[t,]<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">as.matrix</span>(airquality.complete[t, <span class="fu">c</span>(<span class="st">&quot;Solar.R&quot;</span>, <span class="st">&quot;Wind&quot;</span>, <span class="st">&quot;Temp&quot;</span>)]))</span>
+<span id="cb15-17"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-17" tabindex="-1"></a>}</span>
+<span id="cb15-18"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-18" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-19" tabindex="-1"></a>JFF <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">seq</span>(<span class="dv">1</span>, n <span class="sc">*</span> p), <span class="at">nrow =</span> n, <span class="at">ncol =</span> p)</span>
+<span id="cb15-20"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-20" tabindex="-1"></a>F1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">as.matrix</span>(airquality.complete[<span class="dv">1</span>, <span class="fu">c</span>(<span class="st">&quot;Solar.R&quot;</span>, <span class="st">&quot;Wind&quot;</span>, <span class="st">&quot;Temp&quot;</span>)]))</span>
+<span id="cb15-21"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-21" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-22" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,p)</span>
+<span id="cb15-23"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-23" tabindex="-1"></a>C0 <span class="ot">&lt;-</span> <span class="fu">diag</span>(p)</span>
+<span id="cb15-24"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-24" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-25" tabindex="-1"></a>dlm.mod <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">m0 =</span> m0,</span>
+<span id="cb15-26"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-26" tabindex="-1"></a>                <span class="at">C0 =</span> C0,</span>
+<span id="cb15-27"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-27" tabindex="-1"></a>                <span class="at">FF =</span> F1,</span>
+<span id="cb15-28"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-28" tabindex="-1"></a>                <span class="at">GG =</span> <span class="fu">diag</span>(p),</span>
+<span id="cb15-29"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-29" tabindex="-1"></a>                <span class="at">V =</span> <span class="dv">1</span>,</span>
+<span id="cb15-30"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-30" tabindex="-1"></a>                <span class="at">W =</span> <span class="fu">diag</span>(p),</span>
+<span id="cb15-31"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-31" tabindex="-1"></a>                <span class="at">JFF =</span> JFF,</span>
+<span id="cb15-32"><a href="forward-filtering-backward-sampling---shared-variance.html#cb15-32" tabindex="-1"></a>                <span class="at">X =</span> X)</span></code></pre></div>
+<p>We can now run the DLM on our data:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb16-1" tabindex="-1"></a>a0 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb16-2"><a href="forward-filtering-backward-sampling---shared-variance.html#cb16-2" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb16-3"><a href="forward-filtering-backward-sampling---shared-variance.html#cb16-3" tabindex="-1"></a>ff.results <span class="ot">&lt;-</span> <span class="fu">FF</span>(y, dlm.mod, a0, b0, <span class="at">scale.random =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-4"><a href="forward-filtering-backward-sampling---shared-variance.html#cb16-4" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="forward-filtering-backward-sampling---shared-variance.html#cb16-5" tabindex="-1"></a>sigma2.T <span class="ot">&lt;-</span> ff.results<span class="sc">$</span>sigma2[N<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb16-6"><a href="forward-filtering-backward-sampling---shared-variance.html#cb16-6" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;(sigma2 | D_T):&quot;</span>, sigma2.T)</span></code></pre></div>
+<pre><code>## (sigma2 | D_T): 0.03449604</code></pre>
+<p>In particular, we are interested in the value of <span class="math inline">\(\sigma^{2}\vert D_{T}\)</span>, because this will be the scale variance value we will use to sample our parameter estimates at the backwards sampling step:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb18-1" tabindex="-1"></a>bs.results <span class="ot">&lt;-</span> <span class="fu">BS</span>(dlm.mod, ff.results<span class="sc">$</span>m, ff.results<span class="sc">$</span>C, ff.results<span class="sc">$</span>lRt, sigma2.T, <span class="at">scale.random =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Do some postprocessing to prepare for plotting the parameter estimates for Solar R, Wind, and Temperature:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb19-1" tabindex="-1"></a>betas.bs <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(bs.results<span class="sc">$</span>beta)</span>
+<span id="cb19-2"><a href="forward-filtering-backward-sampling---shared-variance.html#cb19-2" tabindex="-1"></a><span class="fu">colnames</span>(betas.bs) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Solar.R&quot;</span>, <span class="st">&quot;Wind&quot;</span>, <span class="st">&quot;Temp&quot;</span>)</span>
+<span id="cb19-3"><a href="forward-filtering-backward-sampling---shared-variance.html#cb19-3" tabindex="-1"></a>betas.bs<span class="sc">$</span>t <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,N)</span>
+<span id="cb19-4"><a href="forward-filtering-backward-sampling---shared-variance.html#cb19-4" tabindex="-1"></a>betas.bs <span class="ot">&lt;-</span> <span class="fu">merge</span>(betas.bs, airquality.complete[,<span class="fu">c</span>(<span class="st">&quot;t&quot;</span>,<span class="st">&quot;date&quot;</span>)])</span>
+<span id="cb19-5"><a href="forward-filtering-backward-sampling---shared-variance.html#cb19-5" tabindex="-1"></a>betas.bs<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(betas.bs<span class="sc">$</span>date, <span class="at">tryFormats=</span><span class="fu">c</span>(<span class="st">&quot;%m/%d/%Y&quot;</span>))</span></code></pre></div>
+<p>The estimates of <span class="math inline">\(\beta_{t}\)</span> are plotted below:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb20-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.2.3</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb22-1" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb22-2"><a href="forward-filtering-backward-sampling---shared-variance.html#cb22-2" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb22-3"><a href="forward-filtering-backward-sampling---shared-variance.html#cb22-3" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="forward-filtering-backward-sampling---shared-variance.html#cb22-4" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> betas.bs, <span class="fu">aes</span>(<span class="at">x =</span> date)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Solar.R))</span>
+<span id="cb22-5"><a href="forward-filtering-backward-sampling---shared-variance.html#cb22-5" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> betas.bs, <span class="fu">aes</span>(<span class="at">x =</span> date)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Wind))</span>
+<span id="cb22-6"><a href="forward-filtering-backward-sampling---shared-variance.html#cb22-6" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> betas.bs, <span class="fu">aes</span>(<span class="at">x =</span> date)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Temp))</span>
+<span id="cb22-7"><a href="forward-filtering-backward-sampling---shared-variance.html#cb22-7" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="forward-filtering-backward-sampling---shared-variance.html#cb22-8" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;gridExtra&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: package &#39;gridExtra&#39; was built under R version 4.2.2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;gridExtra&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     combine</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="forward-filtering-backward-sampling---shared-variance.html#cb26-1" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
 <a href="posteriors-using-sufficient-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="appendix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="matrix-algebra.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -310,8 +860,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-DLMSharedVariance.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,
@@ -321,7 +871,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null

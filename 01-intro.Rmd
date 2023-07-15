@@ -16,7 +16,7 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 header-includes:
   - \newcommand{\T}{\mathrm{\scriptscriptstyle T}}
-  - \usepackage{mathtools}
+  - \usepackage{amsmath, amssymb, mathtools, listings}
 output: html_document
 
 ---
@@ -517,26 +517,52 @@ function toggleDisplay5(id) {
 So, we get the following updating form of the posterior distribution from Bayesian linear regression
 
 
-
+<!-- \begin{subequations}\label{eq:conjbayesdensity} -->
 \begin{equation*}
-\begin{split}
 P\left(\beta, \sigma^{2} \mid y\right) = NIG\left(\beta, \sigma^{2} \mid \tilde{m}_1, \tilde{M}_1, a_{1}, b_{1}\right) \\
-\end{split}
 (\#eq:conjbayesdensity)
 \end{equation*}
 
 where
 
+<!--\begin{subequations}
+\label{eq:conjbayes}
 \begin{equation*}
 \begin{split}
-\tilde{m}_1 & =M_1 m_1=m_0+M_0 X^{\T} Q^{-1}\left(y-X m_0\right) \\
-\tilde{M}_1 & =M_1=M_0-M_0 X^{\T} Q^{-1} X M_0 \\
+\begin{align}
+\tilde{m}_1 & =M_1 m_1 =m_0+M_0 X^{\T} Q^{-1}\left(y-X m_0\right) \\
+\end{split}\label{eq:conjbayesm}
+\begin{split}
+\tilde{M}_1 & =M_1 =M_0-M_0 X^{\T} Q^{-1} X M_0\\
+\end{split}\label{eq:conjbayesM}
+\begin{split}
+a_1 & =a_0+\frac{p}{2} \\
+\end{split}\label{eq:conjbayesa}
+\begin{split}
+b_1 & =b_0+\frac{1}{2}\left(y-X m_0\right)^{\T} Q^{-1}\left(y-X m_0\right) \\
+\end{split}\label{eq:conjbayesb}
+\begin{split}
+Q & =V+X M_0 X^{\T} \\
+\end{split}\label{eq:conjbayesQ}
+\end{equation*}
+\end{subequations}-->
+<!--
+\begin{subequations}
+\label{eq:conjbayes}-->
+\begin{equation*}
+\begin{split}
+\tilde{m}_1 & =M_1 m_1 =m_0+M_0 X^{\T} Q^{-1}\left(y-X m_0\right)\\
+\tilde{M}_1 & =M_1 =M_0-M_0 X^{\T} Q^{-1} X M_0\\
 a_1 & =a_0+\frac{p}{2} \\
 b_1 & =b_0+\frac{1}{2}\left(y-X m_0\right)^{\T} Q^{-1}\left(y-X m_0\right) \\
-Q & =V+X M_0 X^{\T}\\
+Q & =V+X M_0 X^{\T} 
 \end{split}
-(\#eq:conjbayesterms)
+(\#eq:conjbayes)
 \end{equation*}
+<!--\end{subequations}
+-->
+
+
 
 ### Method 2: Distribution theory
 Previously, we got the Bayesian Linear Regression Updater using [Sherman-Woodbury-Morrison identity](https://en.wikipedia.org/wiki/Woodbury_matriX_identity). Here, we will derive the results without resorting to it. Recall that the model is given by

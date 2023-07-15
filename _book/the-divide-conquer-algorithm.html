@@ -23,7 +23,7 @@
 <meta name="author" content="Xiang Chen, Valentina Arputhasamy, Daniel Zhou, Sudipto Banerjee" />
 
 
-<meta name="date" content="2023-03-01" />
+<meta name="date" content="2023-07-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,6 +56,7 @@
 
 
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -68,6 +69,9 @@
       <nav role="navigation">
 
 <ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
@@ -112,19 +116,26 @@
 </ul></li>
 <li class="chapter" data-level="4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html"><i class="fa fa-check"></i><b>4</b> Forward Filtering Backward Sampling - Shared Variance</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#background"><i class="fa fa-check"></i><b>4.1</b> Background</a></li>
+<li class="chapter" data-level="4.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#background"><i class="fa fa-check"></i><b>4.1</b> Background</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#a-preliminary-note"><i class="fa fa-check"></i><b>4.1.1</b> A Preliminary Note</a></li>
+</ul></li>
 <li class="chapter" data-level="4.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-forward-filter"><i class="fa fa-check"></i><b>4.2</b> Derivation of the Forward Filter</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_tvert-y_t"><i class="fa fa-check"></i><b>4.2.1</b> Deriving <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span></a></li>
-<li class="chapter" data-level="4.2.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2vert-y_t"><i class="fa fa-check"></i><b>4.2.2</b> Deriving <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span></a></li>
-<li class="chapter" data-level="4.2.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#commentary"><i class="fa fa-check"></i><b>4.2.3</b> Commentary</a></li>
+<li class="chapter" data-level="4.2.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_t-vert-d_t"><i class="fa fa-check"></i><b>4.2.1</b> Deriving <span class="math inline">\(\beta_{t} \vert D_{t}\)</span></a></li>
+<li class="chapter" data-level="4.2.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2-vert-d_t"><i class="fa fa-check"></i><b>4.2.2</b> Deriving <span class="math inline">\(\sigma^{2} \vert D_{t}\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-backwards-sampling"><i class="fa fa-check"></i><b>4.3</b> Derivation of the Backwards Sampling</a></li>
+<li class="chapter" data-level="4.4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#sample-code"><i class="fa fa-check"></i><b>4.4</b> Sample Code</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i>Appendix</a>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="matrix-algebra.html"><a href="matrix-algebra.html"><i class="fa fa-check"></i><b>A</b> Matrix Algebra</a>
 <ul>
-<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#deriving-x_2-vert-x_1-when-x_1-x_2mathrmscriptscriptstyle-t-is-a-block-normal-multivariate-random-variable"><i class="fa fa-check"></i>Deriving <span class="math inline">\(x_{2} \vert x_{1}\)</span> when <span class="math inline">\((x_{1} x_{2})^{\mathrm{\scriptscriptstyle T}}\)</span> is a block-normal multivariate random variable</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#deriving-x_2-x_1-when-x_1text-x_2mathrmscriptscriptstyle-t-is-a-block-normal-multivariate-random-variable"><i class="fa fa-check"></i>Deriving <span class="math inline">\(x_{2} | x_{1}\)</span> when <span class="math inline">\((x_{1}\text{ }x_{2})^{\mathrm{\scriptscriptstyle T}}\)</span> is a block-normal multivariate random variable</a></li>
 </ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -149,8 +160,11 @@
 <div id="the-problem" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> The Problem<a href="the-divide-conquer-algorithm.html#the-problem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let <span class="math inline">\(y = (y_1, y_2, ...,y_n)^{T}\)</span> be an <span class="math inline">\(n \times 1\)</span> random vector of outcomes and <span class="math inline">\(X\)</span> be a fixed <span class="math inline">\(n \times p\)</span> matrix of predictors with full column rank. Consider the following Bayesian (hierarchical) linear regression model,</p>
-<p><span class="math display">\[ NIG(\beta, \sigma^2 \mid m_0, M_0, a_0, b_0) \times N(y \mid X\beta, \sigma^2I_n).\]</span>
-The posterior density is <span class="math inline">\(p(\beta, \sigma^2 \mid y) = IG(\sigma^2 \mid a_1, b_1) \times N(\beta \mid M_1m_1, \sigma^2M_1)\)</span>, and to carry out Bayesian inference, we first sample <span class="math inline">\(\sigma^2 \sim IG(a_1, b_1)\)</span> and then, for each sampled <span class="math inline">\(\sigma^2\)</span>, we sample <span class="math inline">\(\beta \sim N(M_1m_1, \sigma^2 M_1)\)</span>.</p>
+<p><span class="math display" id="eq:hierlinreg">\[\begin{equation*}
+IG(\sigma^2 \mid a_0,b_0) \times N(\beta \mid m_0, \sigma^2M_0) \times N(y \mid X\beta, \sigma^2I_n)\\
+\tag{2.1}
+\end{equation*}\]</span></p>
+<p>The posterior density is <span class="math inline">\(p(\beta, \sigma^2 \mid y) = IG(\sigma^2 \mid a_1, b_1) \times N(\beta \mid M_1m_1, \sigma^2M_1)\)</span>, and to carry out Bayesian inference, we first sample <span class="math inline">\(\sigma^2 \sim IG(a_1, b_1)\)</span> and then, for each sampled <span class="math inline">\(\sigma^2\)</span>, we sample <span class="math inline">\(\beta \sim N(M_1m_1, \sigma^2 M_1)\)</span>.</p>
 <p>Assume that <span class="math inline">\(n\)</span> is so large that we are unable to store or load <span class="math inline">\(y\)</span> or <span class="math inline">\(X\)</span> into our CPU to carry out computations for them. We decide to divide our data set into K mutually exclusive and exhaustive subsets, each comprising a manageable number of points. Note that <span class="math inline">\(p\)</span> is small, so computations involving <span class="math inline">\(p \times p\)</span> matrices are fine. Let <span class="math inline">\(y_k\)</span> denote the <span class="math inline">\(q_k \times 1\)</span> sub-vector of <span class="math inline">\(y\)</span>, and <span class="math inline">\(X_k\)</span> be the <span class="math inline">\(q_k \times p\)</span> sub-matrix of <span class="math inline">\(X\)</span> in subset <span class="math inline">\(k\)</span>, where each <span class="math inline">\(q_k\)</span> has been chosen by us so that <span class="math inline">\(q_k &gt; p\)</span>, and is small enough such that we can fit the above model on <span class="math inline">\(\{y_k, X_k\}\)</span>. This section will clearly explain how we can still compute <span class="math inline">\(a_1, b_1, M_1\)</span> and <span class="math inline">\(m_1\)</span> without ever having to store or compute with <span class="math inline">\(y\)</span> or <span class="math inline">\(X\)</span>, but with quantities computed using only the subsets <span class="math inline">\(\{y_k, X_k\}\)</span> for <span class="math inline">\(k = 1,2,...,K\)</span>.</p>
 </div>
 <div id="parallel-computing" class="section level2 hasAnchor" number="2.2">
@@ -165,65 +179,55 @@ The posterior density is <span class="math inline">\(p(\beta, \sigma^2 \mid y) =
 <style type="text/css">
 .ul { border: 2px solid black; }
 </style>
-<ul class="custom">
-<li>
-<span class="math inline">\(a_1\)</span> = <span class="math inline">\(a_0 + \frac{n}{2}\)</span><br />
-
-<li>
-<span class="math inline">\(b_1\)</span> = <span class="math inline">\(b_0 + \frac{c}{2}\)</span><br />
-
-<li>
-<span class="math inline">\(c\)</span> = <span class="math inline">\(m_0^{T}M^{-1}_0 m_0 + y^{\mathrm{\scriptscriptstyle T}}y - m_1^{\mathrm{\scriptscriptstyle T}}M_1m_1\)</span><br />
-
-<li>
-<span class="math inline">\(m_1\)</span> = <span class="math inline">\((X^{\mathrm{\scriptscriptstyle T}}y + M_0^{-1}m_0)\)</span><br />
-
-<li>
-<span class="math inline">\(M_1^{-1}\)</span> = <span class="math inline">\(X^{\mathrm{\scriptscriptstyle T}}X + M_0^{-1}\)</span>
-</ul>
-This implies that the explicit expressions for <span class="math inline">\(a_1, b_1, m_1\)</span> and <span class="math inline">\(M_1\)</span> for the <span class="math inline">\(i^{th}\)</span> subset are given by:
-<ul class="custom">
-<li>
-<span class="math inline">\(a_{1i}\)</span> = <span class="math inline">\(a_0 + \frac{q_i}{2}\)</span><br />
-
-<li>
-<span class="math inline">\(b_{1i}\)</span> = <span class="math inline">\(b_0 + \frac{c}{2}\)</span><br />
-
-<li>
-<span class="math inline">\(c_i\)</span> = <span class="math inline">\(m_0^{\mathrm{\scriptscriptstyle T}}M^{-1}_0 m_0 + y_i^{\mathrm{\scriptscriptstyle T}}y_i - m_{1i}^{\mathrm{\scriptscriptstyle T}}M_{1i}m_{1i}\)</span>
-<li>
-<span class="math inline">\(m_i\)</span> = <span class="math inline">\((X_i^{\mathrm{\scriptscriptstyle T}}y_i + M_0^{-1}m_0)\)</span><br />
-
-<li>
-<span class="math inline">\(M_i^{-1}\)</span> = <span class="math inline">\(X_i^{\mathrm{\scriptscriptstyle T}}X_i + M_0^{-1}\)</span>
-</ul>
+<p><span class="math display" id="eq:linregparams">\[\begin{equation*}
+\begin{split}
+a_1 &amp;= a_0 + \frac{n}{2}\\
+b_1 &amp;= b_0 + \frac{c}{2} \\
+c &amp;= m_0^{T}M^{-1}_0 m_0 + y^{\mathrm{\scriptscriptstyle T}}y - m_1^{\mathrm{\scriptscriptstyle T}}M_1 m_1 \\
+m_1 &amp;= (X^{\mathrm{\scriptscriptstyle T}}y + M_0^{-1}m_0) \\
+M_1^{-1} &amp;= X^{\mathrm{\scriptscriptstyle T}}X + M_0^{-1}
+\end{split}
+\tag{2.2}
+\end{equation*}\]</span></p>
+<p>This implies that the explicit expressions for <span class="math inline">\(a_1, b_1, m_1\)</span> and <span class="math inline">\(M_1\)</span> for the <span class="math inline">\(i^{th}\)</span> subset are given by:</p>
+<p><span class="math display" id="eq:linregparamssplit">\[\begin{equation*}
+\begin{split}
+a_{1i} &amp;= a_0 + \frac{q_i}{2} \\
+b_{1i} &amp;= b_0 + \frac{c}{2} \\
+c_i &amp;= m_0^{\mathrm{\scriptscriptstyle T}}M^{-1}_0 m_0 + y_i^{\mathrm{\scriptscriptstyle T}}y_i - m_{1i}^{\mathrm{\scriptscriptstyle T}}M_{1i}m_{1i}\\
+m_i &amp;= (X_i^{\mathrm{\scriptscriptstyle T}}y_i + M_0^{-1}m_0) \\
+M_i^{-1} &amp;= X_i^{\mathrm{\scriptscriptstyle T}}X_i + M_0^{-1}
+\end{split}
+\tag{2.3}
+\end{equation*}\]</span></p>
 <p>We can express the posteriors of the entire data set as a function of the posteriors of the subsets as follows:</p>
-<ul class="custom">
-<li>
-<span class="math inline">\(a_1\)</span> = <span class="math inline">\(\sum_{i=1}^{k} a_{1i} + (k-1)a_0\)</span>
-<li>
-<span class="math inline">\(b_1\)</span> = <span class="math inline">\(b_0 + m_0^{\mathrm{\scriptscriptstyle T}}M^{-1}_0 m_0 + \sum_{i=1}^{k}y_i^{\mathrm{\scriptscriptstyle T}}y_i - m_{1i}^{\mathrm{\scriptscriptstyle T}}M_{1i}m_{1i}\)</span><br />
-
-<li>
-<span class="math inline">\(m_1\)</span> = <span class="math inline">\(\sum_{i=1}^{k}m_{1i} - (k-1)M^{-1}_0m_0\)</span><br />
-
-<li>
-<span class="math inline">\(M_1^{-1}\)</span> = <span class="math inline">\(\sum_{i=1}^{k}x_i^{\mathrm{\scriptscriptstyle T}}x_i + M^{-1}_0 = \sum_{i=1}^{k}M^{-1}_{1i} - (k-1)M^{-1}_0\)</span>
-</ul>
+<p><span class="math display" id="eq:linregparamsumsplit">\[\begin{equation*}
+\begin{split}
+a_1 &amp;= \sum_{i=1}^{k} a_{1i} + (k-1)a_0\\
+b_1 &amp;= b_0 + m_0^{\mathrm{\scriptscriptstyle T}}M^{-1}_0 m_0 + \sum_{i=1}^{k}y_i^{\mathrm{\scriptscriptstyle T}}y_i - m_{1i}^{\mathrm{\scriptscriptstyle T}}M_{1i}m_{1i} \\
+m_1 &amp;= \sum_{i=1}^{k}m_{1i} - (k-1)M^{-1}_0m_0 \\
+M_1^{-1} &amp;= \sum_{i=1}^{k}x_i^{\mathrm{\scriptscriptstyle T}}x_i + M^{-1}_0 = \sum_{i=1}^{k}M^{-1}_{1i} - (k-1)M^{-1}_0
+\end{split}
+\tag{2.4}
+\end{equation*}\]</span></p>
 </div>
 <div id="algebra" class="section level3 hasAnchor" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Algebra<a href="the-divide-conquer-algorithm.html#algebra" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!--TODO: rename "Derivation"? -->
 <p>This section details the algebra used to obtain the posteriors of the entire
 data set expressed as functions of the posteriors of the subsets.</p>
 <p class="round1">
 Starting with <span class="math inline">\(a_1\)</span>:
 </p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display" id="eq:aderiv">\[\begin{equation*}
+\begin{split}
 \sum_{i=1}^{k} a_{i1} &amp;= \sum_{i=1}^{k} a_0 + \sum_{i=1}^{k}\frac{q_i}{2} \\
 &amp;= ka_0 + \frac{n}{2} \\
 &amp;= (k-1)a_0 + a_0 + \frac{n}{2} \\
-&amp;= (k-1)a_0 + a_1 \\
-\end{align*}\]</span></p>
+&amp;= (k-1)a_0 + a_1
+\end{split}
+\tag{2.5}
+\end{equation*}\]</span></p>
 <p><span class="math display">\[\begin{equation}
 \Longrightarrow a_1 = \sum_{i=1}^{k} a_{i1} - (k-1)a_0
 \end{equation}\]</span></p>
@@ -231,25 +235,31 @@ Starting with <span class="math inline">\(a_1\)</span>:
 Moving onto <span class="math inline">\(m\)</span>:
 </p>
 <p>Recall that <span class="math inline">\(m_1 = X^{\mathrm{\scriptscriptstyle T}}y + V_\beta^{-1}\mu_\beta\)</span>,</p>
-<p>where
-<span class="math display">\[X = \begin{bmatrix}x_1\\
+<p>where</p>
+<p><span class="math display">\[X = \begin{bmatrix}x_1\\
 x_2 \\
 \vdots \\
 x_k
 \end{bmatrix} \text{, where}\ x_i \in \mathbb{R}^{m_i \times 1} \ \text{and} \ y = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n
 \end{bmatrix} \text{, where}\ y_i \in \mathbb{R}.\]</span></p>
 <p>Using linear algebra we can see that:</p>
-<p><span class="math display">\[
+<p><span class="math display" id="eq:dotprod">\[\begin{equation*}
+\begin{split}
 X^{\mathrm{\scriptscriptstyle T}}y = \begin{bmatrix}x_1^{\mathrm{\scriptscriptstyle T}} &amp;
 x_2^{\mathrm{\scriptscriptstyle T}} &amp; \dots &amp; x_k^{T} \end{bmatrix} \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} = \sum_{i=1}^{k} x_i^{\mathrm{\scriptscriptstyle T}}y_i
-\]</span>
-Thus:</p>
-<p><span class="math display">\[\begin{align*}
+\end{split}
+\tag{2.6}
+\end{equation*}\]</span></p>
+<p>Thus:</p>
+<p><span class="math display" id="eq:mderiv">\[\begin{equation*}
+\begin{split}
 \sum_{i=1}^{k} m_i &amp;= \sum_{i=1}^{k} x_i^{\mathrm{\scriptscriptstyle T}}y_i + kV_\beta\mu_\beta^{-1} \\
 &amp;= X^{\mathrm{\scriptscriptstyle T}}y + kV_\beta^{-1}\mu_\beta \\
 &amp;= X^{\mathrm{\scriptscriptstyle T}}y + V_\beta^{-1}\mu_\beta + (k-1)V_\beta^{-1}\mu_\beta \\
 &amp;= m + (k-1)V_\beta^{-1}\mu_\beta
-\end{align*}\]</span></p>
+\end{split}
+\tag{2.7}
+\end{equation*}\]</span></p>
 <p><span class="math display">\[\begin{equation}
 \Longrightarrow m_1 = \sum_{i=1}^{k}m_i - (k-1)V_\beta^{-1}\mu_\beta
 \end{equation}\]</span></p>
@@ -258,11 +268,14 @@ Next is <span class="math inline">\(M^{-1}_1\)</span>:
 </p>
 <p>Recall that <span class="math inline">\(M_1^{-1} = X^{\mathrm{\scriptscriptstyle T}}X + V_\beta^{-1}\)</span>.</p>
 <p>Using linear algebra again, we can see that:</p>
-<p><span class="math display">\[
+<p><span class="math display" id="eq:grammatrix">\[\begin{equation*}
+\begin{split}
 X^{\mathrm{\scriptscriptstyle T}}X = \begin{bmatrix}x_1^{\mathrm{\scriptscriptstyle T}} &amp;
 x_2^{\mathrm{\scriptscriptstyle T}} &amp; \dots &amp; x_k^{\mathrm{\scriptscriptstyle T}} \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_k \end{bmatrix} = \sum_{i=1}^{k} x_i^{\mathrm{\scriptscriptstyle T}}x_i
-\]</span>
-<span class="math display">\[\begin{equation}
+\end{split}
+\tag{2.8}
+\end{equation*}\]</span></p>
+<p><span class="math display">\[\begin{equation}
 \Longrightarrow M_1^{-1} = \sum_{i=1}^{k}x_i^{\mathrm{\scriptscriptstyle T}}x_i + V_\beta^{-1}
 \end{equation}\]</span></p>
 <p class="round1">
@@ -270,11 +283,14 @@ Last is <span class="math inline">\(b_1\)</span>:
 </p>
 <p>Recall that <span class="math inline">\(b_1 = b_0 + \frac{m_0^{\mathrm{\scriptscriptstyle T}}M^{-1}_0 m_0 + y^{\mathrm{\scriptscriptstyle T}}y - m_1^{\mathrm{\scriptscriptstyle T}}M_1m_1}{2}\)</span>.</p>
 <p>Using linear algebra once again, we can see that:</p>
-<p><span class="math display">\[
+<p><span class="math display" id="eq:ynorm">\[\begin{equation}
+\begin{split}
 y^{\mathrm{\scriptscriptstyle T}}y = \begin{bmatrix}y_1^{\mathrm{\scriptscriptstyle T}} &amp;
 y_2^{\mathrm{\scriptscriptstyle T}} &amp; \dots &amp; y_n^{\mathrm{\scriptscriptstyle T}} \end{bmatrix} \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} = \sum_{i=1}^{n} y_i^{\mathrm{\scriptscriptstyle T}}y_i
-\]</span>
-<span class="math display">\[\begin{equation}
+\end{split}
+\tag{2.9}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
 \Longrightarrow b_1 = b_0 + \frac{m_0^{\mathrm{\scriptscriptstyle T}}M^{-1}_0 m_0 + \sum_{i=1}^{n} y_i^{\mathrm{\scriptscriptstyle T}}y_i - m_1^{\mathrm{\scriptscriptstyle T}}M_1m_1}{2}
 \end{equation}\]</span></p>
 <p>Which concludes the algebra behind obtaining <span class="math inline">\(a_1, b_1, M_1, \text{and} \ m_1\)</span> from the posteriors computed using the subsetted data.</p>
@@ -294,34 +310,32 @@ subset, which will upon computation will give us the posterior of the entire dat
 <p>Let <span class="math inline">\(D_k = \{y_k, X_k\}\)</span> be the <span class="math inline">\(i^{th}\)</span> subset of the entire data set for <span class="math inline">\(k = 1, ..., K\)</span>, such that <span class="math inline">\(D_i \perp D_j ,\ \forall \ i \neq j\)</span>. We will start with a simple example of how sequential computing works by setting <span class="math inline">\(k = 2\)</span>.<br />
 </p>
 <p>The posterior density of the first subset is:
-<span class="math display">\[\begin{equation}
+<span class="math display" id="eq:sub1post">\[\begin{equation}
 p(\beta, \sigma^2 \mid D_1) \propto IG(\sigma^2 \mid a_1, b_1) \times N(\beta \mid M_1m_1, \sigma^2M_1)
+\tag{2.10}
 \end{equation}\]</span></p>
 <p>The posteriors <span class="math inline">\(\{a_1, b_1, M_1, \text{and} \ m_1\}\)</span> then replace <span class="math inline">\(\{a_0, b_0\, M_0, \text{and} \ m_0\}\)</span> as priors when using the second subset to calculate posteriors:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display" id="eq:postud">\[\begin{equation*}
+\begin{split}
 p(\beta, \sigma^2 \mid D_1, D_1) &amp;\propto p(\beta, \sigma^2, D_1, D_2) \\
 &amp;\propto p(\beta, \sigma^2) \times p(D_1, D_2, \mid \beta, \sigma^2) \\
 &amp;\propto p(\beta, \sigma^2) \times p(D_1 \mid \beta, \sigma^2) \times p(D_2 \mid \beta, \sigma^2) \\
 &amp;\propto p(\beta, \sigma^2 \mid D_1) \times p(D_2 \mid \beta, \sigma^2)
-\end{align*}\]</span></p>
-<p>Which illustrates how the posteriors of the previous subset act as a priors when calculating the posteriors of the current subset.</p>
+\end{split}
+\tag{2.11}
+\end{equation*}\]</span></p>
+<p>which illustrates how the posteriors of the previous subset act as a priors when calculating the posteriors of the current subset.</p>
 <p>If we generalize this to <span class="math inline">\(k\)</span> subsets and do some algebra, we can derive equations for the posteriors of the last subset, which are equivalent to the posteriors obtained using the full data set.</p>
-<ul class="custom">
-<li>
-<span class="math inline">\(a_{1k}\)</span> = <span class="math inline">\(a_0 + \sum_{i=1}^{k}\frac{q_i}{2}\)</span><br />
-
-<li>
-<span class="math inline">\(b_1\)</span> = <span class="math inline">\(b_0 + \frac{c}{2}\)</span><br />
-
-<li>
-<span class="math inline">\(c\)</span> = <span class="math inline">\(m_0^{\mathrm{\scriptscriptstyle T}}M^{-1}_0 m_0 + y^{\mathrm{\scriptscriptstyle T}}y - m_1^{\mathrm{\scriptscriptstyle T}}M_1m_1\)</span><br />
-
-<li>
-<span class="math inline">\(m_1\)</span> = <span class="math inline">\((X^{\mathrm{\scriptscriptstyle T}}y + M_0^{-1}m_0)\)</span><br />
-
-<li>
-<span class="math inline">\(M_1^{-1}\)</span> = <span class="math inline">\(X^{\mathrm{\scriptscriptstyle T}}X + M_0^{-1}\)</span>
-</ul>
+<p><span class="math display" id="eq:kud">\[\begin{equation*}
+\begin{split}
+a_{1k} &amp;= a_0 + \sum_{i=1}^{k}\frac{q_i}{2}\\
+b_1 &amp;= b_0 + \frac{c}{2} \\
+c &amp;= m_0^{\mathrm{\scriptscriptstyle T}}M^{-1}_0 m_0 + y^{\mathrm{\scriptscriptstyle T}}y - m_1^{\mathrm{\scriptscriptstyle T}}M_1m_1 \\
+m_1 &amp;= (X^{\mathrm{\scriptscriptstyle T}}y + M_0^{-1}m_0) \\
+M_1^{-1} &amp;= X^{\mathrm{\scriptscriptstyle T}}X + M_0^{-1}
+\end{split}
+\tag{2.12}
+\end{equation*}\]</span></p>
 
 </div>
 </div>
@@ -363,8 +377,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-divide_and_conquer.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,
@@ -374,7 +388,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null

@@ -23,7 +23,7 @@
 <meta name="author" content="Xiang Chen, Valentina Arputhasamy, Daniel Zhou, Sudipto Banerjee" />
 
 
-<meta name="date" content="2023-03-01" />
+<meta name="date" content="2023-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,6 +56,7 @@
 
 
 
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -68,6 +69,9 @@
       <nav role="navigation">
 
 <ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
@@ -112,19 +116,26 @@
 </ul></li>
 <li class="chapter" data-level="4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html"><i class="fa fa-check"></i><b>4</b> Forward Filtering Backward Sampling - Shared Variance</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#background"><i class="fa fa-check"></i><b>4.1</b> Background</a></li>
+<li class="chapter" data-level="4.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#background"><i class="fa fa-check"></i><b>4.1</b> Background</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#a-preliminary-note"><i class="fa fa-check"></i><b>4.1.1</b> A Preliminary Note</a></li>
+</ul></li>
 <li class="chapter" data-level="4.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-forward-filter"><i class="fa fa-check"></i><b>4.2</b> Derivation of the Forward Filter</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_tvert-y_t"><i class="fa fa-check"></i><b>4.2.1</b> Deriving <span class="math inline">\(\beta_{t}\vert Y_{t}\)</span></a></li>
-<li class="chapter" data-level="4.2.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2vert-y_t"><i class="fa fa-check"></i><b>4.2.2</b> Deriving <span class="math inline">\(\sigma^{2}\vert Y_{t}\)</span></a></li>
-<li class="chapter" data-level="4.2.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#commentary"><i class="fa fa-check"></i><b>4.2.3</b> Commentary</a></li>
+<li class="chapter" data-level="4.2.1" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-beta_t-vert-d_t"><i class="fa fa-check"></i><b>4.2.1</b> Deriving <span class="math inline">\(\beta_{t} \vert D_{t}\)</span></a></li>
+<li class="chapter" data-level="4.2.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2-vert-d_t"><i class="fa fa-check"></i><b>4.2.2</b> Deriving <span class="math inline">\(\sigma^{2} \vert D_{t}\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-backwards-sampling"><i class="fa fa-check"></i><b>4.3</b> Derivation of the Backwards Sampling</a></li>
+<li class="chapter" data-level="4.4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#sample-code"><i class="fa fa-check"></i><b>4.4</b> Sample Code</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i>Appendix</a>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="matrix-algebra.html"><a href="matrix-algebra.html"><i class="fa fa-check"></i><b>A</b> Matrix Algebra</a>
 <ul>
-<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#deriving-x_2-vert-x_1-when-x_1-x_2mathrmscriptscriptstyle-t-is-a-block-normal-multivariate-random-variable"><i class="fa fa-check"></i>Deriving <span class="math inline">\(x_{2} \vert x_{1}\)</span> when <span class="math inline">\((x_{1} x_{2})^{\mathrm{\scriptscriptstyle T}}\)</span> is a block-normal multivariate random variable</a></li>
+<li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#deriving-x_2-x_1-when-x_1text-x_2mathrmscriptscriptstyle-t-is-a-block-normal-multivariate-random-variable"><i class="fa fa-check"></i>Deriving <span class="math inline">\(x_{2} | x_{1}\)</span> when <span class="math inline">\((x_{1}\text{ }x_{2})^{\mathrm{\scriptscriptstyle T}}\)</span> is a block-normal multivariate random variable</a></li>
 </ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -185,8 +196,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/%s",
+"text": "Edit"
 },
 "history": {
 "link": null,
@@ -196,7 +207,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null
