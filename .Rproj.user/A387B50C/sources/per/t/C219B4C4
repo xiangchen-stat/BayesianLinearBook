@@ -1,9 +1,9 @@
 {
     "id": "C219B4C4",
-    "path": "D:/Documents/UCLA/GSR/BLR/BayesianLinearBook/01-intro.Rmd",
+    "path": "D:/Documents/UCLA/Administrative/GSR/BLR/BayesianLinearBook/01-intro.Rmd",
     "project_path": "01-intro.Rmd",
     "type": "r_markdown",
-    "hash": "199750008",
+    "hash": "2087064370",
     "contents": "",
     "dirty": false,
     "created": 1674956169860.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "794,21",
-        "scrollLine": "802"
+        "cursorPosition": "952,33",
+        "scrollLine": "950"
     },
     "folds": "",
-    "lastKnownWriteTime": 1676316938,
+    "lastKnownWriteTime": 1689506164,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1676316938252,
+    "last_content_update": 1689506164288,
     "read_only": false,
     "read_only_alternatives": []
 }

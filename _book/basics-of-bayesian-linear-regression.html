@@ -23,7 +23,7 @@
 <meta name="author" content="Xiang Chen, Sudipto Banerjee" />
 
 
-<meta name="date" content="2023-07-14" />
+<meta name="date" content="2023-07-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -120,7 +120,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body>
@@ -133,9 +132,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
-
-<li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
@@ -156,6 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#bayesian-prediction"><i class="fa fa-check"></i><b>1.5</b> Bayesian prediction</a></li>
 <li class="chapter" data-level="1.6" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#sampling-from-the-posterior-distribution"><i class="fa fa-check"></i><b>1.6</b> Sampling from the posterior distribution</a></li>
+<li class="chapter" data-level="1.7" data-path="basics-of-bayesian-linear-regression.html"><a href="basics-of-bayesian-linear-regression.html#sample-code"><i class="fa fa-check"></i><b>1.7</b> Sample code</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="the-divide-conquer-algorithm.html"><a href="the-divide-conquer-algorithm.html"><i class="fa fa-check"></i><b>2</b> The Divide &amp; Conquer Algorithm</a>
 <ul>
@@ -190,16 +187,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.2.2" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#deriving-sigma2-vert-d_t"><i class="fa fa-check"></i><b>4.2.2</b> Deriving <span class="math inline">\(\sigma^{2} \vert D_{t}\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#derivation-of-the-backwards-sampling"><i class="fa fa-check"></i><b>4.3</b> Derivation of the Backwards Sampling</a></li>
-<li class="chapter" data-level="4.4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#sample-code"><i class="fa fa-check"></i><b>4.4</b> Sample Code</a></li>
+<li class="chapter" data-level="4.4" data-path="forward-filtering-backward-sampling---shared-variance.html"><a href="forward-filtering-backward-sampling---shared-variance.html#sample-code-1"><i class="fa fa-check"></i><b>4.4</b> Sample Code</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="matrix-algebra.html"><a href="matrix-algebra.html"><i class="fa fa-check"></i><b>A</b> Matrix Algebra</a>
 <ul>
 <li class="chapter" data-level="" data-path="matrix-algebra.html"><a href="matrix-algebra.html#deriving-x_2-x_1-when-x_1text-x_2mathrmscriptscriptstyle-t-is-a-block-normal-multivariate-random-variable"><i class="fa fa-check"></i>Deriving <span class="math inline">\(x_{2} | x_{1}\)</span> when <span class="math inline">\((x_{1}\text{ }x_{2})^{\mathrm{\scriptscriptstyle T}}\)</span> is a block-normal multivariate random variable</a></li>
 </ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -1006,6 +1000,97 @@ function toggleDisplay9(id) {
 <li><p>Draw <span class="math inline">\(\hat{\beta}_{(i)}\)</span> from <span class="math inline">\(N\left(M_{1} m_{1}, \hat{\sigma}_{(i)}^{2} M_{1}\right)\)</span></p></li>
 <li><p>Draw <span class="math inline">\(\tilde{y}_{(i)}\)</span> from <span class="math inline">\(N\left(\tilde{X} \hat{\beta}_{(i)}, \hat{\sigma}_{(i)}^{2}I_{\tilde{n}}\right)\)</span></p></li>
 </ol>
+</div>
+<div id="sample-code" class="section level2 hasAnchor" number="1.7">
+<h2><span class="header-section-number">1.7</span> Sample code<a href="basics-of-bayesian-linear-regression.html#sample-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="basics-of-bayesian-linear-regression.html#cb1-1" tabindex="-1"></a><span class="cf">if</span>(<span class="cn">TRUE</span>){</span>
+<span id="cb1-2"><a href="basics-of-bayesian-linear-regression.html#cb1-2" tabindex="-1"></a>  <span class="fu">library</span>(pacman)</span>
+<span id="cb1-3"><a href="basics-of-bayesian-linear-regression.html#cb1-3" tabindex="-1"></a>  <span class="fu">options</span>(<span class="at">tidyverse.quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-4"><a href="basics-of-bayesian-linear-regression.html#cb1-4" tabindex="-1"></a>  <span class="fu">p_load</span>(here, mvnfast, invgamma)</span>
+<span id="cb1-5"><a href="basics-of-bayesian-linear-regression.html#cb1-5" tabindex="-1"></a>  <span class="fu">p_load</span>(tidyverse)</span>
+<span id="cb1-6"><a href="basics-of-bayesian-linear-regression.html#cb1-6" tabindex="-1"></a>  </span>
+<span id="cb1-7"><a href="basics-of-bayesian-linear-regression.html#cb1-7" tabindex="-1"></a>  <span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">22</span>))</span>
+<span id="cb1-8"><a href="basics-of-bayesian-linear-regression.html#cb1-8" tabindex="-1"></a>  <span class="co">#print(here())</span></span>
+<span id="cb1-9"><a href="basics-of-bayesian-linear-regression.html#cb1-9" tabindex="-1"></a>}</span>
+<span id="cb1-10"><a href="basics-of-bayesian-linear-regression.html#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="basics-of-bayesian-linear-regression.html#cb1-11" tabindex="-1"></a><span class="co"># set up parameters and data</span></span>
+<span id="cb1-12"><a href="basics-of-bayesian-linear-regression.html#cb1-12" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb1-13"><a href="basics-of-bayesian-linear-regression.html#cb1-13" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># number of observations</span></span>
+<span id="cb1-14"><a href="basics-of-bayesian-linear-regression.html#cb1-14" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># dimention of covariates</span></span>
+<span id="cb1-15"><a href="basics-of-bayesian-linear-regression.html#cb1-15" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, n), <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>n), <span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span>n)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n)</span>
+<span id="cb1-16"><a href="basics-of-bayesian-linear-regression.html#cb1-16" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(X, <span class="at">nrow =</span> n, <span class="at">ncol =</span> p)</span>
+<span id="cb1-17"><a href="basics-of-bayesian-linear-regression.html#cb1-17" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="basics-of-bayesian-linear-regression.html#cb1-18" tabindex="-1"></a><span class="co"># parameters for sigma2</span></span>
+<span id="cb1-19"><a href="basics-of-bayesian-linear-regression.html#cb1-19" tabindex="-1"></a>a0 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb1-20"><a href="basics-of-bayesian-linear-regression.html#cb1-20" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb1-21"><a href="basics-of-bayesian-linear-regression.html#cb1-21" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">rinvgamma</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">shape =</span> a0, <span class="at">rate =</span> b0)</span>
+<span id="cb1-22"><a href="basics-of-bayesian-linear-regression.html#cb1-22" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="basics-of-bayesian-linear-regression.html#cb1-23" tabindex="-1"></a><span class="co"># generate random error</span></span>
+<span id="cb1-24"><a href="basics-of-bayesian-linear-regression.html#cb1-24" tabindex="-1"></a>V <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">1</span>, <span class="at">nrow =</span> n, <span class="at">ncol =</span> n)</span>
+<span id="cb1-25"><a href="basics-of-bayesian-linear-regression.html#cb1-25" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">rmvn</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">mu =</span> <span class="fu">rep</span>(<span class="dv">0</span>, n), <span class="at">sigma =</span> sigma2 <span class="sc">*</span> V) <span class="sc">/</span> <span class="dv">100</span>)</span>
+<span id="cb1-26"><a href="basics-of-bayesian-linear-regression.html#cb1-26" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="basics-of-bayesian-linear-regression.html#cb1-27" tabindex="-1"></a><span class="co"># parameters for beta</span></span>
+<span id="cb1-28"><a href="basics-of-bayesian-linear-regression.html#cb1-28" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(p)</span>
+<span id="cb1-29"><a href="basics-of-bayesian-linear-regression.html#cb1-29" tabindex="-1"></a>M0 <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="dv">1</span>, <span class="at">nrow =</span> p, <span class="at">ncol =</span> p)</span>
+<span id="cb1-30"><a href="basics-of-bayesian-linear-regression.html#cb1-30" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">rmvn</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">mu =</span> <span class="fu">rep</span>(<span class="dv">0</span>, p), <span class="at">sigma =</span> sigma2 <span class="sc">*</span> M0) <span class="sc">/</span> <span class="dv">100</span></span>
+<span id="cb1-31"><a href="basics-of-bayesian-linear-regression.html#cb1-31" tabindex="-1"></a>beta <span class="ot">&lt;-</span> m0 <span class="sc">+</span> w <span class="sc">%&gt;%</span> <span class="fu">as.vector</span>()</span>
+<span id="cb1-32"><a href="basics-of-bayesian-linear-regression.html#cb1-32" tabindex="-1"></a>  </span>
+<span id="cb1-33"><a href="basics-of-bayesian-linear-regression.html#cb1-33" tabindex="-1"></a>y <span class="ot">&lt;-</span> X <span class="sc">%*%</span> beta <span class="sc">+</span> e</span>
+<span id="cb1-34"><a href="basics-of-bayesian-linear-regression.html#cb1-34" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="basics-of-bayesian-linear-regression.html#cb1-35" tabindex="-1"></a><span class="co"># function for calculating posterior distribution</span></span>
+<span id="cb1-36"><a href="basics-of-bayesian-linear-regression.html#cb1-36" tabindex="-1"></a>update_post <span class="ot">&lt;-</span> <span class="cf">function</span>(X, y, m0, M0, a0, b0){</span>
+<span id="cb1-37"><a href="basics-of-bayesian-linear-regression.html#cb1-37" tabindex="-1"></a>  <span class="co"># calculate intermediate values</span></span>
+<span id="cb1-38"><a href="basics-of-bayesian-linear-regression.html#cb1-38" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">length</span>(m0)</span>
+<span id="cb1-39"><a href="basics-of-bayesian-linear-regression.html#cb1-39" tabindex="-1"></a>  XM0 <span class="ot">&lt;-</span> X <span class="sc">%*%</span> M0</span>
+<span id="cb1-40"><a href="basics-of-bayesian-linear-regression.html#cb1-40" tabindex="-1"></a>  y_Xm0 <span class="ot">&lt;-</span> y <span class="sc">-</span> X <span class="sc">%*%</span> m0</span>
+<span id="cb1-41"><a href="basics-of-bayesian-linear-regression.html#cb1-41" tabindex="-1"></a>  Q <span class="ot">&lt;-</span> V <span class="sc">+</span> XM0 <span class="sc">%*%</span> <span class="fu">t</span>(X)</span>
+<span id="cb1-42"><a href="basics-of-bayesian-linear-regression.html#cb1-42" tabindex="-1"></a>  Qinv <span class="ot">&lt;-</span> <span class="fu">solve</span>(Q)</span>
+<span id="cb1-43"><a href="basics-of-bayesian-linear-regression.html#cb1-43" tabindex="-1"></a>  M0XtQinv <span class="ot">&lt;-</span> <span class="fu">t</span>(XM0) <span class="sc">%*%</span> Qinv</span>
+<span id="cb1-44"><a href="basics-of-bayesian-linear-regression.html#cb1-44" tabindex="-1"></a>  </span>
+<span id="cb1-45"><a href="basics-of-bayesian-linear-regression.html#cb1-45" tabindex="-1"></a>  <span class="co"># update parameters</span></span>
+<span id="cb1-46"><a href="basics-of-bayesian-linear-regression.html#cb1-46" tabindex="-1"></a>  m1 <span class="ot">&lt;-</span> m0 <span class="sc">+</span> M0XtQinv <span class="sc">%*%</span> y_Xm0</span>
+<span id="cb1-47"><a href="basics-of-bayesian-linear-regression.html#cb1-47" tabindex="-1"></a>  M1 <span class="ot">&lt;-</span> M0 <span class="sc">-</span> M0XtQinv <span class="sc">%*%</span> XM0</span>
+<span id="cb1-48"><a href="basics-of-bayesian-linear-regression.html#cb1-48" tabindex="-1"></a>  a1 <span class="ot">&lt;-</span> a0 <span class="sc">+</span> p <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb1-49"><a href="basics-of-bayesian-linear-regression.html#cb1-49" tabindex="-1"></a>  b1 <span class="ot">&lt;-</span> b0 <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">t</span>(y_Xm0) <span class="sc">%*%</span> Qinv <span class="sc">%*%</span> y_Xm0</span>
+<span id="cb1-50"><a href="basics-of-bayesian-linear-regression.html#cb1-50" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">list</span>(m1, M1, a1, b1)</span>
+<span id="cb1-51"><a href="basics-of-bayesian-linear-regression.html#cb1-51" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb1-52"><a href="basics-of-bayesian-linear-regression.html#cb1-52" tabindex="-1"></a>}</span></code></pre></div>
+<p>This is the initial values of parameters</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="basics-of-bayesian-linear-regression.html#cb2-1" tabindex="-1"></a><span class="fu">list</span>(m0, M0, a0, b0)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] -0.07891709  0.88678481  0.11697127
+## 
+## [[2]]
+##      [,1] [,2] [,3]
+## [1,]    1    0    0
+## [2,]    0    1    0
+## [3,]    0    0    1
+## 
+## [[3]]
+## [1] 1
+## 
+## [[4]]
+## [1] 2</code></pre>
+<p>Here is the updated parameters of posterior distribution</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="basics-of-bayesian-linear-regression.html#cb4-1" tabindex="-1"></a><span class="fu">update_post</span>(X, y, m0, M0, a0, b0)</span></code></pre></div>
+<pre><code>## [[1]]
+##             [,1]
+## [1,] -0.09067348
+## [2,]  0.87820336
+## [3,]  0.12281565
+## 
+## [[2]]
+##             [,1]        [,2]        [,3]
+## [1,]  0.34856278 -0.06719858  0.05429884
+## [2,] -0.06719858  0.01846990 -0.01719519
+## [3,]  0.05429884 -0.01719519  0.01721752
+## 
+## [[3]]
+## [1] 2.5
+## 
+## [[4]]
+##          [,1]
+## [1,] 2.010475</code></pre>
 
 </div>
 </div>
@@ -1046,8 +1131,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
-"text": "Edit"
+"link": null,
+"text": null
 },
 "history": {
 "link": null,
@@ -1057,7 +1142,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null

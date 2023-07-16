@@ -935,3 +935,74 @@ We can get the joint posterior density $P\left(\beta, \sigma^{2}, \tilde{y} \mid
 2) Draw $\hat{\beta}_{(i)}$ from $N\left(M_{1} m_{1}, \hat{\sigma}_{(i)}^{2} M_{1}\right)$
 
 3) Draw $\tilde{y}_{(i)}$ from $N\left(\tilde{X} \hat{\beta}_{(i)}, \hat{\sigma}_{(i)}^{2}I_{\tilde{n}}\right)$
+
+
+## Sample code
+
+```{r}
+if(TRUE){
+  library(pacman)
+  options(tidyverse.quiet = TRUE)
+  p_load(here, mvnfast, invgamma)
+  p_load(tidyverse)
+  
+  theme_set(theme_minimal(base_size = 22))
+  #print(here())
+}
+
+# set up parameters and simulate data
+set.seed(100)
+n <- 20 # number of observations
+p <- 3 # dimention of covariates
+X <- c(rep(1, n), seq(1:n), seq(1:n)^2/n)
+X <- matrix(X, nrow = n, ncol = p)
+
+# parameters for sigma2
+a0 <- 1
+b0 <- 2
+sigma2 <- rinvgamma(n = 1, shape = a0, rate = b0)
+
+# generate random error
+V <- diag(1, nrow = n, ncol = n)
+e <- as.vector(rmvn(n = 1, mu = rep(0, n), sigma = sigma2 * V) / 100)
+
+# parameters for beta
+m0 <- rnorm(p)
+M0 <- diag(1, nrow = p, ncol = p)
+w <- rmvn(n = 1, mu = rep(0, p), sigma = sigma2 * M0) / 100
+beta <- m0 + w %>% as.vector()
+  
+y <- X %*% beta + e
+
+# function for calculating posterior distribution
+update_post <- function(X, y, m0, M0, a0, b0){
+  # calculate intermediate values
+  p <- length(m0)
+  XM0 <- X %*% M0
+  y_Xm0 <- y - X %*% m0
+  Q <- V + XM0 %*% t(X)
+  Qinv <- solve(Q)
+  M0XtQinv <- t(XM0) %*% Qinv
+  
+  # update parameters
+  m1 <- m0 + M0XtQinv %*% y_Xm0
+  M1 <- M0 - M0XtQinv %*% XM0
+  a1 <- a0 + p / 2
+  b1 <- b0 + 1/2 * t(y_Xm0) %*% Qinv %*% y_Xm0
+  res <- list(m1, M1, a1, b1)
+  return(res)
+}
+
+```
+
+This is the initial values of parameters 
+
+```{r}
+list(m0, M0, a0, b0)
+```
+
+Here is the updated parameters of posterior distribution 
+
+```{r}
+update_post(X, y, m0, M0, a0, b0)
+```

@@ -106,3 +106,8 @@ eq:twopartvars
 eq:paramsperpart
 eq:paramsfull
 eq:fullfromparts
+example-code
+thm:bayes
+def:NIG
+thm:swm
+sample-code-1
