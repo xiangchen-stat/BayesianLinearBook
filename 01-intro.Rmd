@@ -92,7 +92,7 @@ where $Q(x, m, M)=(x-m)^{\T} M^{-1} (x-m) \, .$
 
 where $Q(x, m, M)=(x-m)^{\T} M^{-1} (x-m) \, .$
 
-Note: the Inverse-Gamma ($IG$) distribution has a relationship with Gamma distribution. Given $X \sim  Gamma(\alpha, \beta)$, the density function of $X$ is $f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x}$. Then $Y=\frac{1}{X} \sim IG\left(\alpha, \beta\right)$ with density function $f(y)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{-\alpha-1} e^{-\frac{\beta}{x}}$.
+Note: the Inverse-Gamma ($IG$) distribution has a relationship with Gamma distribution. Given $X \sim  Gamma(\alpha, \beta)$, the density function of $X$ is $f(x)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x}$. Then $Y=\frac{1}{X} \sim IG\left(\alpha, \beta\right)$ with density function $f(y)=\frac{\beta^{\alpha}}{\Gamma(\alpha)} y^{-\alpha-1} e^{-\frac{\beta}{y}}$. Note that, in Gamma distribution, \beta is rate parameter while in Inverse-Gamma distribution, \beta is scale parameter.
 
 </div>
 
